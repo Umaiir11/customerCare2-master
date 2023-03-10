@@ -51,6 +51,14 @@ class VmCompany extends GetxController {
   set Pr_boolisFolded_wid(bool value) {
     l_PrisFolded = value;
   }
+  RxBool Pr_isLoading = false.obs;
+
+  RxBool get Pr_isLoading_wid {
+    return Pr_isLoading;
+  }
+  set Pr_isLoading_wid(RxBool value) {
+    Pr_isLoading = value;
+  }
 
   int l_Prcount = 1;
 
@@ -92,14 +100,6 @@ class VmCompany extends GetxController {
 
 
 
-  RxBool Pr_isLoading = false.obs;
-
-  RxBool get Pr_isLoading_wid {
-    return Pr_isLoading;
-  }
-  set Pr_isLoading_wid(RxBool value) {
-    Pr_isLoading = value;
-  }
 
 
 

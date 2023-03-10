@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../../ClassModules/cmGlobalVariables.dart';
 import '../../ServiceLayer/Sl_UserLogin.dart';
@@ -12,43 +13,45 @@ class VmLogin extends GetxController {
   RxList<ModCompanySettingQuery>? l_PrCompanyList =
       <ModCompanySettingQuery>[].obs;
 
+  RxString l_PrUsername = ''.obs;
 
-  RxString l_PrUsername =''.obs;
-  RxString get Pr_txtusername_Text {
-    return l_PrUsername;
+  String get Pr_txtusername_Text {
+    return l_PrUsername.value = "aisonesystems@gmail.com";
   }
-  set Pr_txtusername_Text(RxString value) {
-    l_PrUsername.value = value.value;
+
+  set Pr_txtusername_Text(String value) {
+    l_PrUsername.value = value;
   }
 
   RxString l_PrPassword = ''.obs;
-  RxString get Pr_txtpassword_Text {
-    return l_PrPassword;
-  }
-  set Pr_txtpassword_Text(RxString value) {
-    l_PrPassword.value = value.value;
+
+  String get Pr_txtpassword_Text {
+    return l_PrPassword.value ="GodHelp145";
   }
 
+  set Pr_txtpassword_Text(String value) {
+    l_PrPassword.value = value;
+  }
 
   RxBool l_PrisSecurePassword = false.obs;
 
   RxBool get Pr_boolSecurePassword_wid {
     return l_PrisSecurePassword;
   }
+
   set Pr_boolSecurePassword_wid(RxBool value) {
     l_PrisSecurePassword = value;
   }
 
- RxBool Pr_isLoading = false.obs;
+  RxBool Pr_isLoading = false.obs;
 
   RxBool get Pr_isLoading_wid {
     return Pr_isLoading;
   }
+
   set Pr_isLoading_wid(RxBool value) {
     Pr_isLoading = value;
   }
-
-
 
   Fnc_SetModelFields() {
     l_MmoLoginModel.username = l_PrUsername.value.trim();
@@ -83,9 +86,6 @@ class VmLogin extends GetxController {
     }
   }
 
-
-
-
   Future<bool> Fnc_WValidateUser() async {
     ModUserProfile? l_ModUserProfile =
         await SlwUserLogin().Fnc_UserProfile(l_MmoLoginModel);
@@ -118,7 +118,7 @@ class VmLogin extends GetxController {
   Future<bool> Fnc_OnTapLoginBtn() async {
     Pr_isLoading_wid.value = true;
     try {
-      // Set a timeout of 15 seconds for the API call
+      // Set a timeout of 5 seconds for the API call
       bool result = await Fnc_ValidateLogin().timeout(Duration(seconds: 5));
       Pr_isLoading_wid.value = false;
       if (result) {
@@ -131,7 +131,7 @@ class VmLogin extends GetxController {
       // Handle timeout error
       Pr_isLoading_wid.value = false;
       print('API call timed out after 15 seconds');
-     cmGlobalVariables.Pb_Exception = e.toString();
+      cmGlobalVariables.Pb_Exception = e.toString();
       return false; // API call failed
     }
   }

@@ -10,6 +10,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../ClassModules/cmGlobalVariables.dart';
+import '../../Searching/SrCompanyList.dart';
 import '../ViewModel/VmCompany.dart';
 import 'VwAssignedBranches.dart';
 import 'VwDrawer.dart';
@@ -24,14 +25,19 @@ class VwCompany extends StatefulWidget {
 class _VwCompanyState extends State<VwCompany> {
   @override
   final VmCompany l_VmCompany = Get.put(VmCompany());
+  final l_SearchController = Get.put(SrCompanyList());
 
   void initState() {
     // TODO: implement initState
     super.initState();
     l_VmCompany.Fnc_addItem();
+    l_SearchController.Fnc_addItem();
+    //Orignal list copy for searching
+    l_SearchController.Pr_filteredList.value.addAll(l_SearchController.l_PrCompanyList!);
+    l_SearchController.searchText.listen((value) {
+      l_SearchController.Fnc_filterlist(value);
+    });
   }
-
-  final TextEditingController l_SerachController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -145,9 +151,11 @@ class _VwCompanyState extends State<VwCompany> {
                         child: Container(
                             padding: EdgeInsets.only(left: 16),
                             child: TextField(
-                              controller: l_SerachController,
-                              //onChanged: FncfilterSearchResults,
+                              onChanged: (value) =>
+                                  l_SearchController.searchText.value = value,
                               decoration: InputDecoration(
+                                suffixIcon: const Icon(MdiIcons.searchWeb,
+                                    size: 20, color: Colors.indigo),
                                 hintText: "Search",
                                 hintStyle: TextStyle(color: Colors.black),
                                 border: InputBorder.none,
@@ -160,7 +168,7 @@ class _VwCompanyState extends State<VwCompany> {
                 child: Obx(() => Stack(
                       children: [
                         ListView.builder(
-                          itemCount: l_VmCompany.l_PrCompanyList?.length,
+                          itemCount: l_SearchController.Pr_filteredList.length,
                           itemBuilder: ((context, index) {
                             return Column(
                               children: [
@@ -214,8 +222,8 @@ class _VwCompanyState extends State<VwCompany> {
                                                   padding: EdgeInsets.only(
                                                       top: 15, left: 25),
                                                   child: Text(
-                                                    l_VmCompany
-                                                        .l_PrCompanyList![index]
+                                                    l_SearchController
+                                                        .Pr_filteredList[index]
                                                         .Pr_CompanyName,
                                                     //G_CompanyList[index].Pr_CompanyName,
                                                     style: GoogleFonts.ubuntu(
@@ -257,8 +265,8 @@ class _VwCompanyState extends State<VwCompany> {
                                                                   top: 2,
                                                                   left: 25),
                                                           child: Text(
-                                                            l_VmCompany
-                                                                .l_PrCompanyList![
+                                                            l_SearchController
+                                                                .Pr_filteredList[
                                                                     index]
                                                                 .Pr_EmailId,
                                                             style: GoogleFonts.ubuntu(
@@ -304,8 +312,8 @@ class _VwCompanyState extends State<VwCompany> {
                                                                   top: 2,
                                                                   left: 25),
                                                           child: Text(
-                                                            l_VmCompany
-                                                                .l_PrCompanyList![
+                                                            l_SearchController
+                                                                .Pr_filteredList[
                                                                     index]
                                                                 .Pr_CompanyPhone
                                                                 .toString(),
@@ -344,8 +352,8 @@ class _VwCompanyState extends State<VwCompany> {
                                                   padding: EdgeInsets.only(
                                                       top: 2, left: 25),
                                                   child: Text(
-                                                    l_VmCompany
-                                                        .l_PrCompanyList![index]
+                                                    l_SearchController
+                                                        .Pr_filteredList[index]
                                                         .Pr_CompanyAddress
                                                         .toString(),
                                                     style: GoogleFonts.ubuntu(

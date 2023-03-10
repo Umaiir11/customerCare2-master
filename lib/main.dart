@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'MVVM/View/VwLogin.dart';
+import 'MVVM/View/testui.dart';
 
 void main() {
   runApp(const MyApp());

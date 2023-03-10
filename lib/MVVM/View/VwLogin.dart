@@ -18,9 +18,6 @@ class _VwLoginState extends State<VwLogin> {
   @override
   final VmLogin l_vmLogin = Get.put(VmLogin());
 
-
-
-
   final TextEditingController usernameController = TextEditingController();
 
   final TextEditingController passswordController = TextEditingController();
@@ -28,27 +25,22 @@ class _VwLoginState extends State<VwLogin> {
 
   @override
   Widget build(BuildContext context) {
-    usernameController.addListener(() {
-      l_vmLogin.Pr_txtusername_Text.value = usernameController.text;
-    });
-
-    passswordController.addListener(() {
-      l_vmLogin.Pr_txtpassword_Text.value = passswordController.text;
-    });
+    usernameController.text = l_vmLogin.Pr_txtusername_Text;
+    passswordController.text = l_vmLogin.Pr_txtpassword_Text;
 
     Widget togglepassword() {
-      return IconButton(
-        onPressed: () {
-          setState(() {
+      return Obx(() {
+        return IconButton(
+          onPressed: () {
             l_vmLogin.Pr_boolSecurePassword_wid.value =
                 !l_vmLogin.Pr_boolSecurePassword_wid.value;
-          });
-        },
-        icon: l_vmLogin.Pr_boolSecurePassword_wid.value
-            ? Icon(Icons.visibility)
-            : Icon(Icons.visibility_off),
-        color: Colors.indigo,
-      );
+          },
+          icon: l_vmLogin.Pr_boolSecurePassword_wid.value
+              ? Icon(Icons.visibility)
+              : Icon(Icons.visibility_off),
+          color: Colors.indigo,
+        );
+      });
     }
 
     Widget _WidgetportraitMode(double Pr_height, Pr_width) {
@@ -105,22 +97,27 @@ class _VwLoginState extends State<VwLogin> {
                     padding: EdgeInsets.only(top: 40),
                     child: Center(
                       child: SizedBox(
-                          width: 430,
-                          child: TextFormField(
+                        width: 430,
+                        child: TextFormField(
                             controller: usernameController,
                             decoration: InputDecoration(
                               hintText: 'Enter Email',
                               hintStyle: const TextStyle(color: Colors.black26),
                               labelText: ' Email',
-                              floatingLabelBehavior: FloatingLabelBehavior.always,
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always,
                               border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5),
-                                  borderSide:
-                                      const BorderSide(color: Colors.white38)),
+                                borderRadius: BorderRadius.circular(5),
+                                borderSide:
+                                    const BorderSide(color: Colors.white38),
+                              ),
                               prefixIcon: const Icon(MdiIcons.fingerprint,
                                   size: 20, color: Colors.indigo),
                             ),
-                          )),
+                            onChanged: (value) {
+                              l_vmLogin.Pr_txtusername_Text = value;
+                            }),
+                      ),
                     ),
                   ),
                   Padding(
@@ -136,24 +133,30 @@ class _VwLoginState extends State<VwLogin> {
                     child: Center(
                       child: SizedBox(
                           width: 430,
-                          child: TextFormField(
-                            obscureText:
-                                l_vmLogin.Pr_boolSecurePassword_wid.value,
-                            controller: passswordController,
-                            decoration: InputDecoration(
-                              hintText: 'Enter Password',
-                              hintStyle: const TextStyle(color: Colors.black26),
-                              labelText: ' Password',
-                              floatingLabelBehavior: FloatingLabelBehavior.always,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5),
-                                  borderSide:
-                                      const BorderSide(color: Colors.white38)),
-                              prefixIcon: const Icon(MdiIcons.fingerprint,
-                                  size: 20, color: Colors.indigo),
-                              suffixIcon: togglepassword(),
-                            ),
-                          )),
+                          child: Obx(() {
+                            return TextFormField(
+                                obscureText:
+                                    l_vmLogin.Pr_boolSecurePassword_wid.value,
+                                controller: passswordController,
+                                decoration: InputDecoration(
+                                  hintText: 'Enter Password',
+                                  hintStyle:
+                                      const TextStyle(color: Colors.black26),
+                                  labelText: ' Password',
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      borderSide: const BorderSide(
+                                          color: Colors.white38)),
+                                  prefixIcon: const Icon(MdiIcons.fingerprint,
+                                      size: 20, color: Colors.indigo),
+                                  suffixIcon: togglepassword(),
+                                ),
+                                onChanged: (value) {
+                                  l_vmLogin.Pr_txtpassword_Text = value;
+                                });
+                          })),
                     ),
                   ),
                   Padding(
@@ -165,7 +168,7 @@ class _VwLoginState extends State<VwLogin> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top:  3),
+                    padding: EdgeInsets.only(top: 3),
                     child: Center(child: Text("Remember me")),
                   ),
                   Padding(
@@ -185,40 +188,35 @@ class _VwLoginState extends State<VwLogin> {
                         child: Obx(() {
                           return ElevatedButton(
                             onPressed: () async {
-
-                              if (await  l_vmLogin.Fnc_OnTapLoginBtn() == true){
-
+                              if (await l_vmLogin.Fnc_OnTapLoginBtn() == true) {
                                 Get.to(() => VwCompany());
+                              } else {
+                                Get.snackbar("Exception",
+                                    cmGlobalVariables.Pb_Exception!);
                               }
-                              else{
-                                Get.snackbar("Exception", cmGlobalVariables.Pb_Exception!);
-
-                              }
-
                             },
                             child: l_vmLogin.Pr_isLoading_wid.value
                                 ? LoadingAnimationWidget.twistingDots(
-                              leftDotColor: const Color(0xFF1A1A3F),
-                              rightDotColor: const Color(0xFFEA3799),
-                              size: 40,
-                            )
+                                    leftDotColor: const Color(0xFF1A1A3F),
+                                    rightDotColor: const Color(0xFFEA3799),
+                                    size: 40,
+                                  )
                                 : Text("Login"),
                             style: ElevatedButton.styleFrom(
                               animationDuration: Duration(seconds: 1),
                               shape: l_vmLogin.Pr_isLoading_wid.value
                                   ? RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50),
-                              )
+                                      borderRadius: BorderRadius.circular(50),
+                                    )
                                   : RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(0),
-                              ),
+                                      borderRadius: BorderRadius.circular(0),
+                                    ),
                             ),
                           );
                         }),
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
