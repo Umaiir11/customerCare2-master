@@ -1,8 +1,7 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:customercare/ClassModules/cmGlobalVariables.dart';
-import 'package:customercare/MVVM/View/VwLogin.dart';
+import 'package:customercare/MVVM/View/testui.dart';
 import 'package:customercare/MVVM/ViewModel/VmDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,8 +32,6 @@ class _vi_DrawerState extends State<vi_Drawer> {
   }
 
   int selectedIndex = 0;
-
-  GlobalKey<ScaffoldState> scafKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -109,298 +106,7 @@ class _vi_DrawerState extends State<vi_Drawer> {
         ),
         drawer: SizedBox(
           width: 270,
-          child: Drawer(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.all(20),
-                      child: ResponsiveWrapper(
-                          maxWidth: 1200,
-                          minWidth: 480,
-                          defaultScale: true,
-                          breakpoints: const [
-                            ResponsiveBreakpoint.resize(480, name: MOBILE),
-                            ResponsiveBreakpoint.autoScale(800, name: TABLET),
-                            ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-                            ResponsiveBreakpoint.autoScale(2460, name: '4K'),
-                          ],
-                          child: Column (
-                            children: [
-                              Center(
-                                child: Container(
-                                    margin: EdgeInsets.only(top: 0, left: 0),
-                                    width: 150,
-                                    height: 150,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(75)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.lightBlueAccent.shade100
-                                              .withOpacity(0.2),
-                                          spreadRadius: 4,
-                                          blurRadius: 17,
-                                          offset: Offset(0,
-                                              5), // changes position of shadow
-                                        ),
-                                      ],
-                                    ),
-                                    child: CircleAvatar(
-                                        radius: 50.0,
-                                        child: ClipOval(
-                                            child: Image.memory(
-                                                Uint8List.fromList(l_VmDrawer
-                                                    .Pr_DecodeData_Image!))))),
-                              ),
-                              Row(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.only(top: 10, left: 65),
-                                        child: Text(
-                                          'Name',
-                                          style: GoogleFonts.ubuntu(
-                                              textStyle: TextStyle(
-                                                  fontSize: 18,
-                                                  color: Colors.black26,
-                                                  letterSpacing: .5)),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.only(top: 2, left: 65),
-                                        child: Text(
-                                          cmGlobalVariables.Pb_UserName!,
-                                          style: GoogleFonts.ubuntu(
-                                              textStyle: TextStyle(
-                                                  fontSize: 20,
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w600,
-                                                  letterSpacing: .5)),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.only(top: 10, left: 80),
-                                        child: Text(
-                                          'Branch Name',
-                                          style: GoogleFonts.ubuntu(
-                                              textStyle: TextStyle(
-                                                  fontSize: 18,
-                                                  color: Colors.black26,
-                                                  letterSpacing: .5)),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.only(top: 2, left: 80),
-                                        child: Text(
-                                          l_VmDrawer
-                                              .l_PrAssignedBranchesList![
-                                                  l_VmDrawer
-                                                      .Pr_txtselectedIndex_Text
-                                                      .value]
-                                              .pr_BranchName,
-                                          style: GoogleFonts.ubuntu(
-                                              textStyle: TextStyle(
-                                                  fontSize: 20,
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w600,
-                                                  letterSpacing: .5)),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.only(top: 10, left: 65),
-                                        child: Text(
-                                          'Email',
-                                          style: GoogleFonts.ubuntu(
-                                              textStyle: TextStyle(
-                                                  fontSize: 18,
-                                                  color: Colors.black26,
-                                                  //fontWeight: FontWeight.w600,
-                                                  letterSpacing: .5)),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.only(top: 2, left: 65),
-                                        child: Text(
-                                          cmGlobalVariables.Pb_UserEmail!,
-                                          style: GoogleFonts.ubuntu(
-                                              textStyle: TextStyle(
-                                                  fontSize: 20,
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w600,
-                                                  letterSpacing: .5)),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              )
-                            ],
-                          )),
-                    ),
-
-                    Divider(
-                      thickness: 2,
-                    ),
-                    SizedBox(
-                      height: 1,
-                    ),
-
-                    ListTile(
-                      selected: selectedIndex == 0,
-                      leading: Icon(
-                        Icons.desktop_mac_outlined,
-                        size: 28,
-                      ),
-                      title: Text("Acc Ledger"),
-                      onTap: () async {
-                        Get.snackbar("Please Wait", "Data Is Loading");
-                        if (await l_VmDrawer.Fnc_AccLedgerList() == true) {
-                          // Get.to(() => vi_AccountLedger());
-                        } else {
-                          Get.snackbar("Alert",
-                              "No DATA, Please Contact Your Administrator");
-                        }
-                      },
-                    ),
-                    SizedBox(
-                      height: 1,
-                    ),
-                    Divider(
-                      thickness: 2,
-                    ),
-                    SizedBox(
-                      height: 1,
-                    ),
-                    //tile2
-                    ListTile(
-                      selected: selectedIndex == 1,
-                      leading: Icon(
-                        Icons.library_books_outlined,
-                        size: 28,
-                      ),
-                      title: Text("Pending Cheques"),
-                      onTap: () async {
-                        Get.snackbar("Please Wait", "Data Is Loading");
-                        if (await l_VmDrawer.Fnc_PendingChequesList() == true) {
-                          // Get.to(() => vi_AccountLedger());
-                        } else {
-                          Get.snackbar("Alert",
-                              "No DATA, Please Contact Your Administrator");
-                        }
-                      },
-                    ),
-                    Divider(
-                      thickness: 2,
-                    ),
-                    SizedBox(
-                      height: 1,
-                    ),
-                    ListTile(
-                      selected: selectedIndex == 1,
-                      leading: Icon(
-                        Icons.library_books_outlined,
-                        size: 28,
-                      ),
-                      title: Text("Pending S/O"),
-                      onTap: () async {
-                        Get.snackbar("Please Wait", "Data Is Loading");
-                        if (await l_VmDrawer.Fnc_PendingSaleOrderList() ==
-                            true) {
-                          // Get.to(() => vi_AccountLedger());
-                        } else {
-                          Get.snackbar("Alert",
-                              "No DATA, Please Contact Your Administrator");
-                        }
-                      },
-                    ),
-
-                    Divider(
-                      thickness: 2,
-                    ),
-                    SizedBox(
-                      height: 1,
-                    ),
-
-                    ListTile(
-                      selected: selectedIndex == 1,
-                      leading: Icon(
-                        Icons.library_books_outlined,
-                        size: 28,
-                      ),
-                      title: Text("ItemQuery"),
-                      onTap: () async {
-                        Get.snackbar("Please Wait", "Data Is Loading");
-                        if (await l_VmDrawer.Fnc_ItemQueryList() == true) {
-                          // Get.to(() => vi_AccountLedger());
-                        } else {
-                          Get.snackbar("Alert",
-                              "No DATA, Please Contact Your Administrator");
-                        }
-                      },
-                    ),
-
-                    Divider(
-                      thickness: 2,
-                    ),
-                    SizedBox(
-                      height: 1,
-                    ),
-
-                    Container(
-                      margin: EdgeInsets.only(top: 265),
-                      child: ListTile(
-                          selected: selectedIndex == 1,
-                          leading: Icon(
-                            Icons.logout,
-                            size: 28,
-                          ),
-                          title: Text("Logout"),
-                          onTap: () async {
-                            l_VmDrawer.FncClearAllDATA();
-                            Get.to(() => VwLogin());
-                          }),
-                    ),
-
-                    //tile2
-                  ],
-                ),
-              ],
-            ),
-          ),
         ),
-        key: scafKey,
         body: Container(
           height: double.infinity,
           width: double.infinity,
@@ -458,16 +164,11 @@ class _vi_DrawerState extends State<vi_Drawer> {
                   ),
                 ),
                 Container(
-                    margin: EdgeInsets.only(top: 42, left: 12),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.menu_sharp,
-                        color: Colors.black,
-                      ),
-                      onPressed: () {
-                        scafKey.currentState?.openDrawer();
-                      },
-                    )),
+                  margin: EdgeInsets.only(top: 42, left: 12),
+                  child: InkWell(
+                    child: DrawerWidget(),
+                  ),
+                ),
                 Container(
                   margin: EdgeInsets.only(top: 110, left: 112),
                   child: Text(

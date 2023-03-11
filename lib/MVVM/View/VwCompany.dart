@@ -13,7 +13,6 @@ import '../../ClassModules/cmGlobalVariables.dart';
 import '../../Searching/SrCompanyList.dart';
 import '../ViewModel/VmCompany.dart';
 import 'VwAssignedBranches.dart';
-import 'VwDrawer.dart';
 
 class VwCompany extends StatefulWidget {
   const VwCompany({Key? key}) : super(key: key);
@@ -33,7 +32,8 @@ class _VwCompanyState extends State<VwCompany> {
     l_VmCompany.Fnc_addItem();
     l_SearchController.Fnc_addItem();
     //Orignal list copy for searching
-    l_SearchController.Pr_filteredList.value.addAll(l_SearchController.l_PrCompanyList!);
+    l_SearchController.Pr_filteredList.value
+        .addAll(l_SearchController.l_PrCompanyList!);
     l_SearchController.searchText.listen((value) {
       l_SearchController.Fnc_filterlist(value);
     });
@@ -221,19 +221,24 @@ class _VwCompanyState extends State<VwCompany> {
                                                 Padding(
                                                   padding: EdgeInsets.only(
                                                       top: 15, left: 25),
-                                                  child: Text(
-                                                    l_SearchController
-                                                        .Pr_filteredList[index]
-                                                        .Pr_CompanyName,
-                                                    //G_CompanyList[index].Pr_CompanyName,
-                                                    style: GoogleFonts.ubuntu(
-                                                        textStyle: TextStyle(
-                                                            fontSize: 22,
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            letterSpacing: .5)),
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                      text: '',
+                                                      style: TextStyle(
+                                                        fontSize: 22,
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.w600,
+                                                        letterSpacing: 0.5,
+                                                      ),
+                                                      children: [
+                                                        l_SearchController.getMatchedTextSpan(
+                                                          l_SearchController.Pr_filteredList[index].Pr_CompanyName,
+                                                          l_SearchController.searchText.value,
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
+
                                                 ),
                                                 Row(
                                                   children: [
@@ -264,22 +269,27 @@ class _VwCompanyState extends State<VwCompany> {
                                                               EdgeInsets.only(
                                                                   top: 2,
                                                                   left: 25),
-                                                          child: Text(
-                                                            l_SearchController
-                                                                .Pr_filteredList[
-                                                                    index]
-                                                                .Pr_EmailId,
-                                                            style: GoogleFonts.ubuntu(
-                                                                textStyle: TextStyle(
-                                                                    fontSize:
-                                                                        13,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    letterSpacing:
-                                                                        .5)),
+                                                          child:RichText(
+                                                            text: TextSpan(
+                                                              text: '',
+                                                              style: GoogleFonts.ubuntu(
+                                                                  textStyle: TextStyle(
+                                                                      fontSize:
+                                                                      13,
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                      letterSpacing:
+                                                                      .5)),
+                                                              children: [
+                                                                l_SearchController.getMatchedTextSpan(
+                                                                  l_SearchController.Pr_filteredList[index].Pr_EmailId,
+                                                                  l_SearchController.searchText.value,
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
                                                       ],
@@ -311,23 +321,27 @@ class _VwCompanyState extends State<VwCompany> {
                                                               EdgeInsets.only(
                                                                   top: 2,
                                                                   left: 25),
-                                                          child: Text(
-                                                            l_SearchController
-                                                                .Pr_filteredList[
-                                                                    index]
-                                                                .Pr_CompanyPhone
-                                                                .toString(),
-                                                            style: GoogleFonts.ubuntu(
-                                                                textStyle: TextStyle(
-                                                                    fontSize:
-                                                                        13,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    letterSpacing:
-                                                                        .5)),
+                                                          child: RichText(
+                                                            text: TextSpan(
+                                                              text: '',
+                                                              style: GoogleFonts.ubuntu(
+                                                                  textStyle: TextStyle(
+                                                                      fontSize:
+                                                                      13,
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                      letterSpacing:
+                                                                      .5)),
+                                                              children: [
+                                                                l_SearchController.getMatchedTextSpan(
+                                                                  l_SearchController.Pr_filteredList[index].Pr_CompanyPhone,
+                                                                  l_SearchController.searchText.value,
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
                                                       ],
@@ -351,18 +365,27 @@ class _VwCompanyState extends State<VwCompany> {
                                                 Padding(
                                                   padding: EdgeInsets.only(
                                                       top: 2, left: 25),
-                                                  child: Text(
-                                                    l_SearchController
-                                                        .Pr_filteredList[index]
-                                                        .Pr_CompanyAddress
-                                                        .toString(),
-                                                    style: GoogleFonts.ubuntu(
-                                                        textStyle: TextStyle(
-                                                            fontSize: 13,
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            letterSpacing: .5)),
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                      text: '',
+                                                      style: GoogleFonts.ubuntu(
+                                                          textStyle: TextStyle(
+                                                              fontSize:
+                                                              13,
+                                                              color: Colors
+                                                                  .black,
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .w600,
+                                                              letterSpacing:
+                                                              .5)),
+                                                      children: [
+                                                        l_SearchController.getMatchedTextSpan(
+                                                          l_SearchController.Pr_filteredList[index].Pr_CompanyAddress,
+                                                          l_SearchController.searchText.value,
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ],

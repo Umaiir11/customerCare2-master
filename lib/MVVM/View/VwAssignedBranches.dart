@@ -1,4 +1,5 @@
 import 'package:customercare/MVVM/View/VwDrawer.dart';
+import 'package:customercare/MVVM/View/testui.dart';
 import 'package:customercare/MVVM/ViewModel/VmAssignedBranches.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -124,32 +125,7 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
                     highlightColor: Colors.cyanAccent,
                     child: Text("lblCompanyList")),
               ),
-              Container(
-                margin: EdgeInsets.only(top: Pr_height*.095, right: Pr_width*.040),
-                width: Pr_height*.370 ,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(32),
-                  color: Colors.lightBlueAccent.shade100,
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: Container(
-                            padding: EdgeInsets.only(left: 16),
-                            child:  TextField(
-                              //controller: l_SerachController,
-                              //onChanged: FncfilterSearchResults,
-                              decoration: InputDecoration(
-                                hintText: "Search",
-                                hintStyle: TextStyle(color: Colors.black),
-                                border: InputBorder.none,
-                              ),
-                            )
-                                )),
-
-                  ],
-                ),
-              ),
+              SizedBox(height: Pr_height*0.020,),
               Expanded(
                 child: Obx(() => ListView.builder(
                   itemCount: l_VmAssignedBranches.l_PrAssignedBranchesList?.length,
@@ -159,7 +135,7 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
                         InkWell(
                           onTap:(){
 
-                            Get.to(() => vi_Drawer());
+                            Get.to(() => Home());
 
                           } ,
 
