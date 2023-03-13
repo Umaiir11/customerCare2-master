@@ -24,10 +24,17 @@ class VmDrawer extends GetxController {
     PrDecodeImage!.value = value!;
   }
 
-  late RxInt l_PrselectedIndex = 0.obs;
+   RxInt l_PrselectedIndex = 0.obs;
   RxInt get Pr_txtselectedIndex_Text {
     return l_PrselectedIndex;
   }set Pr_txtselectedIndex_Text(RxInt value) {
+    l_PrselectedIndex = value;
+  }
+
+  RxInt l_PrselectedDrawerMenu = 0.obs;
+  RxInt get Pr_txtselectedDrawerMenu_Text {
+    return l_PrselectedIndex;
+  }set Pr_selectedDrawerMenu_Text(RxInt value) {
     l_PrselectedIndex = value;
   }
 
