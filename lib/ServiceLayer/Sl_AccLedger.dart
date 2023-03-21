@@ -16,7 +16,7 @@ class Sl_AccountLedger {
       final DateFormat formatter = DateFormat('yyyy-MM-dd');
       final String? l_StartDate = formatter.format(StartDate);
       final String? l_DateTime = formatter.format(EndDate);
-      String? l_AccountsDID = cmGlobalVariables.Pb_AccountsDID;
+      String? l_AccountsDID = "a01cc68a-28fe-411e-9fba-798d375b68fc";
 
       ParModAccLedger l_ParModAccLedger = ParModAccLedger(
           Pr_AccountDID: l_AccountsDID,
@@ -33,7 +33,7 @@ class Sl_AccountLedger {
 
       if (l_response.statusCode == 200) {
         var a = l_response;
-        print(a);
+        print("Account Ledgers");
         return Fnc_JsonToListOfModel(jsonDecode(l_response.body));
       } else {
         return null;

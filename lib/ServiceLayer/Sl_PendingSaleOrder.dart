@@ -7,7 +7,9 @@ import '../MVVM/Model/ParameterModels/ParModPendingSaleOrder.dart';
 class Sl_PendingSelOrder {
   Future<List<ModPendingSaleOrder>?> Fnc_PendingSO() async {
     try {
-      String? Did = cmGlobalVariables.Pb_AccountsDID;
+      String? Did ="30B8C293-198D-4560-8EA9-249E9CD146B3";
+      //String? Did = cmGlobalVariables.Pb_AccountsDID;
+
       print(Did);
       print(Did);
       ParModPendingSaleOrder l_ParModPendingSaleOrder =
@@ -28,6 +30,7 @@ class Sl_PendingSelOrder {
       if (l_response.statusCode == 200) {
         var a = l_response;
         print(a);
+        print("Pending S/O)");
         return Fnc_JsonToListOfModel(jsonDecode(l_response.body));
       } else {
         return null;

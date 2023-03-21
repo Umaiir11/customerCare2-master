@@ -409,7 +409,7 @@ class _VwCompanyState extends State<VwCompany> {
                                 backgroundBlendMode: BlendMode.darken,
                               ),
                               child: BackdropFilter(
-                                filter: ImageFilter.blur(sigmaX: 1, sigmaY: 4),
+                                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                                 child: Center(
                                     child: LoadingAnimationWidget.flickr(
                                   leftDotColor: const Color(0xFF1A1A3F),

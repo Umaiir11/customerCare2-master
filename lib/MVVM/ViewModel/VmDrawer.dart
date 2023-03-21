@@ -38,6 +38,20 @@ class VmDrawer extends GetxController {
     l_PrselectedIndex = value;
   }
 
+
+
+  RxBool Pr_isLoading = false.obs;
+
+  RxBool get Pr_isLoading_wid {
+    return Pr_isLoading;
+  }
+
+  set Pr_isLoading_wid(RxBool value) {
+    Pr_isLoading = value;
+  }
+
+
+
   RxList<ModAssignedBranches>? l_PrAssignedBranchesList = <ModAssignedBranches>[].obs;
   void Fnc_addItem() {
     if (l_PrAssignedBranchesList?.isEmpty ?? true) {
@@ -68,19 +82,26 @@ class VmDrawer extends GetxController {
 
   RxList<ModAccountLedger>? l_PrAccountLedgerList = <ModAccountLedger>[].obs;
   Future<bool> Fnc_AccLedgerList() async {
+    Pr_isLoading_wid.value = false;
+
     List<ModAccountLedger>? l_listAccountLedger =
-        new List<ModAccountLedger>.empty(growable: true);
+    new List<ModAccountLedger>.empty(growable: true);
     l_listAccountLedger = await Sl_AccountLedger().Fnc_AccountLedger(
         DateTime.parse("2021-01-01"), DateTime.parse("2021-03-31"));
     {
       l_PrAccountLedgerList?.addAll(l_listAccountLedger!);
 
       if (l_PrAccountLedgerList == null) {
+        Pr_isLoading_wid.value = true;
         return false;
       }
     }
+
+    Pr_isLoading_wid.value = true;
     return true;
   }
+
+
 
   RxList<ModPendingCheques>? l_PrPendingChequesList = <ModPendingCheques>[].obs;
   Future<bool> Fnc_PendingChequesList() async {
@@ -126,6 +147,34 @@ class VmDrawer extends GetxController {
     }
     return true;
   }
+
+
+
+
+
+  Future<bool> FncCase1() async {
+    Pr_isLoading_wid.value = true;
+    try {
+      // Set a timeout of 5 seconds for the API call
+
+      bool result = await Fnc_AccLedgerList().timeout(Duration(seconds: 15));
+      Pr_isLoading_wid.value = false;
+      if (result) {
+        return true; // API call was successful
+      } else {
+        // Handle error
+        return false; // API call failed
+      }
+    } catch (e) {
+      // Handle timeout error
+      Pr_isLoading_wid.value = false;
+      print('API call timed out after 15 seconds');
+      cmGlobalVariables.Pb_Exception = e.toString();
+      return false; // API call failed
+    }
+  }
+
+
 
   void FncClearAllDATA() {
     cmGlobalVariables.Pb_Token = "";

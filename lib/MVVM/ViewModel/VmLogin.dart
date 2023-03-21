@@ -119,7 +119,7 @@ class VmLogin extends GetxController {
     Pr_isLoading_wid.value = true;
     try {
       // Set a timeout of 5 seconds for the API call
-      bool result = await Fnc_ValidateLogin().timeout(Duration(seconds: 5));
+      bool result = await Fnc_ValidateLogin().timeout(Duration(seconds: 10));
       Pr_isLoading_wid.value = false;
       if (result) {
         return true; // API call was successful

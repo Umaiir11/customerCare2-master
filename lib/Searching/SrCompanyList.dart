@@ -6,6 +6,8 @@ import '../MVVM/ViewModel/VmCompany.dart';
 
 class SrCompanyList extends GetxController {
   final VmCompany G_VmCompany = Get.find();
+
+
   RxList<ModCompanySettingQuery>? l_PrCompanyList =
       <ModCompanySettingQuery>[].obs;
 

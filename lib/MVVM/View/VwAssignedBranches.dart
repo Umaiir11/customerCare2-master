@@ -1,4 +1,4 @@
-import 'package:customercare/MVVM/View/Drawer/VwDrawer.dart';
+import 'package:customercare/MVVM/View/Drawer/VwDrawerHome.dart';
 import 'package:customercare/MVVM/View/testui.dart';
 import 'package:customercare/MVVM/ViewModel/VmAssignedBranches.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,8 @@ import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'Drawer/VwDrawerMenu.dart';
+import 'Drawer.dart';
+import 'Drawer/VwDrawer.dart';
 
 class VwAssignedBranches extends StatefulWidget {
   const VwAssignedBranches({Key? key}) : super(key: key);
@@ -137,7 +138,7 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
                         InkWell(
                           onTap:(){
 
-                            Get.to(() => VwDrawerMenu());
+                            Get.to(() => vi_Drawer());
 
                           } ,
 

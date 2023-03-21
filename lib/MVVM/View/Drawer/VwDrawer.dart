@@ -1,360 +1,256 @@
-import 'dart:convert';
+import 'dart:ui';
 
-import 'package:customercare/ClassModules/cmGlobalVariables.dart';
-import 'package:customercare/MVVM/View/testui.dart';
-import 'package:customercare/MVVM/ViewModel/VmDrawer.dart';
+import 'package:customercare/MVVM/View/VwLogin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:responsive_framework/responsive_wrapper.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import '../../ViewModel/VmDrawer.dart';
+import '../testui.dart';
+import 'VwDrawerHome.dart';
 import 'VwDrawerMenu.dart';
 
-class vi_Drawer extends StatefulWidget {
-  const vi_Drawer({Key? key}) : super(key: key);
+int currentIndex = 0;
+
+class VwDrawer extends StatefulWidget {
+  const VwDrawer({Key? key}) : super(key: key);
 
   @override
-  State<vi_Drawer> createState() => _vi_DrawerState();
+  State<VwDrawer> createState() => _VwDrawerState();
 }
 
-class _vi_DrawerState extends State<vi_Drawer> {
+class _VwDrawerState extends State<VwDrawer> {
   @override
-  final l_VmDrawer = Get.put(VmDrawer());
-
   void initState() {
+    // TODO: implement initState
     super.initState();
+    currentIndex = 0;
 
-    l_VmDrawer.Fnc_addItem();
-    l_VmDrawer.Pr_DecodeData_Image =
-        base64.decode(cmGlobalVariables.Pb_UserImage);
-    l_VmDrawer.Fnc_UserAccountQueryList();
   }
 
-  int selectedIndex = 0;
+  final l_VmDrawer = Get.put(VmDrawer());
+  bool isLoading = false;
+
+  Widget build(BuildContext context) {
+    return FutureBuilder<Widget>(
+      future: setScreenIndex(),
+      builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return ZoomDrawer(
+            menuScreen: VwDrawerMenu(
+              setIndex: (index) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+            ),
+            mainScreen: snapshot.data!,
+            showShadow: true,
+            borderRadius: 30,
+            menuBackgroundColor: Colors.lightBlue,
+            openCurve: Curves.fastOutSlowIn,
+            closeCurve: Curves.bounceIn,
+            angle: -12.0,
+            slideWidth: MediaQuery.of(context).size.width * .65,
+          );
+        } else {
+          return Stack(
+            children: [
+              VwDrawerHome(),
+              Positioned.fill(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                  child: Container(
+                    color: Colors.black.withOpacity(0.5),
+                  ),
+                ),
+              ),
+              Center(
+                child: LoadingAnimationWidget.staggeredDotsWave(
+                  color: Colors.white,
+                  size: 40,
+                ),
+              ),
+            ],
+          );
+        }
+      },
+    );
+  }
+
+  Future<Widget> setScreenIndex() async {
+    switch (currentIndex) {
+      case 0:
+        return VwDrawerHome();
+      case 1:
+
+          return Stack(
+            children: [
+              VwDrawerHome(),
+
+              if ( await l_VmDrawer.Fnc_AccLedgerList())
+                vi_AccountLedger()
+              else
+                Container()
+            ],
+          );
+
+
+      case 2:
+        return Stack(
+          children: [
+            VwDrawerHome(),
+            Positioned.fill(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                child: Container(
+                  color: Colors.black.withOpacity(0.5),
+                ),
+              ),
+            ),
+            FutureBuilder<bool>(
+              future: l_VmDrawer.Fnc_PendingChequesList(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: LoadingAnimationWidget.twistingDots(
+                      leftDotColor: const Color(0xFF1A1A3F),
+                      rightDotColor: const Color(0xFFEA3799),
+                      size: 40,
+                    ),
+                  );
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasData && snapshot.data!) {
+                    return VwLogin();
+                  } else {
+                    Get.snackbar(
+                      "Failed to load data",
+                      "",
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: Colors.black.withOpacity(0.5),
+                      colorText: Colors.white,
+                    );
+
+                    //the FutureBuilder requires a widget to be returned in all possible cases. Since there's nothing to show in the else block, returning an empty Container is a good way to handle that case. It doesn't affect the UI since it's an empty container.
+                    return Container();
+                  }
+                } else {
+                  return Container();
+                }
+              },
+            ),
+          ],
+        );
+      case 3:
+        return Stack(
+          children: [
+            VwDrawerHome(),
+            Positioned.fill(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                child: Container(
+                  color: Colors.black.withOpacity(0.5),
+                ),
+              ),
+            ),
+            FutureBuilder<bool>(
+              future: l_VmDrawer.Fnc_PendingSaleOrderList(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: LoadingAnimationWidget.twistingDots(
+                      leftDotColor: const Color(0xFF1A1A3F),
+                      rightDotColor: const Color(0xFFEA3799),
+                      size: 40,
+                    ),
+                  );
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasData && snapshot.data!) {
+                    return VwLogin();
+                  } else {
+                    Get.snackbar(
+                      "Failed to load data",
+                      "",
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: Colors.black.withOpacity(0.5),
+                      colorText: Colors.white,
+                    );
+
+                    //the FutureBuilder requires a widget to be returned in all possible cases. Since there's nothing to show in the else block, returning an empty Container is a good way to handle that case. It doesn't affect the UI since it's an empty container.
+                    return Container();
+                  }
+                } else {
+                  return Container();
+                }
+              },
+            ),
+          ],
+        );
+      case 4:
+        return Stack(
+          children: [
+            VwDrawerHome(),
+            Positioned.fill(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                child: Container(
+                  color: Colors.black.withOpacity(0.5),
+                ),
+              ),
+            ),
+            FutureBuilder<bool>(
+              future: l_VmDrawer.Fnc_ItemQueryList(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: LoadingAnimationWidget.twistingDots(
+                      leftDotColor: const Color(0xFF1A1A3F),
+                      rightDotColor: const Color(0xFFEA3799),
+                      size: 40,
+                    ),
+                  );
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasData && snapshot.data!) {
+                    return VwLogin();
+                  } else {
+                    Get.snackbar(
+                      "Failed to load data",
+                      "",
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: Colors.black.withOpacity(0.5),
+                      colorText: Colors.white,
+                    );
+
+                    //the FutureBuilder requires a widget to be returned in all possible cases. Since there's nothing to show in the else block, returning an empty Container is a good way to handle that case. It doesn't affect the UI since it's an empty container.
+                    return Container();
+                  }
+                } else {
+                  return Container();
+                }
+              },
+            ),
+          ],
+        );
+      case 5:
+        return VwLogin();
+
+      default:
+        return VwDrawerHome();
+    }
+  }
+}
+
+class DrawerWidget extends StatelessWidget {
+  const DrawerWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Widget _WidgetportraitMode(double Pr_height, Pr_width) {
-      return Scaffold(
-        bottomNavigationBar: ResponsiveWrapper(
-          maxWidth: 1200,
-          minWidth: 480,
-          defaultScale: true,
-          breakpoints: const [
-            ResponsiveBreakpoint.resize(480, name: MOBILE),
-            ResponsiveBreakpoint.autoScale(800, name: TABLET),
-            ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-            ResponsiveBreakpoint.autoScale(2460, name: '4K'),
-          ],
-          child: SizedBox(
-            height: 33,
-            child: BottomAppBar(
-              elevation: 10.0,
-              color: Colors.cyan.shade200,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    icon: Icon(
-                      MdiIcons.whatsapp,
-                      size: 20,
-                      color: Colors.green,
-                    ),
-                    onPressed: () async {
-                      var whatsapp = "+923214457734";
-                      Uri whatsappopen =
-                          Uri.parse("whatsapp://send?phone=$whatsapp");
-                      if (await launchUrl(whatsappopen)) {
-                        //dialer opened
-                      } else {
-                        //dailer is not opened
-                      }
-                    },
-                  ),
-                  InkWell(
-                    onTap: () =>
-                        launchUrl(Uri.parse('https://www.aisonesystems.com/')),
-                    child: Text(
-                      'Powered by - aisonesystems.com',
-                      style: GoogleFonts.ubuntu(
-                          textStyle: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black54,
-                              letterSpacing: .5)),
-                    ),
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.phone_forwarded_outlined,
-                      size: 20,
-                      color: Colors.indigoAccent,
-                    ),
-                    onPressed: () async {
-                      Uri phoneno = Uri.parse('tel:+923214457734');
-                      if (await launchUrl(phoneno)) {
-                        //dialer opened
-                      } else {
-                        //dailer is not opened
-                      }
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        drawer: SizedBox(
-          width: 270,
-        ),
-        body: Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFFFFFFFF),
-                Color(0xFFD1FFFF),
-                Color(0xFF88ECF8),
-                Color(0xFF65DCDC),
-              ],
-              stops: [0.1, 0.5, 0.7, 0.9],
-            ),
-          ),
-          child: SingleChildScrollView(
-            child: ResponsiveWrapper(
-              maxWidth: 1200,
-              minWidth: 480,
-              defaultScale: true,
-              breakpoints: const [
-                ResponsiveBreakpoint.resize(480, name: MOBILE),
-                ResponsiveBreakpoint.autoScale(800, name: TABLET),
-                ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-                ResponsiveBreakpoint.autoScale(2460, name: '4K'),
-              ],
-              child: Stack(children: <Widget>[
-                Container(
-                  height: 500,
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 0, left: 0, right: 0),
-                  height: 220,
-                  width: 480,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(6),
-                      topRight: Radius.circular(6),
-                      bottomLeft: Radius.circular(6),
-                      bottomRight: Radius.circular(6),
-                    ),
-                    gradient: LinearGradient(colors: [
-                      Colors.lightBlueAccent.shade200,
-                      Colors.lightBlueAccent.shade200,
-                    ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-                  ),
-                  child: Stack(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(top: 55, left: 180),
-                        child: Text("kk"),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 42, left: 12),
-                  child: InkWell(
-                    child: DrawerWidget(),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 110, left: 112),
-                  child: Text(
-                    "80",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 103, left: 73),
-                  child: SizedBox(
-                    height: 40,
-                    child: Image.asset("assets/inc.png"),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 129, left: 80),
-                  child: Text(
-                    "Balance",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 110, left: 212),
-                  child: Text(
-                    "30",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 103, left: 173),
-                  child: SizedBox(
-                    height: 35,
-                    child: Image.asset("assets/dec.png"),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 129, left: 180),
-                  child: Text(
-                    "Payment",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 110, left: 312),
-                  child: Text(
-                    "7",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 103, left: 273),
-                  child: SizedBox(
-                    height: 40,
-                    child: Image.asset("assets/inc.png"),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 129, left: 290),
-                  child: Text(
-                    "Over Due Amount",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 180, left: 20),
-                  width: 215,
-                  height: 75,
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            color: Color.fromRGBO(0, 0, 0, 0.25),
-                            offset: Offset(0, 5),
-                            blurRadius: 4)
-                      ],
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(5),
-                        topRight: Radius.circular(5),
-                        bottomLeft: Radius.circular(5),
-                        bottomRight: Radius.circular(5),
-                      ),
-                      color: Colors.white),
-                  child: Stack(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 10, left: 100),
-                        child: Text("bb"),
-                      ),
-                      Container(
-                          margin: EdgeInsets.only(top: 45, left: 100),
-                          child: Text(
-                            "RS: 45415",
-                            style:
-                                TextStyle(color: Colors.black38, fontSize: 23),
-                          )),
-                      Container(
-                        margin: EdgeInsets.only(top: 10, left: 7),
-                        child: SizedBox(
-                          height: 35,
-                          child: Image.asset("assets/cashr.png"),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 180, left: 250),
-                  width: 215,
-                  height: 75,
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            color: Color.fromRGBO(0, 0, 0, 0.25),
-                            offset: Offset(0, 5),
-                            blurRadius: 4)
-                      ],
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(5),
-                        topRight: Radius.circular(5),
-                        bottomLeft: Radius.circular(5),
-                        bottomRight: Radius.circular(5),
-                      ),
-                      color: Colors.white),
-                  child: Stack(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 10, left: 100),
-                        child: Text("cc"),
-                      ),
-                      Container(
-                          margin: EdgeInsets.only(top: 45, left: 100),
-                          child: Text(
-                            "RS: 45415",
-                            style:
-                                TextStyle(color: Colors.black38, fontSize: 23),
-                          )),
-                      Container(
-                        margin: EdgeInsets.only(top: 10, left: 7),
-                        child: SizedBox(
-                          height: 35,
-                          child: Image.asset("assets/cashp.png"),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                //Grid
-
-                //Grid
-              ]),
-            ),
-          ),
-        ),
-      );
-    }
-
-    return GestureDetector(
-      onTap: () {
-        //when tap anywhere on screen keyboard dismiss
-        FocusManager.instance.primaryFocus?.unfocus();
-      },
-      child: OrientationBuilder(
-        builder: (BuildContext context, Orientation orientation) {
-          return LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              //Get device's screen height and width.
-              double height = constraints.maxHeight;
-              double width = constraints.maxWidth;
-
-              if (width >= 300 && width < 500) {
-                return _WidgetportraitMode(height, width);
-              } else {
-                return _WidgetportraitMode(height, width);
-              }
-            },
-          );
+    return IconButton(
+        onPressed: () {
+          ZoomDrawer.of(context)!.toggle();
         },
-      ),
-    );
+        icon: Icon(Icons.menu));
   }
 }

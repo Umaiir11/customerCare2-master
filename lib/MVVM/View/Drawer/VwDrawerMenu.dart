@@ -1,7 +1,9 @@
+
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:customercare/MVVM/View/VwLogin.dart';
+import 'package:customercare/ClassModules/cmGlobalVariables.dart';
+import 'package:customercare/MVVM/ViewModel/VmDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
@@ -9,14 +11,12 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 
-import '../../../ClassModules/cmGlobalVariables.dart';
-import '../../ViewModel/VmDrawer.dart';
 import 'VwDrawer.dart';
 
-int currentIndex = 0;
-
 class VwDrawerMenu extends StatefulWidget {
-  const VwDrawerMenu({Key? key}) : super(key: key);
+  final ValueSetter setIndex;
+
+  const VwDrawerMenu({Key? key, required this.setIndex}) : super(key: key);
 
   @override
   State<VwDrawerMenu> createState() => _VwDrawerMenuState();
@@ -24,95 +24,14 @@ class VwDrawerMenu extends StatefulWidget {
 
 class _VwDrawerMenuState extends State<VwDrawerMenu> {
   @override
-  Widget build(BuildContext context) {
-    return ZoomDrawer(
-      menuScreen:MenuScreen(
-        setIndex: (index) {
-          setState(() {
-            currentIndex = index;
-          });
-
-        },
-      ),
-      mainScreen: setScreenIndex(),
-      showShadow: true,
-      borderRadius: 30,
-      menuBackgroundColor: Colors.lightBlue,
-      openCurve: Curves.fastOutSlowIn,
-      closeCurve: Curves.bounceIn,
-      angle: -12.0,
-      slideWidth: MediaQuery.of(context).size.width*.65,
-
-
-    );
-
-
-
-
-
-  }
-
-  Widget setScreenIndex() {
-    switch (currentIndex) {
-      case 0:
-        return vi_Drawer();
-      case 1:
-        return Container(
-          color: Colors.lightBlue,
-        );
-      case 2:
-        return Container(
-          color: Colors.deepPurple,
-        );
-      case 3:
-        return Container(
-          color: Colors.red,
-        );
-      case 4:
-        return Container(
-          color: Colors.deepPurpleAccent,
-        );
-      case 5:
-        return VwLogin();
-
-      default:
-        return vi_Drawer();
-    }
-  }
-}
-
-class DrawerWidget extends StatelessWidget {
-  const DrawerWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-        onPressed: () {
-          ZoomDrawer.of(context)!.toggle();
-        },
-        icon: Icon(Icons.menu));
-  }
-}
-
-class MenuScreen extends StatefulWidget {
-  final ValueSetter setIndex;
-
-  const MenuScreen({Key? key, required this.setIndex}) : super(key: key);
-
-  @override
-  State<MenuScreen> createState() => _MenuScreenState();
-}
-
-class _MenuScreenState extends State<MenuScreen> {
-  @override
   final l_VmDrawer = Get.put(VmDrawer());
 
   void initState() {
     super.initState();
-    l_VmDrawer.Fnc_addItem();
-    l_VmDrawer.Pr_DecodeData_Image =
-        base64.decode(cmGlobalVariables.Pb_UserImage);
-    l_VmDrawer.Fnc_UserAccountQueryList();
+   // l_VmDrawer.Fnc_addItem();
+    //l_VmDrawer.Pr_DecodeData_Image =
+      //  base64.decode(cmGlobalVariables.Pb_UserImage);
+   // l_VmDrawer.Fnc_UserAccountQueryList();
   }
 
   Widget build(BuildContext context) {
@@ -263,7 +182,8 @@ class _MenuScreenState extends State<MenuScreen> {
   }
 
   Widget drawerlist(IconData icon, String text, int index) {
-    bool isSelected = currentIndex == index;
+
+    bool isSelected =  currentIndex == index;
     return GestureDetector(
       onTap: () {
         widget.setIndex(index);
