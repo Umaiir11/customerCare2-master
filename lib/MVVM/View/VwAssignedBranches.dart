@@ -138,7 +138,7 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
                         InkWell(
                           onTap:(){
 
-                            Get.to(() => vi_Drawer());
+                            Get.to(() => VwDrawer());
 
                           } ,
 

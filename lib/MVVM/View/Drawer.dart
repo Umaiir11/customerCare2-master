@@ -174,7 +174,7 @@ class _vi_DrawerState extends State<vi_Drawer> {
                         Get.snackbar("Please Wait", "Data Is Loading");
 
                         if (await l_VmDrawer.Fnc_AccLedgerList() == true) {
-                          Get.to(() => vi_AccountLedger());
+                          Get.to(() => VwAccountLedger());
                         } else {
                           Get.snackbar("Alert",
                               "No DATA, Please Contact Your Administrator");

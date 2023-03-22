@@ -12,15 +12,16 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../Searching/SrAccLedgerList.dart';
 import '../../Searching/SrCompanyList.dart';
+import '../Model/ApiModels/ModAccLedger.dart';
 
-class vi_AccountLedger extends StatefulWidget {
-  const vi_AccountLedger({Key? key}) : super(key: key);
+class VwAccountLedger extends StatefulWidget {
+  const VwAccountLedger({Key? key}) : super(key: key);
 
   @override
-  State<vi_AccountLedger> createState() => _vi_AccountLedgerState();
+  State<VwAccountLedger> createState() => _VwAccountLedgerState();
 }
 
-class _vi_AccountLedgerState extends State<vi_AccountLedger> {
+class _VwAccountLedgerState extends State<VwAccountLedger> {
   final l_SearchController = Get.put(SrAccLedgerList());
 
   //Controller
@@ -194,261 +195,271 @@ class _vi_AccountLedgerState extends State<vi_AccountLedger> {
                   ),
                 ),
                 Expanded(
-                  child: Obx(() => Stack(
+                    child: Obx(
+                  () => ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: l_SearchController.Pr_filteredList.length,
+                    itemBuilder: ((context, index) {
+                      if (l_SearchController.Pr_filteredList.isEmpty) {
+                        return SizedBox(); // Return an empty container if the filtered list is empty
+                      }
+                      return Column(
                         children: [
-                          ListView.builder(
-                            itemCount:
-                                l_SearchController.Pr_filteredList.length,
-                            itemBuilder: ((context, index) {
-                              return Column(
-                                children: [
-                                  InkWell(
-                                    child: ResponsiveWrapper(
-                                      maxWidth: 1200,
-                                      minWidth: 480,
-                                      defaultScale: true,
-                                      breakpoints: const [
-                                        ResponsiveBreakpoint.resize(480,
-                                            name: MOBILE),
-                                        ResponsiveBreakpoint.autoScale(800,
-                                            name: TABLET),
-                                        ResponsiveBreakpoint.resize(1000,
-                                            name: DESKTOP),
-                                        ResponsiveBreakpoint.autoScale(2460,
-                                            name: '4K'),
-                                      ],
-                                      child: SizedBox(
-                                        width: 450,
-                                        height: 180,
-                                        child: Card(
-                                          elevation: 5.0,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0)),
-                                          color: (l_SearchController
-                                                      .Pr_filteredList[index]
-                                                      .Pr_Credit ==
-                                                  0)
-                                              ? Colors.white
-                                              : Colors.grey.shade300,
-                                          child: Row(
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        top: 15, left: 25),
-                                                    child: RichText(
-                                                      text: TextSpan(
-                                                        text: '',
-                                                        style: TextStyle(
-                                                          fontSize: 22,
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          letterSpacing: 0.5,
-                                                        ),
-                                                        children: [
-                                                          l_SearchController
-                                                              .getMatchedTextSpan(
-                                                            l_SearchController
-                                                                .Pr_filteredList[
-                                                                    index]
-                                                                .Pr_VNO,
-                                                            l_SearchController
-                                                                .searchText
-                                                                .value,
-                                                          ),
-                                                        ],
-                                                      ),
+                          InkWell(
+                            onTap: () async {},
+                            child: SizedBox(
+                              width: Pr_width*0.900,
+                              height: Pr_height*0.150,
+                              child: Card(
+                                elevation: 5.0,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                color: (l_SearchController
+                                            .Pr_filteredList[index + 1]
+                                            .Pr_Credit ==
+                                        0)
+                                    ? Colors.white
+                                    : Colors.grey.shade300,
+                                child: Row(
+                                  children: [
+
+
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 15, left: 25),
+                                              child: RichText(
+                                                text: TextSpan(
+                                                  text: '',
+                                                  style: TextStyle(
+                                                    fontSize: 22,
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w600,
+                                                    letterSpacing: 0.5,
+                                                  ),
+                                                  children: [
+                                                    l_SearchController
+                                                        .getMatchedTextSpan(
+                                                      l_SearchController
+                                                          .Pr_filteredList[
+                                                              index + 1]
+                                                          .Pr_VNO,
+                                                      l_SearchController
+                                                          .searchText.value,
                                                     ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(width: 180),
+
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 15, left: 25),
+                                              child: RichText(
+                                                text: TextSpan(
+                                                  text: '',
+                                                  style:  TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight: FontWeight.w600,
+                                                      color:
+                                                      Colors.black,
+                                                      letterSpacing: .5),
+                                                  children: [
+                                                    l_SearchController
+                                                        .getMatchedTextSpan(
+                                                      G_DateTimeFormat.format( l_SearchController
+                                                          .Pr_filteredList[
+                                                      index + 1]
+                                                          .Pr_VDate),
+
+                                                      l_SearchController
+                                                          .searchText.value,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+
+                                          ],
+                                        ),
+
+
+                                        Row(
+                                          children: [
+
+                                            //Debit
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 10, left: 25),
+                                                  child: Text(
+                                                    'Debit',
+                                                    style: GoogleFonts.ubuntu(
+                                                        textStyle: TextStyle(
+                                                            fontSize: 18,
+                                                            color:
+                                                                Colors.black26,
+                                                            letterSpacing: .5)),
                                                   ),
-                                                  Row(
-                                                    children: [
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    top: 10,
-                                                                    left: 25),
-                                                            child: Text(
-                                                              'Email',
-                                                              style: GoogleFonts.ubuntu(
-                                                                  textStyle: TextStyle(
-                                                                      fontSize:
-                                                                          18,
-                                                                      color: Colors
-                                                                          .black26,
-                                                                      letterSpacing:
-                                                                          .5)),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    top: 2,
-                                                                    left: 25),
-                                                            child: RichText(
-                                                              text: TextSpan(
-                                                                text: '',
-                                                                style: GoogleFonts.ubuntu(
-                                                                    textStyle: TextStyle(
-                                                                        fontSize:
-                                                                            13,
-                                                                        color: Colors
-                                                                            .black,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w600,
-                                                                        letterSpacing:
-                                                                            .5)),
-                                                                children: [
-                                                                  l_SearchController
-                                                                      .getMatchedTextSpan(
-                                                                    l_SearchController
-                                                                        .Pr_filteredList[
-                                                                            index]
-                                                                        .Pr_Debit
-                                                                        .toString(),
-                                                                    l_SearchController
-                                                                        .searchText
-                                                                        .value,
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    top: 10,
-                                                                    left: 25),
-                                                            child: Text(
-                                                              'Phone',
-                                                              style: GoogleFonts.ubuntu(
-                                                                  textStyle: TextStyle(
-                                                                      fontSize:
-                                                                          18,
-                                                                      color: Colors
-                                                                          .black26,
-                                                                      letterSpacing:
-                                                                          .5)),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    top: 2,
-                                                                    left: 25),
-                                                            child: RichText(
-                                                              text: TextSpan(
-                                                                text: '',
-                                                                style: GoogleFonts.ubuntu(
-                                                                    textStyle: TextStyle(
-                                                                        fontSize:
-                                                                            13,
-                                                                        color: Colors
-                                                                            .black,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w600,
-                                                                        letterSpacing:
-                                                                            .5)),
-                                                                children: [
-                                                                  l_SearchController
-                                                                      .getMatchedTextSpan(
-                                                                    l_SearchController
-                                                                        .Pr_filteredList[
-                                                                            index]
-                                                                        .Pr_Credit
-                                                                        .toString(),
-                                                                    l_SearchController
-                                                                        .searchText
-                                                                        .value,
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        top: 10, left: 25),
-                                                    child: Text(
-                                                      'Address',
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 2, left: 27),
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                      text: '',
                                                       style: GoogleFonts.ubuntu(
                                                           textStyle: TextStyle(
-                                                              fontSize: 18,
-                                                              color: Colors
-                                                                  .black26,
-                                                              //fontWeight: FontWeight.w600,
+                                                              fontSize: 13,
+                                                              color:
+                                                                  Colors.blue,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
                                                               letterSpacing:
                                                                   .5)),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        top: 2, left: 25),
-                                                    child: RichText(
-                                                      text: TextSpan(
-                                                        text: '',
-                                                        style: GoogleFonts.ubuntu(
-                                                            textStyle: TextStyle(
-                                                                fontSize: 13,
-                                                                color: Colors
-                                                                    .black,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                letterSpacing:
-                                                                    .5)),
-                                                        children: [
+                                                      children: [
+                                                        l_SearchController
+                                                            .getMatchedTextSpan(
+                                                          G_currencyFormat.format(
+                                                              l_SearchController
+                                                                  .Pr_filteredList[
+                                                                      index + 1]
+                                                                  .Pr_Debit),
                                                           l_SearchController
-                                                              .getMatchedTextSpan(
-                                                            l_SearchController
-                                                                .Pr_filteredList[
-                                                                    index]
-                                                                .Pr_Balance
-                                                                .toString(),
-                                                            l_SearchController
-                                                                .searchText
-                                                                .value,
-                                                          ),
-                                                        ],
-                                                      ),
+                                                              .searchText.value,
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
+                                                ),
+                                              ],
+                                            ),
+                                            //Credit
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 10, left: 70),
+                                                  child: Text(
+                                                    'Credit',
+                                                    style: GoogleFonts.ubuntu(
+                                                        textStyle: TextStyle(
+                                                            fontSize: 18,
+                                                            color:
+                                                                Colors.black26,
+                                                            letterSpacing: .5)),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 2, left:72),
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                      text: '',
+                                                      style: GoogleFonts.ubuntu(
+                                                          textStyle: TextStyle(
+                                                              fontSize: 13,
+                                                              color:
+                                                                  Colors.green,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              letterSpacing:
+                                                                  .5)),
+                                                      children: [
+                                                        l_SearchController
+                                                            .getMatchedTextSpan(
+                                                          G_currencyFormat.format(
+                                                              l_SearchController
+                                                                  .Pr_filteredList[
+                                                                      index + 1]
+                                                                  .Pr_Credit),
+                                                          l_SearchController
+                                                              .searchText.value,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            //Balance
+                                            Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 10, left: 55),
+                                                  child: Text(
+                                                    'Balance',
+                                                    style: GoogleFonts.ubuntu(
+                                                        textStyle: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors.black26,
+                                                            //fontWeight: FontWeight.w600,
+                                                            letterSpacing: .5)),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 2, left: 57),
+                                                  child:  RichText(
+                                                    text: TextSpan(
+                                                      text: '',
+                                                      style: GoogleFonts.ubuntu(
+                                                          textStyle: TextStyle(
+                                                              fontSize: 13,
+                                                              color: Colors.black,
+                                                              fontWeight:
+                                                              FontWeight.w600,
+                                                              letterSpacing: .5)),
+                                                      children: [
+                                                        l_SearchController
+                                                            .getMatchedTextSpan(
+                                                          G_currencyFormat.format(
+                                                              l_SearchController
+                                                                  .Pr_filteredList[
+                                                              index + 1]
+                                                                  .Pr_Balance),
+                                                          l_SearchController
+                                                              .searchText.value,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+
+                                          ],
                                         ),
-                                      ),
+
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              );
-                            }),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         ],
-                      )),
-                ),
+                      );
+                    }),
+                  ),
+                )),
               ],
             )),
       );
