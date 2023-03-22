@@ -12,23 +12,23 @@ import '../MVVM/Model/ParameterModels/ParModUserLogin.dart';
 class SlwUserLogin {
 
 
-  Future<ModUserProfile?> Fnc_UserProfile(MmoLoginModel l_MmoLoginModel) async {
-    String l_Pr_CompanyDID = "00000000-0000-0000-0000-000000000000";
+  Future<ModUserProfile?> Fnc_UserProfile(MmoLoginModel lMmoLoginModel) async {
+    String lPrCompanyDID = "00000000-0000-0000-0000-000000000000";
     try {
-      ParModUserProfile l_ParModUserProfile = new ParModUserProfile(
-          Pr_EmailID: l_MmoLoginModel.username,
-          Pr_Password: new cmCryptography().Fnc_Encrypt_AES(l_MmoLoginModel.password),
-          Pr_CompanyDID: l_Pr_CompanyDID);
+      ParModUserProfile lParModUserProfile = ParModUserProfile(
+          Pr_EmailID: lMmoLoginModel.username,
+          Pr_Password: cmCryptography().Fnc_Encrypt_AES(lMmoLoginModel.password),
+          Pr_CompanyDID: lPrCompanyDID);
 
       //Uri.https('www.aisonesystems.com', '/apiUser/UserProfile/Post');
-      String l_jsonString = json.encode((l_ParModUserProfile.toJson()));
-      List<int> l_UtfContent = utf8.encode(l_jsonString);
+      String lJsonString = json.encode((lParModUserProfile.toJson()));
+      List<int> lUtfContent = utf8.encode(lJsonString);
 
-      final l_response = await new cmHttpCalls()
-          .Fnc_HttpResponseWeb('/apiUser/UserProfile/Post', l_UtfContent);
-      print(l_response);
-      if (l_response.statusCode == 200) {
-        return Fnc_JsonToModel(jsonDecode(l_response.body));
+      final lResponse = await cmHttpCalls()
+          .Fnc_HttpResponseWeb('/apiUser/UserProfile/Post', lUtfContent);
+      print(lResponse);
+      if (lResponse.statusCode == 200) {
+        return Fnc_JsonToModel(jsonDecode(lResponse.body));
       } else {
         return null;
       }
@@ -38,28 +38,28 @@ class SlwUserLogin {
     return null;
   }
 
-  ModUserProfile Fnc_JsonToModel(Map<String, dynamic> l_JsonObject) {
-    ModUserProfile l_ModUserProfile = new ModUserProfile();
+  ModUserProfile Fnc_JsonToModel(Map<String, dynamic> lJsonObject) {
+    ModUserProfile lModUserProfile = ModUserProfile();
 
-    l_ModUserProfile.Pr_PKGUID = l_JsonObject["Pr_PKGUID"];
-    l_ModUserProfile.Pr_EmailID = l_JsonObject["Pr_EmailID"];
-    l_ModUserProfile.Pr_FullName = l_JsonObject["Pr_FullName"];
-    l_ModUserProfile.Pr_ContactNo = l_JsonObject["Pr_ContactNo"];
-    l_ModUserProfile.Pr_Image = l_JsonObject["Pr_Image"];
+    lModUserProfile.Pr_PKGUID = lJsonObject["Pr_PKGUID"];
+    lModUserProfile.Pr_EmailID = lJsonObject["Pr_EmailID"];
+    lModUserProfile.Pr_FullName = lJsonObject["Pr_FullName"];
+    lModUserProfile.Pr_ContactNo = lJsonObject["Pr_ContactNo"];
+    lModUserProfile.Pr_Image = lJsonObject["Pr_Image"];
 
-    return l_ModUserProfile;
+    return lModUserProfile;
   }
 
   //Method return list type
-  List<ModUserProfile> Fnc_JsonToListOfModel(List<dynamic> l_JsonList) {
-    List<ModUserProfile> l_ListModUserProfile =
-        new List<ModUserProfile>.empty(growable: true);
+  List<ModUserProfile> Fnc_JsonToListOfModel(List<dynamic> lJsonList) {
+    List<ModUserProfile> lListModUserProfile =
+        List<ModUserProfile>.empty(growable: true);
 
-    for (dynamic l_JsonObject in l_JsonList) {
-      ModUserProfile l_ModUserProfile = new ModUserProfile();
-      l_ModUserProfile = Fnc_JsonToModel(l_JsonObject);
-      l_ListModUserProfile.add(l_ModUserProfile);
+    for (dynamic lJsonObject in lJsonList) {
+      ModUserProfile lModUserProfile = ModUserProfile();
+      lModUserProfile = Fnc_JsonToModel(lJsonObject);
+      lListModUserProfile.add(lModUserProfile);
     }
-    return l_ListModUserProfile;
+    return lListModUserProfile;
   }
 }

@@ -1,7 +1,6 @@
 import 'package:customercare/ClassModules/cmGlobalVariables.dart';
 import 'package:customercare/MVVM/View/VwCompany.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:get/get.dart';
@@ -36,14 +35,14 @@ class _VwLoginState extends State<VwLogin> {
                 !l_vmLogin.Pr_boolSecurePassword_wid.value;
           },
           icon: l_vmLogin.Pr_boolSecurePassword_wid.value
-              ? Icon(Icons.visibility)
-              : Icon(Icons.visibility_off),
+              ? const Icon(Icons.visibility)
+              : const Icon(Icons.visibility_off),
           color: Colors.indigo,
         );
       });
     }
 
-    Widget _WidgetportraitMode(double Pr_height, Pr_width) {
+    Widget _WidgetportraitMode(double PrHeight, PrWidth) {
       return Scaffold(
         key: _scaffoldKey,
         body: Container(
@@ -79,7 +78,7 @@ class _VwLoginState extends State<VwLogin> {
               child: Column(
                 children: [
                   Padding(
-                      padding: EdgeInsets.only(top: 150),
+                      padding: const EdgeInsets.only(top: 150),
                       child: Center(
                         child: Image.asset(
                           "assets/aisonr.png",
@@ -87,14 +86,14 @@ class _VwLoginState extends State<VwLogin> {
                           fit: BoxFit.cover,
                         ),
                       )),
-                  Padding(
+                  const Padding(
                       padding: EdgeInsets.only(top: 40),
                       child: Center(child: Text("data"))),
-                  Padding(
+                  const Padding(
                       padding: EdgeInsets.only(top: 25),
                       child: Center(child: Text("data"))),
                   Padding(
-                    padding: EdgeInsets.only(top: 40),
+                    padding: const EdgeInsets.only(top: 40),
                     child: Center(
                       child: SizedBox(
                         width: 430,
@@ -120,7 +119,7 @@ class _VwLoginState extends State<VwLogin> {
                       ),
                     ),
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(top: 3),
                     child: Divider(
                       endIndent: 79,
@@ -129,7 +128,7 @@ class _VwLoginState extends State<VwLogin> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 3),
+                    padding: const EdgeInsets.only(top: 3),
                     child: Center(
                       child: SizedBox(
                           width: 430,
@@ -159,7 +158,7 @@ class _VwLoginState extends State<VwLogin> {
                           })),
                     ),
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(top: 3),
                     child: Divider(
                       endIndent: 79,
@@ -167,11 +166,11 @@ class _VwLoginState extends State<VwLogin> {
                       thickness: 1.5,
                     ),
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(top: 3),
                     child: Center(child: Text("Remember me")),
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(top: 3),
                     child: Divider(
                       endIndent: 120,
@@ -180,7 +179,7 @@ class _VwLoginState extends State<VwLogin> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 10),
                     child: Center(
                       child: SizedBox(
                         width: 150,
@@ -189,21 +188,14 @@ class _VwLoginState extends State<VwLogin> {
                           return ElevatedButton(
                             onPressed: () async {
                               if (await l_vmLogin.Fnc_OnTapLoginBtn() == true) {
-                                Get.to(() => VwCompany());
+                                Get.to(() => const VwCompany());
                               } else {
                                 Get.snackbar("Exception",
                                     cmGlobalVariables.Pb_Exception!);
                               }
                             },
-                            child: l_vmLogin.Pr_isLoading_wid.value
-                                ? LoadingAnimationWidget.twistingDots(
-                                    leftDotColor: const Color(0xFF1A1A3F),
-                                    rightDotColor: const Color(0xFFEA3799),
-                                    size: 40,
-                                  )
-                                : Text("Login"),
                             style: ElevatedButton.styleFrom(
-                              animationDuration: Duration(seconds: 1),
+                              animationDuration: const Duration(seconds: 1),
                               shape: l_vmLogin.Pr_isLoading_wid.value
                                   ? RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50),
@@ -212,6 +204,13 @@ class _VwLoginState extends State<VwLogin> {
                                       borderRadius: BorderRadius.circular(0),
                                     ),
                             ),
+                            child: l_vmLogin.Pr_isLoading_wid.value
+                                ? LoadingAnimationWidget.twistingDots(
+                                    leftDotColor: const Color(0xFF1A1A3F),
+                                    rightDotColor: const Color(0xFFEA3799),
+                                    size: 40,
+                                  )
+                                : const Text("Login"),
                           );
                         }),
                       ),

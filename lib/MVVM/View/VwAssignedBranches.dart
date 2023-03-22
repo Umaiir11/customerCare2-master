@@ -1,16 +1,12 @@
-import 'package:customercare/MVVM/View/Drawer/VwDrawerHome.dart';
-import 'package:customercare/MVVM/View/testui.dart';
 import 'package:customercare/MVVM/ViewModel/VmAssignedBranches.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'Drawer.dart';
 import 'Drawer/VwDrawer.dart';
 
 class VwAssignedBranches extends StatefulWidget {
@@ -24,6 +20,7 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
   @override
   final l_VmAssignedBranches = Get.put(VmAssignedBranches());
 
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -31,8 +28,9 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
   }
   //UserWidgets
 
+  @override
   Widget build(BuildContext context) {
-    Widget _WidgetportraitMode(double Pr_height, Pr_width) {
+    Widget _WidgetportraitMode(double PrHeight, PrWidth) {
       return Scaffold(
         bottomNavigationBar: ResponsiveWrapper(
           maxWidth: 1200,
@@ -53,7 +51,7 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       MdiIcons.whatsapp,
                       size: 20,
                       color: Colors.green,
@@ -75,14 +73,14 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
                     child: Text(
                       'Powered by - aisonesystems.com',
                       style: GoogleFonts.ubuntu(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                               fontSize: 14,
                               color: Colors.black54,
                               letterSpacing: .5)),
                     ),
                   ),
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.phone_forwarded_outlined,
                       size: 20,
                       color: Colors.indigoAccent,
@@ -102,8 +100,8 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
           ),
         ),
         body: Container(
-          height: Pr_height,
-          width: Pr_width,
+          height: PrHeight,
+          width: PrWidth,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -121,14 +119,14 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                  top: Pr_height*.080,
+                  top: PrHeight*.080,
                 ),
                 child: Shimmer.fromColors(
                     baseColor: Colors.black38,
                     highlightColor: Colors.cyanAccent,
-                    child: Text("lblCompanyList")),
+                    child: const Text("lblCompanyList")),
               ),
-              SizedBox(height: Pr_height*0.020,),
+              SizedBox(height: PrHeight*0.020,),
               Expanded(
                 child: Obx(() => ListView.builder(
                   itemCount: l_VmAssignedBranches.l_PrAssignedBranchesList?.length,
@@ -138,7 +136,7 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
                         InkWell(
                           onTap:(){
 
-                            Get.to(() => VwDrawer());
+                            Get.to(() => const VwDrawer());
 
                           } ,
 
@@ -174,14 +172,14 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
                                       CrossAxisAlignment.start,
                                       children: [
                                         Padding(
-                                          padding: EdgeInsets.only(
+                                          padding: const EdgeInsets.only(
                                               top: 15, left: 25),
                                           child: Text(
                                             l_VmAssignedBranches.l_PrAssignedBranchesList
                                                 ![index].pr_BranchName,
                                             //G_CompanyList[index].Pr_CompanyName,
                                             style: GoogleFonts.ubuntu(
-                                                textStyle: TextStyle(
+                                                textStyle: const TextStyle(
                                                     fontSize: 22,
                                                     color: Colors.black,
                                                     fontWeight:
@@ -196,12 +194,12 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
                                               CrossAxisAlignment.start,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsets.only(
+                                                  padding: const EdgeInsets.only(
                                                       top: 10, left: 25),
                                                   child: Text(
                                                     'Address',
                                                     style: GoogleFonts.ubuntu(
-                                                        textStyle: TextStyle(
+                                                        textStyle: const TextStyle(
                                                             fontSize: 18,
                                                             color: Colors
                                                                 .black26,
@@ -210,7 +208,7 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsets.only(
+                                                  padding: const EdgeInsets.only(
                                                       top: 2, left: 25),
                                                   child: Text(
                                                     l_VmAssignedBranches.l_PrAssignedBranchesList
@@ -218,7 +216,7 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
                                                     index]
                                                     .pr_Address,
                                                     style: GoogleFonts.ubuntu(
-                                                        textStyle: TextStyle(
+                                                        textStyle: const TextStyle(
                                                             fontSize: 13,
                                                             color: Colors
                                                                 .black,
@@ -236,12 +234,12 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
                                               CrossAxisAlignment.start,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsets.only(
+                                                  padding: const EdgeInsets.only(
                                                       top: 10, left: 25),
                                                   child: Text(
                                                     'BranchDID',
                                                     style: GoogleFonts.ubuntu(
-                                                        textStyle: TextStyle(
+                                                        textStyle: const TextStyle(
                                                             fontSize: 18,
                                                             color: Colors
                                                                 .black26,
@@ -250,7 +248,7 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsets.only(
+                                                  padding: const EdgeInsets.only(
                                                       top: 2, left: 25),
                                                   child: Text(
                                                     l_VmAssignedBranches.l_PrAssignedBranchesList![
@@ -258,7 +256,7 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
                                                         .pr_BranchDID
                                                         .toString(),
                                                     style: GoogleFonts.ubuntu(
-                                                        textStyle: TextStyle(
+                                                        textStyle: const TextStyle(
                                                             fontSize: 13,
                                                             color: Colors
                                                                 .black,
@@ -274,12 +272,12 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
                                           ],
                                         ),
                                         Padding(
-                                          padding: EdgeInsets.only(
+                                          padding: const EdgeInsets.only(
                                               top: 10, left: 25),
                                           child: Text(
                                             'User DID',
                                             style: GoogleFonts.ubuntu(
-                                                textStyle: TextStyle(
+                                                textStyle: const TextStyle(
                                                     fontSize: 18,
                                                     color: Colors.black26,
                                                     //fontWeight: FontWeight.w600,
@@ -287,14 +285,14 @@ class _VwAssignedBranchesState extends State<VwAssignedBranches> {
                                           ),
                                         ),
                                         Padding(
-                                          padding: EdgeInsets.only(
+                                          padding: const EdgeInsets.only(
                                               top: 2, left: 25),
                                           child: Text(
                                             l_VmAssignedBranches.l_PrAssignedBranchesList![index]
                                                 .pr_UserDID
                                                 .toString(),
                                             style: GoogleFonts.ubuntu(
-                                                textStyle: TextStyle(
+                                                textStyle: const TextStyle(
                                                     fontSize: 13,
                                                     color: Colors.black,
                                                     fontWeight:

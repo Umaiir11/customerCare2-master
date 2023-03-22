@@ -9,74 +9,72 @@ class Sl_PendingCheques {
   Future<List<ModPendingCheques>?> Fnc_PendingCheques() async {
     try {
 
-      ParModPendingCheques l_ParModPendingCheques = new ParModPendingCheques(
+      ParModPendingCheques lParModPendingCheques = ParModPendingCheques(
           Pr_Branchid: "1",
           Pr_WhereClause: "",
           Pr_GroupByClause: "",
           Pr_OrderByClause: "");
 
-      String l_jsonString = json.encode((l_ParModPendingCheques.toJson()));
-      List<int> l_UtfContent = utf8.encode(l_jsonString);
+      String lJsonString = json.encode((lParModPendingCheques.toJson()));
+      List<int> lUtfContent = utf8.encode(lJsonString);
 
-      final l_response = await new cmHttpCalls().Fnc_HttpResponseERPBoth(
-          '/RptPendingCheques/Fnc_Read_SP', l_UtfContent);
+      final lResponse = await cmHttpCalls().Fnc_HttpResponseERPBoth(
+          '/RptPendingCheques/Fnc_Read_SP', lUtfContent);
 
-      if (l_response.statusCode == 200) {
-        var a = l_response;
+      if (lResponse.statusCode == 200) {
+        var a = lResponse;
         print(a);
         print("Pending Cheques");
-        return Fnc_JsonToListOfModel(jsonDecode(l_response.body));
+        return Fnc_JsonToListOfModel(jsonDecode(lResponse.body));
       } else {
         return null;
       }
     } catch (e) {
       print(e.toString());
     }
+    return null;
   }
 
-  ModPendingCheques Fnc_JsonToModel(Map<String, dynamic> l_JsonObject) {
-    ModPendingCheques l_ModPendingCheques = new ModPendingCheques();
+  ModPendingCheques Fnc_JsonToModel(Map<String, dynamic> lJsonObject) {
+    ModPendingCheques lModPendingCheques = ModPendingCheques();
 
-    l_ModPendingCheques.Pr_PKGUID = l_JsonObject["Pr_PKGUID"] ?? '0' ;
-    l_ModPendingCheques.Pr_VNO = l_JsonObject["Pr_VNO"] ?? 0;
-    l_ModPendingCheques.Pr_VoucherNo = l_JsonObject["Pr_VoucherNo"] ?? '0';
-    l_ModPendingCheques.Pr_VDate =
-        DateTime.parse(l_JsonObject["Pr_VDate"] ?? "2022-08-06T00:00:00") ;
-    l_ModPendingCheques.Pr_ChequeDate =
-        DateTime.parse( l_JsonObject["Pr_ChequeDate"] ?? "2022-08-06T00:00:00") ;
-    l_ModPendingCheques.Pr_AccountDID = l_JsonObject["Pr_AccountDID"] ?? '0';
-    l_ModPendingCheques.Pr_AccountID = l_JsonObject["Pr_AccountID"] ?? '0';
-    l_ModPendingCheques.Pr_ChequeNo = l_JsonObject["Pr_ChequeNo"] ?? '0';
-    l_ModPendingCheques.Pr_RefNo = l_JsonObject["Pr_RefNo"] ?? '0';
-    l_ModPendingCheques.Pr_Remarks = l_JsonObject["Pr_Remarks"] ?? '0';
+    lModPendingCheques.Pr_PKGUID = lJsonObject["Pr_PKGUID"] ?? '0' ;
+    lModPendingCheques.Pr_VNO = lJsonObject["Pr_VNO"] ?? 0;
+    lModPendingCheques.Pr_VoucherNo = lJsonObject["Pr_VoucherNo"] ?? '0';
+    lModPendingCheques.Pr_VDate =
+        DateTime.parse(lJsonObject["Pr_VDate"] ?? "2022-08-06T00:00:00") ;
+    lModPendingCheques.Pr_ChequeDate =
+        DateTime.parse( lJsonObject["Pr_ChequeDate"] ?? "2022-08-06T00:00:00") ;
+    lModPendingCheques.Pr_AccountDID = lJsonObject["Pr_AccountDID"] ?? '0';
+    lModPendingCheques.Pr_AccountID = lJsonObject["Pr_AccountID"] ?? '0';
+    lModPendingCheques.Pr_ChequeNo = lJsonObject["Pr_ChequeNo"] ?? '0';
+    lModPendingCheques.Pr_RefNo = lJsonObject["Pr_RefNo"] ?? '0';
+    lModPendingCheques.Pr_Remarks = lJsonObject["Pr_Remarks"] ?? '0';
 
-    lat:
-    l_ModPendingCheques.Pr_Amount = l_JsonObject["Pr_Amount"] ?? 0;
-    lat:
-    l_ModPendingCheques.Pr_PendingDebit =
-        l_JsonObject["Pr_PendingDebit"] ?? 0;
-    lat:
-    l_ModPendingCheques.Pr_PendingCredit =
-        l_JsonObject["Pr_PendingCredit"] ?? 0;
+    lModPendingCheques.Pr_Amount = lJsonObject["Pr_Amount"] ?? 0;
+    lModPendingCheques.Pr_PendingDebit =
+        lJsonObject["Pr_PendingDebit"] ?? 0;
+    lModPendingCheques.Pr_PendingCredit =
+        lJsonObject["Pr_PendingCredit"] ?? 0;
 
-    l_ModPendingCheques.Pr_ChequeStatusDID =
-        l_JsonObject["Pr_ChequeStatusDID"] ?? 0;
-    l_ModPendingCheques.Pr_ChequeStatus =
-        l_JsonObject["Pr_ChequeStatus"] ?? '0';
-    l_ModPendingCheques.Pr_ChequeType = l_JsonObject["Pr_ChequeType"] ?? 0;
-    l_ModPendingCheques.Pr_PostedID = l_JsonObject["Pr_PostedID"] ?? false;
-    l_ModPendingCheques.Pr_BranchID = l_JsonObject["Pr_BranchID"] ?? 0;
-    return l_ModPendingCheques;
+    lModPendingCheques.Pr_ChequeStatusDID =
+        lJsonObject["Pr_ChequeStatusDID"] ?? 0;
+    lModPendingCheques.Pr_ChequeStatus =
+        lJsonObject["Pr_ChequeStatus"] ?? '0';
+    lModPendingCheques.Pr_ChequeType = lJsonObject["Pr_ChequeType"] ?? 0;
+    lModPendingCheques.Pr_PostedID = lJsonObject["Pr_PostedID"] ?? false;
+    lModPendingCheques.Pr_BranchID = lJsonObject["Pr_BranchID"] ?? 0;
+    return lModPendingCheques;
   }
 
-  List<ModPendingCheques> Fnc_JsonToListOfModel(List<dynamic> l_JsonList) {
-    List<ModPendingCheques> l_ListModPendingCheques =
-    new List<ModPendingCheques>.empty(growable: true);
-    for (dynamic l_JsonObject in l_JsonList) {
-      ModPendingCheques l_ModPendingCheques = new ModPendingCheques();
-      l_ModPendingCheques = Fnc_JsonToModel(l_JsonObject);
-      l_ListModPendingCheques.add(l_ModPendingCheques);
+  List<ModPendingCheques> Fnc_JsonToListOfModel(List<dynamic> lJsonList) {
+    List<ModPendingCheques> lListModPendingCheques =
+    List<ModPendingCheques>.empty(growable: true);
+    for (dynamic lJsonObject in lJsonList) {
+      ModPendingCheques lModPendingCheques = ModPendingCheques();
+      lModPendingCheques = Fnc_JsonToModel(lJsonObject);
+      lListModPendingCheques.add(lModPendingCheques);
     }
-    return l_ListModPendingCheques;
+    return lListModPendingCheques;
   }
 }

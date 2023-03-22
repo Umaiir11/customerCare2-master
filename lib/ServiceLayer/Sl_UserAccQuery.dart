@@ -8,50 +8,51 @@ import '../MVVM/Model/ApiModels/ModUserAccQuery.dart';
 class Sl_UserAccountsQuery {
   Future<List<ModUserAccountsQuery>?> Fnc_UserAccountsQuery() async {
     try {
-      ParModUserAccQuery l_ParModUserAccQuery = new ParModUserAccQuery(
+      ParModUserAccQuery lParModUserAccQuery = ParModUserAccQuery(
           Pr_Branchid: "1",
           Pr_WhereClause:
-              "where EmailID='" + cmGlobalVariables.Pb_UserEmail! + "'",
+              "where EmailID='${cmGlobalVariables.Pb_UserEmail!}'",
           Pr_GroupByClause: "",
           Pr_OrderByClause: "");
 
-      String l_jsonString = json.encode((l_ParModUserAccQuery.toJson()));
-      List<int> l_UtfContent = utf8.encode(l_jsonString);
+      String lJsonString = json.encode((lParModUserAccQuery.toJson()));
+      List<int> lUtfContent = utf8.encode(lJsonString);
 
-      final l_response = await new cmHttpCalls().Fnc_HttpResponseERPBoth(
-          '/UserAccountsQuery/Fnc_Read_SP', l_UtfContent);
+      final lResponse = await cmHttpCalls().Fnc_HttpResponseERPBoth(
+          '/UserAccountsQuery/Fnc_Read_SP', lUtfContent);
 
-      if (l_response.statusCode == 200) {
-        var a = l_response;
+      if (lResponse.statusCode == 200) {
+        var a = lResponse;
         print(a);
-        return Fnc_JsonToListOfModel(jsonDecode(l_response.body));
+        return Fnc_JsonToListOfModel(jsonDecode(lResponse.body));
       } else {
         return null;
       }
     } catch (e) {
       print(e.toString());
     }
+    return null;
   }
 
-  ModUserAccountsQuery Fnc_JsonToModel(Map<String, dynamic> l_JsonObject) {
-    ModUserAccountsQuery l_ModUserAccountsQuery = new ModUserAccountsQuery();
+  ModUserAccountsQuery Fnc_JsonToModel(Map<String, dynamic> lJsonObject) {
+    ModUserAccountsQuery lModUserAccountsQuery = ModUserAccountsQuery();
 
-    l_ModUserAccountsQuery.Pr_AccountsDID = l_JsonObject["Pr_AccountsDID"];
-    l_ModUserAccountsQuery.Pr_AccountID = l_JsonObject["Pr_AccountID"];
-    l_ModUserAccountsQuery.Pr_CurrencyCode = l_JsonObject["Pr_CurrencyCode"];
-    l_ModUserAccountsQuery.Pr_CityID = l_JsonObject["Pr_CityID"];
-    l_ModUserAccountsQuery.Pr_BranchID = l_JsonObject["Pr_BranchID"];
-    return l_ModUserAccountsQuery;
+    lModUserAccountsQuery.Pr_AccountsDID = lJsonObject["Pr_AccountsDID"];
+    lModUserAccountsQuery.Pr_AccountID = lJsonObject["Pr_AccountID"];
+    lModUserAccountsQuery.Pr_CurrencyCode = lJsonObject["Pr_CurrencyCode"];
+    lModUserAccountsQuery.Pr_CityID = lJsonObject["Pr_CityID"];
+    lModUserAccountsQuery.Pr_BranchID = lJsonObject["Pr_BranchID"];
+    return lModUserAccountsQuery;
   }
 
-  List<ModUserAccountsQuery> Fnc_JsonToListOfModel(List<dynamic> l_JsonList) {
-    List<ModUserAccountsQuery> l_ListModUserAccountsQuery =
-        new List<ModUserAccountsQuery>.empty(growable: true);
-    for (dynamic l_JsonObject in l_JsonList) {
-      ModUserAccountsQuery l_ModUserAccountsQuery = new ModUserAccountsQuery();
-      l_ModUserAccountsQuery = Fnc_JsonToModel(l_JsonObject);
-      l_ListModUserAccountsQuery.add(l_ModUserAccountsQuery);
+  List<ModUserAccountsQuery> Fnc_JsonToListOfModel(List<dynamic> lJsonList) {
+    List<ModUserAccountsQuery> lListModUserAccountsQuery =
+        List<ModUserAccountsQuery>.empty(growable: true);
+    for (dynamic lJsonObject in lJsonList) {
+      ModUserAccountsQuery lModUserAccountsQuery = ModUserAccountsQuery();
+      lModUserAccountsQuery = Fnc_JsonToModel(lJsonObject);
+      lListModUserAccountsQuery.add(lModUserAccountsQuery);
     }
-    return l_ListModUserAccountsQuery;
+    return lListModUserAccountsQuery;
   }
 }

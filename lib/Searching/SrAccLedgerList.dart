@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../MVVM/Model/ApiModels/ModAccLedger.dart';
-import '../MVVM/Model/ApiModels/ModCompanySettingQuery.dart';
 import '../MVVM/ViewModel/VmDrawer.dart';
-import '../MVVM/ViewModel/VmCompany.dart';
 
 class SrAccLedgerList extends GetxController {
   final VmDrawer G_VmDrawer = Get.find();
@@ -26,30 +23,21 @@ class SrAccLedgerList extends GetxController {
       return;
     }
 
-    List<String> l_UserInput = query.toLowerCase().split(" ");
-    List<ModAccountLedger> l_filteredList =
-        l_PrAccLedgerList!.where((l_ListContent) {
-      for (String l_letter in l_UserInput) {
-        if (!l_ListContent.Pr_VNO.toLowerCase().contains(l_letter) &&
-            !l_ListContent.Pr_Debit.toString()
-                .toLowerCase()
-                .contains(l_letter) &&
-            !l_ListContent.Pr_Credit.toString()
-                .toLowerCase()
-                .contains(l_letter) &&
-            !l_ListContent.Pr_VDate.toString()
-                .toLowerCase()
-                .contains(l_letter) &&
-            !l_ListContent.Pr_Balance.toString()
-                .toLowerCase()
-                .contains(l_letter)) {
+    List<String> lUserInput = query.toLowerCase().split(" ");
+    List<ModAccountLedger> lFilteredList = l_PrAccLedgerList!.where((lListContent) {
+      for (String lLetter in lUserInput) {
+        if (!lListContent.Pr_VNO.toLowerCase().contains(lLetter) &&
+            !lListContent.Pr_Debit.toString().toLowerCase().contains(lLetter) &&
+            !lListContent.Pr_Credit.toString().toLowerCase().contains(lLetter) &&
+            !lListContent.Pr_VDate.toString().toLowerCase().contains(lLetter) &&
+            !lListContent.Pr_Balance.toString().toLowerCase().contains(lLetter)) {
           return false;
         }
       }
       return true;
     }).toList();
 
-    Pr_filteredList.value = l_filteredList;
+    Pr_filteredList.value = lFilteredList;
   }
 
   TextSpan getMatchedTextSpan(String text, String query) {
@@ -59,7 +47,7 @@ class SrAccLedgerList extends GetxController {
     int startIndex = 0;
     for (Match match in matches) {
       final String matchText = match.group(0)!;
-      final TextStyle matchStyle = TextStyle(
+      const TextStyle matchStyle = TextStyle(
         fontWeight: FontWeight.bold,
         color: Colors.yellowAccent,
       );

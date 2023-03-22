@@ -68,26 +68,26 @@ class VmCompany extends GetxController {
         l_PrCompanyList![Pr_txtselectedIndex_Text.value].Pr_CompanyDid;
     String Pass = Get.find(tag: "Pass");
     //APi Call CompanyUrls
-    ModCompanyURLs? l_ModCompanyURLs =
-        await new Sl_CompanyURLs().Fnc_CompanyURls(email, Pass, uuid);
+    ModCompanyURLs? lModCompanyURLs =
+        await Sl_CompanyURLs().Fnc_CompanyURls(email, Pass, uuid);
     //dynamic token = l_ModCompanyURLs?.Pr_Token;
 
-    String? l_Token = l_ModCompanyURLs?.Pr_Token;
-    if (l_Token == null) {
+    String? lToken = lModCompanyURLs?.Pr_Token;
+    if (lToken == null) {
       return false;
     }
 
-    cmGlobalVariables.Pb_ERPApiUrl = l_ModCompanyURLs?.Pr_ApiErpUrl;
-    cmGlobalVariables.Pb_Token = l_Token;
+    cmGlobalVariables.Pb_ERPApiUrl = lModCompanyURLs?.Pr_ApiErpUrl;
+    cmGlobalVariables.Pb_Token = lToken;
     return true;
   }
 
   Future<bool> Fnc_OnlineAssignedBranches() async {
-    List<ModAssignedBranches>? l_listAssignedBranches =
-        new List<ModAssignedBranches>.empty(growable: true);
+    List<ModAssignedBranches>? lListAssignedBranches =
+        List<ModAssignedBranches>.empty(growable: true);
     //Assigned Branches Api Call
-    l_listAssignedBranches = await Sl_AssignedBranches().Fnc_AssignedBranches();
-    l_PrAssignedBranchesList?.addAll(l_listAssignedBranches!);
+    lListAssignedBranches = await Sl_AssignedBranches().Fnc_AssignedBranches();
+    l_PrAssignedBranchesList?.addAll(lListAssignedBranches!);
     {
       if (l_PrAssignedBranchesList == null) {
         return false;
@@ -110,7 +110,7 @@ class VmCompany extends GetxController {
 
       if (await Fnc_OnlineToken() == true) {
         bool result = await Fnc_OnlineAssignedBranches().timeout(
-            Duration(seconds: 5));
+            const Duration(seconds: 5));
         Pr_isLoading_wid.value = false;
         if (result) {
           return true; // API call was successful

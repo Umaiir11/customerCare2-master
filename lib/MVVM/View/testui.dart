@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -11,8 +8,6 @@ import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../Searching/SrAccLedgerList.dart';
-import '../../Searching/SrCompanyList.dart';
-import '../Model/ApiModels/ModAccLedger.dart';
 
 class VwAccountLedger extends StatefulWidget {
   const VwAccountLedger({Key? key}) : super(key: key);
@@ -25,12 +20,11 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
   final l_SearchController = Get.put(SrAccLedgerList());
 
   //Controller
-  TextEditingController _textController = TextEditingController();
-  final G_currencyFormat = new NumberFormat("#,##0", "en_US");
+  final TextEditingController _textController = TextEditingController();
+  final G_currencyFormat = NumberFormat("#,##0", "en_US");
   final DateFormat G_DateTimeFormat = DateFormat('dd-MMM-yy');
 
-  DateTimeRange l_DateRange = DateTimeRange(
-      start: DateTime.parse("2021-01-01"), end: DateTime.parse("2021-03-31"));
+  DateTimeRange l_DateRange = DateTimeRange(start: DateTime.parse("2021-01-01"), end: DateTime.parse("2021-03-31"));
 
   @override
   void initState() {
@@ -39,8 +33,7 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
 
     l_SearchController.Fnc_addItem();
     //Orignal list copy for searching
-    l_SearchController.Pr_filteredList.value
-        .addAll(l_SearchController.l_PrAccLedgerList!);
+    l_SearchController.Pr_filteredList.value.addAll(l_SearchController.l_PrAccLedgerList!);
     l_SearchController.searchText.listen((value) {
       l_SearchController.Fnc_filterlist(value);
     });
@@ -51,19 +44,18 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
     final start = l_DateRange.start;
     final end = l_DateRange.end;
 
-    Widget _WidgetportraitMode(double Pr_height, Pr_width) {
+    Widget _WidgetportraitMode(double PrHeight, PrWidth) {
       return Scaffold(
         appBar: AppBar(
           actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.picture_as_pdf_sharp), onPressed: () async {}),
+            IconButton(icon: const Icon(Icons.picture_as_pdf_sharp), onPressed: () async {}),
           ],
 
           centerTitle: true,
           toolbarHeight: 42,
 
           flexibleSpace: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   Color(0xFFFFFFFF),
@@ -75,9 +67,7 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
             ),
           ),
           title: Shimmer.fromColors(
-              baseColor: Colors.black38,
-              highlightColor: Colors.cyanAccent,
-              child: Text("ACCLedger")),
+              baseColor: Colors.black38, highlightColor: Colors.cyanAccent, child: const Text("ACCLedger")),
 
           // backgroundColor: Colors.transparent,
           elevation: 7.0,
@@ -101,15 +91,14 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       MdiIcons.whatsapp,
                       size: 20,
                       color: Colors.green,
                     ),
                     onPressed: () async {
                       var whatsapp = "+923214457734";
-                      Uri whatsappopen =
-                          Uri.parse("whatsapp://send?phone=$whatsapp");
+                      Uri whatsappopen = Uri.parse("whatsapp://send?phone=$whatsapp");
                       if (await launchUrl(whatsappopen)) {
                         //dialer opened
                       } else {
@@ -118,19 +107,15 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
                     },
                   ),
                   InkWell(
-                    onTap: () =>
-                        launchUrl(Uri.parse('https://www.aisonesystems.com/')),
+                    onTap: () => launchUrl(Uri.parse('https://www.aisonesystems.com/')),
                     child: Text(
                       'Powered by - aisonesystems.com',
                       style: GoogleFonts.ubuntu(
-                          textStyle: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black54,
-                              letterSpacing: .5)),
+                          textStyle: const TextStyle(fontSize: 14, color: Colors.black54, letterSpacing: .5)),
                     ),
                   ),
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.phone_forwarded_outlined,
                       size: 20,
                       color: Colors.indigoAccent,
@@ -168,9 +153,8 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.only(
-                      top: Pr_height * .095, right: Pr_width * .040),
-                  width: Pr_height * .370,
+                  margin: EdgeInsets.only(top: PrHeight * .095, right: PrWidth * .040),
+                  width: PrHeight * .370,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(32),
                     color: Colors.lightBlueAccent.shade100,
@@ -179,13 +163,11 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
                     children: [
                       Expanded(
                           child: Container(
-                              padding: EdgeInsets.only(left: 16),
+                              padding: const EdgeInsets.only(left: 16),
                               child: TextField(
-                                onChanged: (value) =>
-                                    l_SearchController.searchText.value = value,
-                                decoration: InputDecoration(
-                                  suffixIcon: const Icon(MdiIcons.searchWeb,
-                                      size: 20, color: Colors.indigo),
+                                onChanged: (value) => l_SearchController.searchText.value = value,
+                                decoration: const InputDecoration(
+                                  suffixIcon: Icon(MdiIcons.searchWeb, size: 20, color: Colors.indigo),
                                   hintText: "Search",
                                   hintStyle: TextStyle(color: Colors.black),
                                   border: InputBorder.none,
@@ -198,146 +180,107 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
                     child: Obx(
                   () => ListView.builder(
                     shrinkWrap: true,
-                    itemCount: l_SearchController.Pr_filteredList.length,
+                    itemCount: (l_SearchController.Pr_filteredList.length <= 1)
+                        ? 1
+                        : l_SearchController.Pr_filteredList.length - 1,
                     itemBuilder: ((context, index) {
                       if (l_SearchController.Pr_filteredList.isEmpty) {
-                        return SizedBox(); // Return an empty container if the filtered list is empty
+                        return const SizedBox(); // Return an empty container if the filtered list is empty
                       }
                       return Column(
                         children: [
                           InkWell(
                             onTap: () async {},
                             child: SizedBox(
-                              width: Pr_width*0.900,
-                              height: Pr_height*0.150,
+                              width: PrWidth * 0.900,
+                              height: PrHeight * 0.150,
                               child: Card(
                                 elevation: 5.0,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0)),
-                                color: (l_SearchController
-                                            .Pr_filteredList[index + 1]
-                                            .Pr_Credit ==
-                                        0)
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                                color: (l_SearchController.Pr_filteredList[index + 1].Pr_Credit == 0)
                                     ? Colors.white
                                     : Colors.grey.shade300,
                                 child: Row(
                                   children: [
-
-
                                     Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Row(
-
                                           children: [
                                             Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 15, left: 25),
+                                              padding: const EdgeInsets.only(top: 15, left: 25),
                                               child: RichText(
                                                 text: TextSpan(
                                                   text: '',
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     fontSize: 22,
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w600,
                                                     letterSpacing: 0.5,
                                                   ),
                                                   children: [
-                                                    l_SearchController
-                                                        .getMatchedTextSpan(
-                                                      l_SearchController
-                                                          .Pr_filteredList[
-                                                              index + 1]
-                                                          .Pr_VNO,
-                                                      l_SearchController
-                                                          .searchText.value,
+                                                    l_SearchController.getMatchedTextSpan(
+                                                      l_SearchController.Pr_filteredList[index + 1].Pr_VNO,
+                                                      l_SearchController.searchText.value,
                                                     ),
                                                   ],
                                                 ),
                                               ),
                                             ),
-                                            SizedBox(width: 180),
-
+                                            const SizedBox(width: 180),
                                             Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 15, left: 25),
+                                              padding: const EdgeInsets.only(top: 15, left: 25),
                                               child: RichText(
                                                 text: TextSpan(
                                                   text: '',
-                                                  style:  TextStyle(
+                                                  style: const TextStyle(
                                                       fontSize: 15,
                                                       fontWeight: FontWeight.w600,
-                                                      color:
-                                                      Colors.black,
+                                                      color: Colors.black,
                                                       letterSpacing: .5),
                                                   children: [
-                                                    l_SearchController
-                                                        .getMatchedTextSpan(
-                                                      G_DateTimeFormat.format( l_SearchController
-                                                          .Pr_filteredList[
-                                                      index + 1]
-                                                          .Pr_VDate),
-
-                                                      l_SearchController
-                                                          .searchText.value,
+                                                    l_SearchController.getMatchedTextSpan(
+                                                      G_DateTimeFormat.format(
+                                                          l_SearchController.Pr_filteredList[index + 1].Pr_VDate),
+                                                      l_SearchController.searchText.value,
                                                     ),
                                                   ],
                                                 ),
                                               ),
                                             ),
-
                                           ],
                                         ),
-
-
                                         Row(
                                           children: [
-
                                             //Debit
                                             Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 10, left: 25),
+                                                  padding: const EdgeInsets.only(top: 10, left: 25),
                                                   child: Text(
                                                     'Debit',
                                                     style: GoogleFonts.ubuntu(
-                                                        textStyle: TextStyle(
-                                                            fontSize: 18,
-                                                            color:
-                                                                Colors.black26,
-                                                            letterSpacing: .5)),
+                                                        textStyle: const TextStyle(
+                                                            fontSize: 18, color: Colors.black26, letterSpacing: .5)),
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 2, left: 27),
+                                                  padding: const EdgeInsets.only(top: 2, left: 27),
                                                   child: RichText(
                                                     text: TextSpan(
                                                       text: '',
                                                       style: GoogleFonts.ubuntu(
-                                                          textStyle: TextStyle(
+                                                          textStyle: const TextStyle(
                                                               fontSize: 13,
-                                                              color:
-                                                                  Colors.blue,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              letterSpacing:
-                                                                  .5)),
+                                                              color: Colors.blue,
+                                                              fontWeight: FontWeight.w600,
+                                                              letterSpacing: .5)),
                                                       children: [
-                                                        l_SearchController
-                                                            .getMatchedTextSpan(
+                                                        l_SearchController.getMatchedTextSpan(
                                                           G_currencyFormat.format(
-                                                              l_SearchController
-                                                                  .Pr_filteredList[
-                                                                      index + 1]
-                                                                  .Pr_Debit),
-                                                          l_SearchController
-                                                              .searchText.value,
+                                                              l_SearchController.Pr_filteredList[index + 1].Pr_Debit),
+                                                          l_SearchController.searchText.value,
                                                         ),
                                                       ],
                                                     ),
@@ -347,48 +290,33 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
                                             ),
                                             //Credit
                                             Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 10, left: 70),
+                                                  padding: const EdgeInsets.only(top: 10, left: 70),
                                                   child: Text(
                                                     'Credit',
                                                     style: GoogleFonts.ubuntu(
-                                                        textStyle: TextStyle(
-                                                            fontSize: 18,
-                                                            color:
-                                                                Colors.black26,
-                                                            letterSpacing: .5)),
+                                                        textStyle: const TextStyle(
+                                                            fontSize: 18, color: Colors.black26, letterSpacing: .5)),
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 2, left:72),
+                                                  padding: const EdgeInsets.only(top: 2, left: 72),
                                                   child: RichText(
                                                     text: TextSpan(
                                                       text: '',
                                                       style: GoogleFonts.ubuntu(
-                                                          textStyle: TextStyle(
+                                                          textStyle: const TextStyle(
                                                               fontSize: 13,
-                                                              color:
-                                                                  Colors.green,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              letterSpacing:
-                                                                  .5)),
+                                                              color: Colors.green,
+                                                              fontWeight: FontWeight.w600,
+                                                              letterSpacing: .5)),
                                                       children: [
-                                                        l_SearchController
-                                                            .getMatchedTextSpan(
-                                                          G_currencyFormat.format(
-                                                              l_SearchController
-                                                                  .Pr_filteredList[
-                                                                      index + 1]
-                                                                  .Pr_Credit),
-                                                          l_SearchController
-                                                              .searchText.value,
+                                                        l_SearchController.getMatchedTextSpan(
+                                                          G_currencyFormat.format(l_SearchController
+                                                              .Pr_filteredList[index + 1].Pr_Credit),
+                                                          l_SearchController.searchText.value,
                                                         ),
                                                       ],
                                                     ),
@@ -398,16 +326,14 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
                                             ),
                                             //Balance
                                             Column(
-                                              crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 10, left: 55),
+                                                  padding: const EdgeInsets.only(top: 10, left: 55),
                                                   child: Text(
                                                     'Balance',
                                                     style: GoogleFonts.ubuntu(
-                                                        textStyle: TextStyle(
+                                                        textStyle: const TextStyle(
                                                             fontSize: 18,
                                                             color: Colors.black26,
                                                             //fontWeight: FontWeight.w600,
@@ -415,28 +341,21 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 2, left: 57),
-                                                  child:  RichText(
+                                                  padding: const EdgeInsets.only(top: 2, left: 57),
+                                                  child: RichText(
                                                     text: TextSpan(
                                                       text: '',
                                                       style: GoogleFonts.ubuntu(
-                                                          textStyle: TextStyle(
+                                                          textStyle: const TextStyle(
                                                               fontSize: 13,
                                                               color: Colors.black,
-                                                              fontWeight:
-                                                              FontWeight.w600,
+                                                              fontWeight: FontWeight.w600,
                                                               letterSpacing: .5)),
                                                       children: [
-                                                        l_SearchController
-                                                            .getMatchedTextSpan(
-                                                          G_currencyFormat.format(
-                                                              l_SearchController
-                                                                  .Pr_filteredList[
-                                                              index + 1]
-                                                                  .Pr_Balance),
-                                                          l_SearchController
-                                                              .searchText.value,
+                                                        l_SearchController.getMatchedTextSpan(
+                                                          G_currencyFormat.format(l_SearchController
+                                                              .Pr_filteredList[index + 1].Pr_Balance),
+                                                          l_SearchController.searchText.value,
                                                         ),
                                                       ],
                                                     ),
@@ -444,10 +363,8 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
                                                 ),
                                               ],
                                             ),
-
                                           ],
                                         ),
-
                                       ],
                                     ),
                                   ],
