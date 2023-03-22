@@ -26,14 +26,14 @@ class _VwCompanyState extends State<VwCompany> {
   final VmCompany l_VmCompany = Get.put(VmCompany());
   final l_SearchController = Get.put(SrCompanyList());
 
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     l_VmCompany.Fnc_addItem();
     l_SearchController.Fnc_addItem();
     //Orignal list copy for searching
-    l_SearchController.Pr_filteredList.value
-        .addAll(l_SearchController.l_PrCompanyList!);
+    l_SearchController.Pr_filteredList.value.addAll(l_SearchController.l_PrCompanyList!);
     l_SearchController.searchText.listen((value) {
       l_SearchController.Fnc_filterlist(value);
     });
@@ -41,7 +41,7 @@ class _VwCompanyState extends State<VwCompany> {
 
   @override
   Widget build(BuildContext context) {
-    Widget _WidgetportraitMode(double Pr_height, Pr_width) {
+    Widget _WidgetportraitMode(double PrHeight, PrWidth) {
       return Scaffold(
         bottomNavigationBar: ResponsiveWrapper(
           maxWidth: 1200,
@@ -62,15 +62,14 @@ class _VwCompanyState extends State<VwCompany> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       MdiIcons.whatsapp,
                       size: 20,
                       color: Colors.green,
                     ),
                     onPressed: () async {
                       var whatsapp = "+923214457734";
-                      Uri whatsappopen =
-                          Uri.parse("whatsapp://send?phone=$whatsapp");
+                      Uri whatsappopen = Uri.parse("whatsapp://send?phone=$whatsapp");
                       if (await launchUrl(whatsappopen)) {
                         //dialer opened
                       } else {
@@ -79,19 +78,15 @@ class _VwCompanyState extends State<VwCompany> {
                     },
                   ),
                   InkWell(
-                    onTap: () =>
-                        launchUrl(Uri.parse('https://www.aisonesystems.com/')),
+                    onTap: () => launchUrl(Uri.parse('https://www.aisonesystems.com/')),
                     child: Text(
                       'Powered by - aisonesystems.com',
                       style: GoogleFonts.ubuntu(
-                          textStyle: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black54,
-                              letterSpacing: .5)),
+                          textStyle: const TextStyle(fontSize: 14, color: Colors.black54, letterSpacing: .5)),
                     ),
                   ),
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.phone_forwarded_outlined,
                       size: 20,
                       color: Colors.indigoAccent,
@@ -111,8 +106,8 @@ class _VwCompanyState extends State<VwCompany> {
           ),
         ),
         body: Container(
-          height: Pr_height,
-          width: Pr_width,
+          height: PrHeight,
+          width: PrWidth,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -130,17 +125,16 @@ class _VwCompanyState extends State<VwCompany> {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                  top: Pr_height * .080,
+                  top: PrHeight * .080,
                 ),
                 child: Shimmer.fromColors(
                     baseColor: Colors.black38,
                     highlightColor: Colors.cyanAccent,
-                    child: Text("lblCompanyList")),
+                    child: const Text("lblCompanyList")),
               ),
               Container(
-                margin: EdgeInsets.only(
-                    top: Pr_height * .095, right: Pr_width * .040),
-                width: Pr_height * .370,
+                margin: EdgeInsets.only(top: PrHeight * .095, right: PrWidth * .040),
+                width: PrHeight * .370,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(32),
                   color: Colors.lightBlueAccent.shade100,
@@ -149,13 +143,12 @@ class _VwCompanyState extends State<VwCompany> {
                   children: [
                     Expanded(
                         child: Container(
-                            padding: EdgeInsets.only(left: 16),
+                            padding: const EdgeInsets.only(left: 16),
                             child: TextField(
-                              onChanged: (value) =>
-                                  l_SearchController.searchText.value = value,
-                              decoration: InputDecoration(
-                                suffixIcon: const Icon(MdiIcons.searchWeb,
-                                    size: 20, color: Colors.indigo),
+                              onChanged: (value) => l_SearchController.searchText.value = value,
+                              decoration: const InputDecoration(
+                                suffixIcon:
+                                    Icon(MdiIcons.searchWeb, size: 20, color: Colors.indigo),
                                 hintText: "Search",
                                 hintStyle: TextStyle(color: Colors.black),
                                 border: InputBorder.none,
@@ -174,17 +167,14 @@ class _VwCompanyState extends State<VwCompany> {
                               children: [
                                 InkWell(
                                   onTap: () async {
-                                    if (await l_VmCompany.Fnc_OnTapLoginBtn() ==
-                                        true) {
-                                      Get.to(() => VwAssignedBranches());
+                                    if (await l_VmCompany.Fnc_OnTapLoginBtn() == true) {
+                                      Get.to(() => const VwAssignedBranches());
                                     } else {
-                                      Get.snackbar("Exception",
-                                          cmGlobalVariables.Pb_Exception!);
+                                      Get.snackbar("Exception", cmGlobalVariables.Pb_Exception!);
                                     }
 
                                     setState(() {
-                                      l_VmCompany.Pr_txtselectedIndex_Text
-                                          .value = index;
+                                      l_VmCompany.Pr_txtselectedIndex_Text.value = index;
                                     });
                                   },
                                   child: ResponsiveWrapper(
@@ -192,14 +182,10 @@ class _VwCompanyState extends State<VwCompany> {
                                     minWidth: 480,
                                     defaultScale: true,
                                     breakpoints: const [
-                                      ResponsiveBreakpoint.resize(480,
-                                          name: MOBILE),
-                                      ResponsiveBreakpoint.autoScale(800,
-                                          name: TABLET),
-                                      ResponsiveBreakpoint.resize(1000,
-                                          name: DESKTOP),
-                                      ResponsiveBreakpoint.autoScale(2460,
-                                          name: '4K'),
+                                      ResponsiveBreakpoint.resize(480, name: MOBILE),
+                                      ResponsiveBreakpoint.autoScale(800, name: TABLET),
+                                      ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+                                      ResponsiveBreakpoint.autoScale(2460, name: '4K'),
                                     ],
                                     child: SizedBox(
                                       width: 450,
@@ -207,24 +193,21 @@ class _VwCompanyState extends State<VwCompany> {
                                       child: Card(
                                         elevation: 5.0,
                                         shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0)),
+                                            borderRadius: BorderRadius.circular(10.0)),
                                         color: index % 2 == 0
                                             ? Colors.lightBlueAccent.shade100
                                             : Colors.lightBlue.shade100,
                                         child: Row(
                                           children: [
                                             Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 15, left: 25),
+                                                  padding: const EdgeInsets.only(top: 15, left: 25),
                                                   child: RichText(
                                                     text: TextSpan(
                                                       text: '',
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                         fontSize: 22,
                                                         color: Colors.black,
                                                         fontWeight: FontWeight.w600,
@@ -232,60 +215,45 @@ class _VwCompanyState extends State<VwCompany> {
                                                       ),
                                                       children: [
                                                         l_SearchController.getMatchedTextSpan(
-                                                          l_SearchController.Pr_filteredList[index].Pr_CompanyName,
+                                                          l_SearchController
+                                                              .Pr_filteredList[index].Pr_CompanyName,
                                                           l_SearchController.searchText.value,
                                                         ),
                                                       ],
                                                     ),
                                                   ),
-
                                                 ),
                                                 Row(
                                                   children: [
                                                     Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: [
                                                         Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  top: 10,
-                                                                  left: 25),
+                                                          padding: const EdgeInsets.only(top: 10, left: 25),
                                                           child: Text(
                                                             'Email',
                                                             style: GoogleFonts.ubuntu(
-                                                                textStyle: TextStyle(
-                                                                    fontSize:
-                                                                        18,
-                                                                    color: Colors
-                                                                        .black26,
-                                                                    letterSpacing:
-                                                                        .5)),
+                                                                textStyle: const TextStyle(
+                                                                    fontSize: 18,
+                                                                    color: Colors.black26,
+                                                                    letterSpacing: .5)),
                                                           ),
                                                         ),
                                                         Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  top: 2,
-                                                                  left: 25),
-                                                          child:RichText(
+                                                          padding: const EdgeInsets.only(top: 2, left: 25),
+                                                          child: RichText(
                                                             text: TextSpan(
                                                               text: '',
                                                               style: GoogleFonts.ubuntu(
-                                                                  textStyle: TextStyle(
-                                                                      fontSize:
-                                                                      13,
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                      letterSpacing:
-                                                                      .5)),
+                                                                  textStyle: const TextStyle(
+                                                                      fontSize: 13,
+                                                                      color: Colors.black,
+                                                                      fontWeight: FontWeight.w600,
+                                                                      letterSpacing: .5)),
                                                               children: [
                                                                 l_SearchController.getMatchedTextSpan(
-                                                                  l_SearchController.Pr_filteredList[index].Pr_EmailId,
+                                                                  l_SearchController
+                                                                      .Pr_filteredList[index].Pr_EmailId,
                                                                   l_SearchController.searchText.value,
                                                                 ),
                                                               ],
@@ -295,49 +263,35 @@ class _VwCompanyState extends State<VwCompany> {
                                                       ],
                                                     ),
                                                     Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: [
                                                         Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  top: 10,
-                                                                  left: 25),
+                                                          padding: const EdgeInsets.only(top: 10, left: 25),
                                                           child: Text(
                                                             'Phone',
                                                             style: GoogleFonts.ubuntu(
-                                                                textStyle: TextStyle(
-                                                                    fontSize:
-                                                                        18,
-                                                                    color: Colors
-                                                                        .black26,
-                                                                    letterSpacing:
-                                                                        .5)),
+                                                                textStyle: const TextStyle(
+                                                                    fontSize: 18,
+                                                                    color: Colors.black26,
+                                                                    letterSpacing: .5)),
                                                           ),
                                                         ),
                                                         Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  top: 2,
-                                                                  left: 25),
+                                                          padding: const EdgeInsets.only(top: 2, left: 25),
                                                           child: RichText(
                                                             text: TextSpan(
                                                               text: '',
                                                               style: GoogleFonts.ubuntu(
-                                                                  textStyle: TextStyle(
-                                                                      fontSize:
-                                                                      13,
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                      letterSpacing:
-                                                                      .5)),
+                                                                  textStyle: const TextStyle(
+                                                                      fontSize: 13,
+                                                                      color: Colors.black,
+                                                                      fontWeight: FontWeight.w600,
+                                                                      letterSpacing: .5)),
                                                               children: [
                                                                 l_SearchController.getMatchedTextSpan(
-                                                                  l_SearchController.Pr_filteredList[index].Pr_CompanyPhone,
+                                                                  l_SearchController
+                                                                      .Pr_filteredList[index]
+                                                                      .Pr_CompanyPhone,
                                                                   l_SearchController.searchText.value,
                                                                 ),
                                                               ],
@@ -349,39 +303,32 @@ class _VwCompanyState extends State<VwCompany> {
                                                   ],
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 10, left: 25),
+                                                  padding: const EdgeInsets.only(top: 10, left: 25),
                                                   child: Text(
                                                     'Address',
                                                     style: GoogleFonts.ubuntu(
-                                                        textStyle: TextStyle(
+                                                        textStyle: const TextStyle(
                                                             fontSize: 18,
-                                                            color:
-                                                                Colors.black26,
+                                                            color: Colors.black26,
                                                             //fontWeight: FontWeight.w600,
                                                             letterSpacing: .5)),
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 2, left: 25),
+                                                  padding: const EdgeInsets.only(top: 2, left: 25),
                                                   child: RichText(
                                                     text: TextSpan(
                                                       text: '',
                                                       style: GoogleFonts.ubuntu(
-                                                          textStyle: TextStyle(
-                                                              fontSize:
-                                                              13,
-                                                              color: Colors
-                                                                  .black,
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w600,
-                                                              letterSpacing:
-                                                              .5)),
+                                                          textStyle: const TextStyle(
+                                                              fontSize: 13,
+                                                              color: Colors.black,
+                                                              fontWeight: FontWeight.w600,
+                                                              letterSpacing: .5)),
                                                       children: [
                                                         l_SearchController.getMatchedTextSpan(
-                                                          l_SearchController.Pr_filteredList[index].Pr_CompanyAddress,
+                                                          l_SearchController
+                                                              .Pr_filteredList[index].Pr_CompanyAddress,
                                                           l_SearchController.searchText.value,
                                                         ),
                                                       ],

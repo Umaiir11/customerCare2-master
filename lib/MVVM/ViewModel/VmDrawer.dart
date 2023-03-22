@@ -61,12 +61,12 @@ class VmDrawer extends GetxController {
 
   RxList<ModUserAccountsQuery>? l_PrUserAccountsQueryList = <ModUserAccountsQuery>[].obs;
   Future<bool> Fnc_UserAccountQueryList() async {
-    List<ModUserAccountsQuery>? l_listUserAccountsQuery =
-        new List<ModUserAccountsQuery>.empty(growable: true);
-    l_listUserAccountsQuery =
+    List<ModUserAccountsQuery>? lListUserAccountsQuery =
+        List<ModUserAccountsQuery>.empty(growable: true);
+    lListUserAccountsQuery =
         await Sl_UserAccountsQuery().Fnc_UserAccountsQuery();
     {
-      l_PrUserAccountsQueryList?.addAll(l_listUserAccountsQuery!);
+      l_PrUserAccountsQueryList?.addAll(lListUserAccountsQuery!);
 
       if (l_PrUserAccountsQueryList == null) {
         return false;
@@ -84,12 +84,12 @@ class VmDrawer extends GetxController {
   Future<bool> Fnc_AccLedgerList() async {
     Pr_isLoading_wid.value = false;
 
-    List<ModAccountLedger>? l_listAccountLedger =
-    new List<ModAccountLedger>.empty(growable: true);
-    l_listAccountLedger = await Sl_AccountLedger().Fnc_AccountLedger(
+    List<ModAccountLedger>? lListAccountLedger =
+    List<ModAccountLedger>.empty(growable: true);
+    lListAccountLedger = await Sl_AccountLedger().Fnc_AccountLedger(
         DateTime.parse("2021-01-01"), DateTime.parse("2021-03-31"));
     {
-      l_PrAccountLedgerList?.addAll(l_listAccountLedger!);
+      l_PrAccountLedgerList?.addAll(lListAccountLedger!);
 
       if (l_PrAccountLedgerList == null) {
         Pr_isLoading_wid.value = true;
@@ -105,11 +105,11 @@ class VmDrawer extends GetxController {
 
   RxList<ModPendingCheques>? l_PrPendingChequesList = <ModPendingCheques>[].obs;
   Future<bool> Fnc_PendingChequesList() async {
-    List<ModPendingCheques>? l_listPendingCheques =
-        new List<ModPendingCheques>.empty(growable: true);
-    l_listPendingCheques = await Sl_PendingCheques().Fnc_PendingCheques();
+    List<ModPendingCheques>? lListPendingCheques =
+        List<ModPendingCheques>.empty(growable: true);
+    lListPendingCheques = await Sl_PendingCheques().Fnc_PendingCheques();
     {
-      l_PrPendingChequesList?.addAll(l_listPendingCheques!);
+      l_PrPendingChequesList?.addAll(lListPendingCheques!);
 
       if (l_PrPendingChequesList == null) {
         return false;
@@ -120,11 +120,11 @@ class VmDrawer extends GetxController {
 
   RxList<ModPendingSaleOrder>? l_PrPendingSaleOrderList = <ModPendingSaleOrder>[].obs;
   Future<bool> Fnc_PendingSaleOrderList() async {
-    List<ModPendingSaleOrder>? l_listPendingSaleOrder =
-        new List<ModPendingSaleOrder>.empty(growable: true);
-    l_listPendingSaleOrder = await Sl_PendingSelOrder().Fnc_PendingSO();
+    List<ModPendingSaleOrder>? lListPendingSaleOrder =
+        List<ModPendingSaleOrder>.empty(growable: true);
+    lListPendingSaleOrder = await Sl_PendingSelOrder().Fnc_PendingSO();
     {
-      l_PrPendingSaleOrderList?.addAll(l_listPendingSaleOrder!);
+      l_PrPendingSaleOrderList?.addAll(lListPendingSaleOrder!);
 
       if (l_PrPendingSaleOrderList == null) {
         return false;
@@ -135,11 +135,11 @@ class VmDrawer extends GetxController {
 
   RxList<ModItemQueryDTO>? l_PrItemQueryList = <ModItemQueryDTO>[].obs;
   Future<bool> Fnc_ItemQueryList() async {
-    List<ModItemQueryDTO>? l_listItemQuery =
-        new List<ModItemQueryDTO>.empty(growable: true);
-    l_listItemQuery = await Sl_ItemQuery().Fnc_ItemQuery();
+    List<ModItemQueryDTO>? lListItemQuery =
+        List<ModItemQueryDTO>.empty(growable: true);
+    lListItemQuery = await Sl_ItemQuery().Fnc_ItemQuery();
     {
-      l_PrItemQueryList?.addAll(l_listItemQuery!);
+      l_PrItemQueryList?.addAll(lListItemQuery!);
 
       if (l_PrItemQueryList == null) {
         return false;
@@ -157,7 +157,7 @@ class VmDrawer extends GetxController {
     try {
       // Set a timeout of 5 seconds for the API call
 
-      bool result = await Fnc_AccLedgerList().timeout(Duration(seconds: 15));
+      bool result = await Fnc_AccLedgerList().timeout(const Duration(seconds: 15));
       Pr_isLoading_wid.value = false;
       if (result) {
         return true; // API call was successful

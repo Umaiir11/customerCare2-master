@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:http/http.dart' as http;
 
@@ -8,43 +7,43 @@ import 'cmGlobalVariables.dart';
 class cmHttpCalls {
   //Fnc_HttpResponseWebLogin,---- //
   Future<http.Response> Fnc_HttpResponseWeb(
-      String l_controllerUrl, List<int> l_UtfContent) async {
-    Uri l_uri = Uri.https(cmGlobalVariables.Pb_WebAPIURL, l_controllerUrl);
-    Map<String, String> l_stringContect = {
+      String lControllerUrl, List<int> lUtfContent) async {
+    Uri lUri = Uri.https(cmGlobalVariables.Pb_WebAPIURL, lControllerUrl);
+    Map<String, String> lStringContect = {
       //HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
       HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
     };
-    final l_response =
-    await http.post(l_uri, headers: l_stringContect, body: l_UtfContent);
-    return l_response;
+    final lResponse =
+    await http.post(lUri, headers: lStringContect, body: lUtfContent);
+    return lResponse;
   }
 
   Future<http.Response> Fnc_HttpResponseERPBoth(
-      String l_controllerUrl, List<int> l_UtfContent) async {
-    String? l_token;
-    l_token = cmGlobalVariables.Pb_Token;
+      String lControllerUrl, List<int> lUtfContent) async {
+    String? lToken;
+    lToken = cmGlobalVariables.Pb_Token;
 
     String BaseURL, DynamicURL, URL;
     BaseURL = cmGlobalVariables.Pb_ERPApiUrl!;
-    DynamicURL = l_controllerUrl;
+    DynamicURL = lControllerUrl;
     URL = BaseURL + DynamicURL;
 
-    late Uri l_uri;
+    late Uri lUri;
     if (cmGlobalVariables.Pb_ERPApiUrl == cmGlobalVariables.Pb_ERP_API) {
-      l_uri = Uri.http(cmGlobalVariables.Pb_ERPApiUrl!, l_controllerUrl);
-      print(l_uri);
+      lUri = Uri.http(cmGlobalVariables.Pb_ERPApiUrl!, lControllerUrl);
+      print(lUri);
     } else {
-      l_uri = Uri.parse(URL);
-      print(l_uri);
+      lUri = Uri.parse(URL);
+      print(lUri);
     }
 
-    Map<String, String> l_stringContect = {
+    Map<String, String> lStringContect = {
       HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
-      HttpHeaders.authorizationHeader: 'Bearer $l_token',
+      HttpHeaders.authorizationHeader: 'Bearer $lToken',
     };
-    final l_response =
-    await http.post(l_uri, headers: l_stringContect, body: l_UtfContent);
-    return l_response;
+    final lResponse =
+    await http.post(lUri, headers: lStringContect, body: lUtfContent);
+    return lResponse;
   }
 
 

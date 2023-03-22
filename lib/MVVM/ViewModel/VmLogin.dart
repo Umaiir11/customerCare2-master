@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../../ClassModules/cmGlobalVariables.dart';
 import '../../ServiceLayer/Sl_UserLogin.dart';
@@ -8,7 +7,7 @@ import '../Model/ApiModels/ModUserProfile.dart';
 import '../Model/MmoLogin.dart';
 
 class VmLogin extends GetxController {
-  MmoLoginModel l_MmoLoginModel = new MmoLoginModel();
+  MmoLoginModel l_MmoLoginModel = MmoLoginModel();
 
   RxList<ModCompanySettingQuery>? l_PrCompanyList =
       <ModCompanySettingQuery>[].obs;
@@ -87,27 +86,27 @@ class VmLogin extends GetxController {
   }
 
   Future<bool> Fnc_WValidateUser() async {
-    ModUserProfile? l_ModUserProfile =
+    ModUserProfile? lModUserProfile =
         await SlwUserLogin().Fnc_UserProfile(l_MmoLoginModel);
-    if (l_ModUserProfile == null) {
+    if (lModUserProfile == null) {
       return false;
     }
 
-    cmGlobalVariables.Pb_UserDID = l_ModUserProfile.Pr_PKGUID;
-    cmGlobalVariables.Pb_UserName = l_ModUserProfile.Pr_FullName;
-    cmGlobalVariables.Pb_UserEmail = l_ModUserProfile.Pr_EmailID;
-    cmGlobalVariables.Pb_UserNumber = l_ModUserProfile.Pr_ContactNo;
-    cmGlobalVariables.Pb_UserImage = l_ModUserProfile.Pr_Image;
+    cmGlobalVariables.Pb_UserDID = lModUserProfile.Pr_PKGUID;
+    cmGlobalVariables.Pb_UserName = lModUserProfile.Pr_FullName;
+    cmGlobalVariables.Pb_UserEmail = lModUserProfile.Pr_EmailID;
+    cmGlobalVariables.Pb_UserNumber = lModUserProfile.Pr_ContactNo;
+    cmGlobalVariables.Pb_UserImage = lModUserProfile.Pr_Image;
     return true;
   }
 
   Future<bool> Fnc_OnlineProcedures() async {
     Fnc_SetModelFields();
-    List<ModCompanySettingQuery>? l_listcompany =
-        new List<ModCompanySettingQuery>.empty(growable: true);
+    List<ModCompanySettingQuery>? lListcompany =
+        List<ModCompanySettingQuery>.empty(growable: true);
 
-    l_listcompany = await SlwLogin().Fnc_WLogin(l_MmoLoginModel);
-    l_PrCompanyList?.addAll(l_listcompany!);
+    lListcompany = await SlwLogin().Fnc_WLogin(l_MmoLoginModel);
+    l_PrCompanyList?.addAll(lListcompany!);
 
     if (l_PrCompanyList == null) {
       return false;
@@ -119,7 +118,7 @@ class VmLogin extends GetxController {
     Pr_isLoading_wid.value = true;
     try {
       // Set a timeout of 5 seconds for the API call
-      bool result = await Fnc_ValidateLogin().timeout(Duration(seconds: 10));
+      bool result = await Fnc_ValidateLogin().timeout(const Duration(seconds: 10));
       Pr_isLoading_wid.value = false;
       if (result) {
         return true; // API call was successful

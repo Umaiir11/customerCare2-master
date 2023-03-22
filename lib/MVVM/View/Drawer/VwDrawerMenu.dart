@@ -1,5 +1,4 @@
 
-import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:customercare/ClassModules/cmGlobalVariables.dart';
@@ -7,7 +6,6 @@ import 'package:customercare/MVVM/ViewModel/VmDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 
@@ -26,6 +24,7 @@ class _VwDrawerMenuState extends State<VwDrawerMenu> {
   @override
   final l_VmDrawer = Get.put(VmDrawer());
 
+  @override
   void initState() {
     super.initState();
    // l_VmDrawer.Fnc_addItem();
@@ -34,6 +33,7 @@ class _VwDrawerMenuState extends State<VwDrawerMenu> {
    // l_VmDrawer.Fnc_UserAccountQueryList();
   }
 
+  @override
   Widget build(BuildContext context) {
     final deviceHeight = MediaQuery.of(context).size.height;
     final devicewidth = MediaQuery.of(context).size.width;
@@ -60,13 +60,13 @@ class _VwDrawerMenuState extends State<VwDrawerMenu> {
                 height: 160,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(75)),
+                  borderRadius: const BorderRadius.all(Radius.circular(75)),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.lightBlueAccent.shade100.withOpacity(0.2),
                       spreadRadius: 4,
                       blurRadius: 17,
-                      offset: Offset(0, 5),
+                      offset: const Offset(0, 5),
                     ),
                   ],
                   image: DecorationImage(
@@ -76,7 +76,7 @@ class _VwDrawerMenuState extends State<VwDrawerMenu> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                child: CircleAvatar(
+                child: const CircleAvatar(
                   radius: 50.0,
                   backgroundColor: Colors.transparent,
                 ),
@@ -88,11 +88,11 @@ class _VwDrawerMenuState extends State<VwDrawerMenu> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 10, left: 48),
+                      padding: const EdgeInsets.only(top: 10, left: 48),
                       child: Text(
                         cmGlobalVariables.Pb_UserName!,
                         style: GoogleFonts.ubuntu(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                                 fontSize: 30,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w600,
@@ -107,14 +107,14 @@ class _VwDrawerMenuState extends State<VwDrawerMenu> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 8, left: 80),
+                  padding: const EdgeInsets.only(top: 8, left: 80),
                   child: Text(
                     l_VmDrawer
                         .l_PrAssignedBranchesList![
                     l_VmDrawer.Pr_txtselectedIndex_Text.value]
                         .pr_BranchName,
                     style: GoogleFonts.ubuntu(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontSize: 25,
                             color: Colors.black,
                             fontWeight: FontWeight.w600,
@@ -129,12 +129,12 @@ class _VwDrawerMenuState extends State<VwDrawerMenu> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 10, left: 30),
+                      padding: const EdgeInsets.only(top: 10, left: 30),
                       child: Text(
 
                         cmGlobalVariables.Pb_UserEmail!,
                         style: GoogleFonts.ubuntu(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                                 fontSize: 25,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w600,
@@ -150,27 +150,27 @@ class _VwDrawerMenuState extends State<VwDrawerMenu> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 300),
+                  padding: const EdgeInsets.only(top: 300),
                   child: drawerlist(Icons.home, "Home", 0),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 8),
+                  padding: const EdgeInsets.only(top: 8),
                   child: drawerlist(Icons.home, "Account Ledger", 1),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 8),
+                  padding: const EdgeInsets.only(top: 8),
                   child: drawerlist(Icons.home, "Pending Cheques", 2),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 8),
+                  padding: const EdgeInsets.only(top: 8),
                   child: drawerlist(Icons.home, "Pending Sale Order", 3),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 8),
+                  padding: const EdgeInsets.only(top: 8),
                   child: drawerlist(Icons.home, "Item Query", 4),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 8),
+                  padding: const EdgeInsets.only(top: 8),
                   child: drawerlist(Icons.home, "Logout", 5),
                 ),
               ],
@@ -192,7 +192,7 @@ class _VwDrawerMenuState extends State<VwDrawerMenu> {
 
       },
       child: Container(
-        margin: EdgeInsets.only(left: 30, bottom: 30),
+        margin: const EdgeInsets.only(left: 30, bottom: 30),
 
         child: Row(
           children: [
@@ -200,7 +200,7 @@ class _VwDrawerMenuState extends State<VwDrawerMenu> {
               icon,
               size: 35,
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Text(

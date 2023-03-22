@@ -1,11 +1,8 @@
-import 'dart:convert';
-import 'dart:typed_data';
 
 
 import 'package:customercare/MVVM/View/testui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
@@ -54,14 +51,14 @@ class _vi_DrawerState extends State<vi_Drawer> {
                     height: 100,
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 7.5, left: 84),
+                    margin: const EdgeInsets.only(top: 7.5, left: 84),
                     child: InkWell(
                       onTap: () => launchUrl(
                           Uri.parse('https://www.aisonesystems.com/')),
                       child: Text(
                         'Powered by - aisonesystems.com',
                         style: GoogleFonts.ubuntu(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                                 fontSize: 18,
                                 color: Colors.black54,
                                 letterSpacing: .5)),
@@ -69,9 +66,9 @@ class _vi_DrawerState extends State<vi_Drawer> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 0, left: 385),
+                    margin: const EdgeInsets.only(top: 0, left: 385),
                     child: IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.phone_forwarded_outlined,
                         size: 25,
                         color: Colors.indigoAccent,
@@ -87,9 +84,9 @@ class _vi_DrawerState extends State<vi_Drawer> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 0, left: 22),
+                    margin: const EdgeInsets.only(top: 0, left: 22),
                     child: IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         MdiIcons.whatsapp,
 
                         size: 25,
@@ -123,7 +120,7 @@ class _vi_DrawerState extends State<vi_Drawer> {
                 children: <Widget>[
                   Container(
                     width: double.infinity,
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     child: ResponsiveWrapper(
                       maxWidth: 1200,
                       minWidth: 480,
@@ -135,7 +132,7 @@ class _vi_DrawerState extends State<vi_Drawer> {
                         ResponsiveBreakpoint.autoScale(2460, name: '4K'),
                       ],
                       child: Stack(
-                        children: <Widget>[
+                        children: const <Widget>[
 
 
                         ],
@@ -143,60 +140,60 @@ class _vi_DrawerState extends State<vi_Drawer> {
                     ),
                   ),
 
-                  Divider(
+                  const Divider(
                     thickness: 2,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 1,
                   ),
 
 
-                  SizedBox(
+                  const SizedBox(
                     height: 1,
                   ),
-                  Divider(
+                  const Divider(
                     thickness: 2,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 1,
                   ),
                   //tile2
 
                   ListTile(
                       //selected: selectedIndex == 1,
-                      leading: Icon(
+                      leading: const Icon(
                         Icons.library_books_outlined,
                         size: 28,
                       ),
-                      title: Text("AcccLedger"),
+                      title: const Text("AcccLedger"),
                       onTap: () async {
                         //changeIndex(0);
                         Get.snackbar("Please Wait", "Data Is Loading");
 
                         if (await l_VmDrawer.Fnc_AccLedgerList() == true) {
-                          Get.to(() => VwAccountLedger());
+                          Get.to(() => const VwAccountLedger());
                         } else {
                           Get.snackbar("Alert",
                               "No DATA, Please Contact Your Administrator");
                         }
                       }),
 
-                  Divider(
+                  const Divider(
                     thickness: 2,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 1,
                   ),
 
                   Container(
-                    margin: EdgeInsets.only(top: 280),
+                    margin: const EdgeInsets.only(top: 280),
                     child: ListTile(
                         //selected: selectedIndex == 1,
-                        leading: Icon(
+                        leading: const Icon(
                           Icons.logout,
                           size: 28,
                         ),
-                        title: Text("last"),
+                        title: const Text("last"),
                         onTap: () async {
 
                         }),
@@ -242,11 +239,11 @@ class _vi_DrawerState extends State<vi_Drawer> {
                 height: 500,
               ),
               Container(
-                margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
                 height: 220,
                 width: 480,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(6),
                     topRight: Radius.circular(6),
                     bottomLeft: Radius.circular(6),
@@ -260,16 +257,16 @@ class _vi_DrawerState extends State<vi_Drawer> {
                 child: Stack(
                   children: <Widget>[
                     Container(
-                      margin: EdgeInsets.only(top: 55, left: 180),
-                      child: Text("last"),
+                      margin: const EdgeInsets.only(top: 55, left: 180),
+                      child: const Text("last"),
                     )
                   ],
                 ),
               ),
               Container(
-                  margin: EdgeInsets.only(top: 42, left: 12),
+                  margin: const EdgeInsets.only(top: 42, left: 12),
                   child: IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.menu_sharp,
                       color: Colors.black,
                     ),
@@ -278,73 +275,73 @@ class _vi_DrawerState extends State<vi_Drawer> {
                     },
                   )),
               Container(
-                margin: EdgeInsets.only(top: 110, left: 112),
-                child: Text(
+                margin: const EdgeInsets.only(top: 110, left: 112),
+                child: const Text(
                   "80",
                   style: TextStyle(fontSize: 20),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 103, left: 73),
+                margin: const EdgeInsets.only(top: 103, left: 73),
                 child: SizedBox(
                   height: 40,
                   child: Image.asset("assets/inc.png"),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 129, left: 80),
-                child: Text(
+                margin: const EdgeInsets.only(top: 129, left: 80),
+                child: const Text(
                   "Balance",
                   style: TextStyle(fontSize: 20),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 110, left: 212),
-                child: Text(
+                margin: const EdgeInsets.only(top: 110, left: 212),
+                child: const Text(
                   "30",
                   style: TextStyle(fontSize: 20),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 103, left: 173),
+                margin: const EdgeInsets.only(top: 103, left: 173),
                 child: SizedBox(
                   height: 35,
                   child: Image.asset("assets/dec.png"),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 129, left: 180),
-                child: Text(
+                margin: const EdgeInsets.only(top: 129, left: 180),
+                child: const Text(
                   "Payment",
                   style: TextStyle(fontSize: 20),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 110, left: 312),
-                child: Text(
+                margin: const EdgeInsets.only(top: 110, left: 312),
+                child: const Text(
                   "7",
                   style: TextStyle(fontSize: 20),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 103, left: 273),
+                margin: const EdgeInsets.only(top: 103, left: 273),
                 child: SizedBox(
                   height: 40,
                   child: Image.asset("assets/inc.png"),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 129, left: 290),
-                child: Text(
+                margin: const EdgeInsets.only(top: 129, left: 290),
+                child: const Text(
                   "Over Due Amount",
                   style: TextStyle(fontSize: 20),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 180, left: 20),
+                margin: const EdgeInsets.only(top: 180, left: 20),
                 width: 215,
                 height: 75,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
                           color: Color.fromRGBO(0, 0, 0, 0.25),
@@ -360,21 +357,21 @@ class _vi_DrawerState extends State<vi_Drawer> {
                     color: Colors.white),
                 child: Stack(
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 10, left: 100),
-                      child: Text("last"),
+                      margin: const EdgeInsets.only(top: 10, left: 100),
+                      child: const Text("last"),
                     ),
                     Container(
-                        margin: EdgeInsets.only(top: 45, left: 100),
-                        child: Text(
+                        margin: const EdgeInsets.only(top: 45, left: 100),
+                        child: const Text(
                           "RS: 45415",
                           style: TextStyle(color: Colors.black38, fontSize: 23),
                         )),
                     Container(
-                      margin: EdgeInsets.only(top: 10, left: 7),
+                      margin: const EdgeInsets.only(top: 10, left: 7),
                       child: SizedBox(
                         height: 35,
                         child: Image.asset("assets/cashr.png"),
@@ -384,10 +381,10 @@ class _vi_DrawerState extends State<vi_Drawer> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 180, left: 250),
+                margin: const EdgeInsets.only(top: 180, left: 250),
                 width: 215,
                 height: 75,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
                           color: Color.fromRGBO(0, 0, 0, 0.25),
@@ -403,21 +400,21 @@ class _vi_DrawerState extends State<vi_Drawer> {
                     color: Colors.white),
                 child: Stack(
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 10, left: 100),
-                      child: Text("last"),
+                      margin: const EdgeInsets.only(top: 10, left: 100),
+                      child: const Text("last"),
                     ),
                     Container(
-                        margin: EdgeInsets.only(top: 45, left: 100),
-                        child: Text(
+                        margin: const EdgeInsets.only(top: 45, left: 100),
+                        child: const Text(
                           "RS: 45415",
                           style: TextStyle(color: Colors.black38, fontSize: 23),
                         )),
                     Container(
-                      margin: EdgeInsets.only(top: 10, left: 7),
+                      margin: const EdgeInsets.only(top: 10, left: 7),
                       child: SizedBox(
                         height: 35,
                         child: Image.asset("assets/cashp.png"),

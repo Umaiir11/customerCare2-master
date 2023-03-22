@@ -1,7 +1,6 @@
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:encrypt/encrypt.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class cmCryptography {
   static final l_key = encrypt.Key.fromUtf8("0dc27f7a882043aea0c1e3a05cf8fbfe");
@@ -13,16 +12,16 @@ class cmCryptography {
 
   //Methods
 
-  String Fnc_Encrypt_AES(String l_PlainText) {
-    Encrypted l_Encrypted = G_encrypter.encrypt(l_PlainText, iv: initialization_vector);
-    String l_EncryptedText = l_Encrypted.base64.toString();
-    Get.put(l_EncryptedText,tag:"Pass" );
-    return l_EncryptedText;
+  String Fnc_Encrypt_AES(String lPlainText) {
+    Encrypted lEncrypted = G_encrypter.encrypt(lPlainText, iv: initialization_vector);
+    String lEncryptedText = lEncrypted.base64.toString();
+    Get.put(lEncryptedText,tag:"Pass" );
+    return lEncryptedText;
   }
 
-  String Fnc_decrypted_AES( String l_EncryptedText) {
-    String l_DecryptedText = G_encrypter.decrypt(l_EncryptedText as Encrypted, iv: initialization_vector) ;
-    return l_DecryptedText;
+  String Fnc_decrypted_AES( String lEncryptedText) {
+    String lDecryptedText = G_encrypter.decrypt(lEncryptedText as Encrypted, iv: initialization_vector) ;
+    return lDecryptedText;
   }
 
 }

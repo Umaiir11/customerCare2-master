@@ -4,7 +4,6 @@ import 'package:customercare/MVVM/View/VwLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../ViewModel/VmDrawer.dart';
@@ -33,6 +32,7 @@ class _VwDrawerState extends State<VwDrawer> {
   final l_VmDrawer = Get.put(VmDrawer());
   bool isLoading = false;
 
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder<Widget>(
       future: setScreenIndex(),
@@ -58,7 +58,7 @@ class _VwDrawerState extends State<VwDrawer> {
         } else {
           return Stack(
             children: [
-              VwDrawerHome(),
+              const VwDrawerHome(),
               Positioned.fill(
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
@@ -83,15 +83,15 @@ class _VwDrawerState extends State<VwDrawer> {
   Future<Widget> setScreenIndex() async {
     switch (currentIndex) {
       case 0:
-        return VwDrawerHome();
+        return const VwDrawerHome();
       case 1:
 
           return Stack(
             children: [
-              VwDrawerHome(),
+              const VwDrawerHome(),
 
               if ( await l_VmDrawer.Fnc_AccLedgerList())
-                VwAccountLedger()
+                const VwAccountLedger()
               else
                 Container()
             ],
@@ -101,7 +101,7 @@ class _VwDrawerState extends State<VwDrawer> {
       case 2:
         return Stack(
           children: [
-            VwDrawerHome(),
+            const VwDrawerHome(),
             Positioned.fill(
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
@@ -146,7 +146,7 @@ class _VwDrawerState extends State<VwDrawer> {
       case 3:
         return Stack(
           children: [
-            VwDrawerHome(),
+            const VwDrawerHome(),
             Positioned.fill(
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
@@ -191,7 +191,7 @@ class _VwDrawerState extends State<VwDrawer> {
       case 4:
         return Stack(
           children: [
-            VwDrawerHome(),
+            const VwDrawerHome(),
             Positioned.fill(
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
@@ -237,7 +237,7 @@ class _VwDrawerState extends State<VwDrawer> {
         return VwLogin();
 
       default:
-        return VwDrawerHome();
+        return const VwDrawerHome();
     }
   }
 }
@@ -251,6 +251,6 @@ class DrawerWidget extends StatelessWidget {
         onPressed: () {
           ZoomDrawer.of(context)!.toggle();
         },
-        icon: Icon(Icons.menu));
+        icon: const Icon(Icons.menu));
   }
 }

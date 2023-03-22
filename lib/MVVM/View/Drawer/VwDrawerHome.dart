@@ -4,7 +4,6 @@ import 'package:customercare/ClassModules/cmGlobalVariables.dart';
 import 'package:customercare/MVVM/ViewModel/VmDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
@@ -23,6 +22,7 @@ class _VwDrawerHomeState extends State<VwDrawerHome> {
   @override
   final l_VmDrawer = Get.put(VmDrawer());
 
+  @override
   void initState() {
     super.initState();
 
@@ -36,7 +36,7 @@ class _VwDrawerHomeState extends State<VwDrawerHome> {
 
   @override
   Widget build(BuildContext context) {
-    Widget _WidgetportraitMode(double Pr_height, Pr_width) {
+    Widget _WidgetportraitMode(double PrHeight, PrWidth) {
       return Scaffold(
         bottomNavigationBar: ResponsiveWrapper(
           maxWidth: 1200,
@@ -57,7 +57,7 @@ class _VwDrawerHomeState extends State<VwDrawerHome> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       MdiIcons.whatsapp,
                       size: 20,
                       color: Colors.green,
@@ -79,14 +79,14 @@ class _VwDrawerHomeState extends State<VwDrawerHome> {
                     child: Text(
                       'Powered by - aisonesystems.com',
                       style: GoogleFonts.ubuntu(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                               fontSize: 14,
                               color: Colors.black54,
                               letterSpacing: .5)),
                     ),
                   ),
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.phone_forwarded_outlined,
                       size: 20,
                       color: Colors.indigoAccent,
@@ -105,7 +105,7 @@ class _VwDrawerHomeState extends State<VwDrawerHome> {
             ),
           ),
         ),
-        drawer: SizedBox(
+        drawer: const SizedBox(
           width: 270,
         ),
         body: Container(
@@ -140,11 +140,11 @@ class _VwDrawerHomeState extends State<VwDrawerHome> {
                   height: 500,
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                  margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
                   height: 220,
                   width: 480,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(6),
                       topRight: Radius.circular(6),
                       bottomLeft: Radius.circular(6),
@@ -158,86 +158,86 @@ class _VwDrawerHomeState extends State<VwDrawerHome> {
                   child: Stack(
                     children: <Widget>[
                       Container(
-                        margin: EdgeInsets.only(top: 55, left: 180),
-                        child: Text("kk"),
+                        margin: const EdgeInsets.only(top: 55, left: 180),
+                        child: const Text("kk"),
                       )
                     ],
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 42, left: 12),
-                  child: InkWell(
+                  margin: const EdgeInsets.only(top: 42, left: 12),
+                  child: const InkWell(
                     child: DrawerWidget(),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 110, left: 112),
-                  child: Text(
+                  margin: const EdgeInsets.only(top: 110, left: 112),
+                  child: const Text(
                     "80",
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 103, left: 73),
+                  margin: const EdgeInsets.only(top: 103, left: 73),
                   child: SizedBox(
                     height: 40,
                     child: Image.asset("assets/inc.png"),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 129, left: 80),
-                  child: Text(
+                  margin: const EdgeInsets.only(top: 129, left: 80),
+                  child: const Text(
                     "Balance",
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 110, left: 212),
-                  child: Text(
+                  margin: const EdgeInsets.only(top: 110, left: 212),
+                  child: const Text(
                     "30",
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 103, left: 173),
+                  margin: const EdgeInsets.only(top: 103, left: 173),
                   child: SizedBox(
                     height: 35,
                     child: Image.asset("assets/dec.png"),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 129, left: 180),
-                  child: Text(
+                  margin: const EdgeInsets.only(top: 129, left: 180),
+                  child: const Text(
                     "Payment",
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 110, left: 312),
-                  child: Text(
+                  margin: const EdgeInsets.only(top: 110, left: 312),
+                  child: const Text(
                     "7",
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 103, left: 273),
+                  margin: const EdgeInsets.only(top: 103, left: 273),
                   child: SizedBox(
                     height: 40,
                     child: Image.asset("assets/inc.png"),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 129, left: 290),
-                  child: Text(
+                  margin: const EdgeInsets.only(top: 129, left: 290),
+                  child: const Text(
                     "Over Due Amount",
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 180, left: 20),
+                  margin: const EdgeInsets.only(top: 180, left: 20),
                   width: 215,
                   height: 75,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       boxShadow: [
                         BoxShadow(
                             color: Color.fromRGBO(0, 0, 0, 0.25),
@@ -253,22 +253,22 @@ class _VwDrawerHomeState extends State<VwDrawerHome> {
                       color: Colors.white),
                   child: Stack(
                     children: <Widget>[
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 10, left: 100),
-                        child: Text("bb"),
+                        margin: const EdgeInsets.only(top: 10, left: 100),
+                        child: const Text("bb"),
                       ),
                       Container(
-                          margin: EdgeInsets.only(top: 45, left: 100),
-                          child: Text(
+                          margin: const EdgeInsets.only(top: 45, left: 100),
+                          child: const Text(
                             "RS: 45415",
                             style:
                                 TextStyle(color: Colors.black38, fontSize: 23),
                           )),
                       Container(
-                        margin: EdgeInsets.only(top: 10, left: 7),
+                        margin: const EdgeInsets.only(top: 10, left: 7),
                         child: SizedBox(
                           height: 35,
                           child: Image.asset("assets/cashr.png"),
@@ -278,10 +278,10 @@ class _VwDrawerHomeState extends State<VwDrawerHome> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 180, left: 250),
+                  margin: const EdgeInsets.only(top: 180, left: 250),
                   width: 215,
                   height: 75,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       boxShadow: [
                         BoxShadow(
                             color: Color.fromRGBO(0, 0, 0, 0.25),
@@ -297,22 +297,22 @@ class _VwDrawerHomeState extends State<VwDrawerHome> {
                       color: Colors.white),
                   child: Stack(
                     children: <Widget>[
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 10, left: 100),
-                        child: Text("cc"),
+                        margin: const EdgeInsets.only(top: 10, left: 100),
+                        child: const Text("cc"),
                       ),
                       Container(
-                          margin: EdgeInsets.only(top: 45, left: 100),
-                          child: Text(
+                          margin: const EdgeInsets.only(top: 45, left: 100),
+                          child: const Text(
                             "RS: 45415",
                             style:
                                 TextStyle(color: Colors.black38, fontSize: 23),
                           )),
                       Container(
-                        margin: EdgeInsets.only(top: 10, left: 7),
+                        margin: const EdgeInsets.only(top: 10, left: 7),
                         child: SizedBox(
                           height: 35,
                           child: Image.asset("assets/cashp.png"),
