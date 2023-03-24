@@ -1,10 +1,13 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../MVVM/Model/ApiModels/ModAccLedger.dart';
 import '../MVVM/ViewModel/VmDrawer.dart';
 
 class SrAccLedgerList extends GetxController {
   final VmDrawer G_VmDrawer = Get.find();
+  final G_currencyFormat = NumberFormat("#,##0", "en_US");
 
   RxList<ModAccountLedger>? l_PrAccLedgerList = <ModAccountLedger>[].obs;
 
@@ -62,4 +65,7 @@ class SrAccLedgerList extends GetxController {
     }
     return TextSpan(children: textSpans);
   }
+
+
+
 }

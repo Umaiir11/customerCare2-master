@@ -153,37 +153,37 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
             child: Column(
               children: [
                 Container(
-            margin: EdgeInsets.only(top: PrHeight * .095, right: PrWidth * .040),
-          width: PrHeight * .370,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(32),
-            color: Colors.lightBlueAccent.shade100,
-          ),
-          child: Material(
-            elevation: 5, // Add elevation effect here
-            borderRadius: BorderRadius.circular(32),
-            color: Colors.lightBlueAccent.shade100,
+                  margin: EdgeInsets.only(top: PrHeight * .095, right: PrWidth * .040),
+                  width: PrHeight * .370,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(32),
+                    color: Colors.lightBlueAccent.shade100,
+                  ),
+                  child: Material(
+                    elevation: 5, // Add elevation effect here
+                    borderRadius: BorderRadius.circular(32),
+                    color: Colors.lightBlueAccent.shade100,
 
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.only(left: PrWidth * 0.020),
-                    child: TextField(
-                      onChanged: (value) => l_SearchController.searchText.value = value,
-                      decoration: const InputDecoration(
-                        suffixIcon: Icon(MdiIcons.searchWeb, size: 20, color: Colors.indigo),
-                        hintText: "Search",
-                        hintStyle: TextStyle(color: Colors.black26),
-                        border: InputBorder.none,
-                      ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.only(left: PrWidth * 0.020),
+                            child: TextField(
+                              onChanged: (value) => l_SearchController.searchText.value = value,
+                              decoration: const InputDecoration(
+                                suffixIcon: Icon(MdiIcons.searchWeb, size: 20, color: Colors.indigo),
+                                hintText: "Search",
+                                hintStyle: TextStyle(color: Colors.black26),
+                                border: InputBorder.none,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ],
-            ),
-          ),
-        ),
                 Expanded(
                   child: Obx(() => ListView.builder(
                         shrinkWrap: true,
@@ -231,7 +231,6 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
                                                       ],
                                                     ),
                                                   ),
-
                                                 ],
                                               ),
                                               Column(
@@ -254,7 +253,6 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
                                                       ],
                                                     ),
                                                   ),
-
                                                 ],
                                               ),
                                             ],
@@ -262,104 +260,103 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
                                         ),
                                         //Row2
                                         Container(
-                                          padding: EdgeInsets.symmetric(horizontal: 13.0,vertical: 1),
+                                          padding: EdgeInsets.symmetric(horizontal: 13.0, vertical: 1),
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               //Debit
-                                               Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Debit',
-                                                      style: GoogleFonts.ubuntu(
-                                                          textStyle: const TextStyle(
-                                                              fontSize: 18, color: Colors.black26, letterSpacing: .5)),
-                                                    ),
-                                                    RichText(
-                                                      text: TextSpan(
-                                                        text: '',
-                                                        style: GoogleFonts.ubuntu(
-                                                            textStyle: const TextStyle(
-                                                                fontSize: 13,
-                                                                color: Colors.blue,
-                                                                fontWeight: FontWeight.w600,
-                                                                letterSpacing: .5)),
-                                                        children: [
-                                                          l_SearchController.getMatchedTextSpan(
-                                                            G_currencyFormat.format(
-                                                                l_SearchController.Pr_filteredList[index].Pr_Debit),
-                                                            l_SearchController.searchText.value,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              //Credit
-                                               Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Credit',
-                                                      style: GoogleFonts.ubuntu(
-                                                          textStyle: const TextStyle(
-                                                              fontSize: 18, color: Colors.black26, letterSpacing: .5)),
-                                                    ),
-                                                    RichText(
-                                                      text: TextSpan(
-                                                        text: '',
-                                                        style: GoogleFonts.ubuntu(
-                                                            textStyle: const TextStyle(
-                                                                fontSize: 13,
-                                                                color: Colors.green,
-                                                                fontWeight: FontWeight.w600,
-                                                                letterSpacing: .5)),
-                                                        children: [
-                                                          l_SearchController.getMatchedTextSpan(
-                                                            G_currencyFormat.format(
-                                                                l_SearchController.Pr_filteredList[index].Pr_Credit),
-                                                            l_SearchController.searchText.value,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                               //Balance
                                               Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Balance',
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Debit',
+                                                    style: GoogleFonts.ubuntu(
+                                                        textStyle: const TextStyle(
+                                                            fontSize: 18, color: Colors.black26, letterSpacing: .5)),
+                                                  ),
+                                                  RichText(
+                                                    text: TextSpan(
+                                                      text: '',
                                                       style: GoogleFonts.ubuntu(
                                                           textStyle: const TextStyle(
-                                                              fontSize: 18,
-                                                              color: Colors.black26,
-                                                              //fontWeight: FontWeight.w600,
+                                                              fontSize: 13,
+                                                              color: Colors.blue,
+                                                              fontWeight: FontWeight.w600,
                                                               letterSpacing: .5)),
+                                                      children: [
+                                                        l_SearchController.getMatchedTextSpan(
+                                                          G_currencyFormat.format(
+                                                              l_SearchController.Pr_filteredList[index].Pr_Debit),
+                                                          l_SearchController.searchText.value,
+                                                        ),
+                                                      ],
                                                     ),
-                                                    RichText(
-                                                      text: TextSpan(
-                                                        text: '',
-                                                        style: GoogleFonts.ubuntu(
-                                                            textStyle: const TextStyle(
-                                                                fontSize: 13,
-                                                                color: Colors.black,
-                                                                fontWeight: FontWeight.w600,
-                                                                letterSpacing: .5)),
-                                                        children: [
-                                                          l_SearchController.getMatchedTextSpan(
-                                                              G_currencyFormat.format(
-                                                                  l_SearchController.Pr_filteredList[index].Pr_Balance),
-                                                              l_SearchController.searchText.value),
-                                                        ],
-                                                      ),
+                                                  ),
+                                                ],
+                                              ),
+                                              //Credit
+                                              Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Credit',
+                                                    style: GoogleFonts.ubuntu(
+                                                        textStyle: const TextStyle(
+                                                            fontSize: 18, color: Colors.black26, letterSpacing: .5)),
+                                                  ),
+                                                  RichText(
+                                                    text: TextSpan(
+                                                      text: '',
+                                                      style: GoogleFonts.ubuntu(
+                                                          textStyle: const TextStyle(
+                                                              fontSize: 13,
+                                                              color: Colors.green,
+                                                              fontWeight: FontWeight.w600,
+                                                              letterSpacing: .5)),
+                                                      children: [
+                                                        l_SearchController.getMatchedTextSpan(
+                                                          G_currencyFormat.format(
+                                                              l_SearchController.Pr_filteredList[index].Pr_Credit),
+                                                          l_SearchController.searchText.value,
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
-
+                                                  ),
+                                                ],
+                                              ),
+                                              //Balance
+                                              Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Balance',
+                                                    style: GoogleFonts.ubuntu(
+                                                        textStyle: const TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors.black26,
+                                                            //fontWeight: FontWeight.w600,
+                                                            letterSpacing: .5)),
+                                                  ),
+                                                  RichText(
+                                                    text: TextSpan(
+                                                      text: '',
+                                                      style: GoogleFonts.ubuntu(
+                                                          textStyle: const TextStyle(
+                                                              fontSize: 13,
+                                                              color: Colors.black,
+                                                              fontWeight: FontWeight.w600,
+                                                              letterSpacing: .5)),
+                                                      children: [
+                                                        l_SearchController.getMatchedTextSpan(
+                                                            G_currencyFormat.format(
+                                                                l_SearchController.Pr_filteredList[index].Pr_Balance),
+                                                            l_SearchController.searchText.value),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -402,6 +399,4 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
       ),
     );
   }
-
-//============================DART=================================
 }
