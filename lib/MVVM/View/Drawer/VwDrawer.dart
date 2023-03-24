@@ -122,45 +122,11 @@ class _VwDrawerState extends State<VwDrawer> {
         return Stack(
           children: [
             const VwDrawerHome(),
-            Positioned.fill(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                child: Container(
-                  color: Colors.black.withOpacity(0.5),
-                ),
-              ),
-            ),
-            FutureBuilder<bool>(
-              future: l_VmDrawer.Fnc_ItemQueryList(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: LoadingAnimationWidget.twistingDots(
-                      leftDotColor: const Color(0xFF1A1A3F),
-                      rightDotColor: const Color(0xFFEA3799),
-                      size: 40,
-                    ),
-                  );
-                } else if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasData && snapshot.data!) {
-                    return VwLogin();
-                  } else {
-                    Get.snackbar(
-                      "Failed to load data",
-                      "",
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.black.withOpacity(0.5),
-                      colorText: Colors.white,
-                    );
 
-                    //the FutureBuilder requires a widget to be returned in all possible cases. Since there's nothing to show in the else block, returning an empty Container is a good way to handle that case. It doesn't affect the UI since it's an empty container.
-                    return Container();
-                  }
-                } else {
-                  return Container();
-                }
-              },
-            ),
+            if ( await l_VmDrawer.Fnc_ItemQueryList())
+              const VwItemQuery()
+            else
+              Container()
           ],
         );
       case 5:
