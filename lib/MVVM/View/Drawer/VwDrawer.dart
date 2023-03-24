@@ -7,6 +7,9 @@ import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../ViewModel/VmDrawer.dart';
+import '../VwAccLedger.dart';
+import '../VwPendingCheques.dart';
+import '../VwPendingSaleOrder.dart';
 import '../testui.dart';
 import 'VwDrawerHome.dart';
 import 'VwDrawerMenu.dart';
@@ -26,9 +29,7 @@ class _VwDrawerState extends State<VwDrawer> {
     // TODO: implement initState
     super.initState();
     currentIndex = 0;
-
   }
-
   final l_VmDrawer = Get.put(VmDrawer());
   bool isLoading = false;
 
@@ -84,9 +85,8 @@ class _VwDrawerState extends State<VwDrawer> {
     switch (currentIndex) {
       case 0:
         return const VwDrawerHome();
-      case 1:
-
-          return Stack(
+        case 1:
+        return Stack(
             children: [
               const VwDrawerHome(),
 
@@ -96,98 +96,28 @@ class _VwDrawerState extends State<VwDrawer> {
                 Container()
             ],
           );
-
-
-      case 2:
+        case 2:
         return Stack(
           children: [
             const VwDrawerHome(),
-            Positioned.fill(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                child: Container(
-                  color: Colors.black.withOpacity(0.5),
-                ),
-              ),
-            ),
-            FutureBuilder<bool>(
-              future: l_VmDrawer.Fnc_PendingChequesList(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: LoadingAnimationWidget.twistingDots(
-                      leftDotColor: const Color(0xFF1A1A3F),
-                      rightDotColor: const Color(0xFFEA3799),
-                      size: 40,
-                    ),
-                  );
-                } else if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasData && snapshot.data!) {
-                    return VwLogin();
-                  } else {
-                    Get.snackbar(
-                      "Failed to load data",
-                      "",
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.black.withOpacity(0.5),
-                      colorText: Colors.white,
-                    );
 
-                    //the FutureBuilder requires a widget to be returned in all possible cases. Since there's nothing to show in the else block, returning an empty Container is a good way to handle that case. It doesn't affect the UI since it's an empty container.
-                    return Container();
-                  }
-                } else {
-                  return Container();
-                }
-              },
-            ),
+            if ( await l_VmDrawer.Fnc_PendingChequesList())
+              const VwPendingCheques()
+            else
+              Container()
           ],
         );
-      case 3:
-        return Stack(
-          children: [
-            const VwDrawerHome(),
-            Positioned.fill(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                child: Container(
-                  color: Colors.black.withOpacity(0.5),
-                ),
-              ),
-            ),
-            FutureBuilder<bool>(
-              future: l_VmDrawer.Fnc_PendingSaleOrderList(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: LoadingAnimationWidget.twistingDots(
-                      leftDotColor: const Color(0xFF1A1A3F),
-                      rightDotColor: const Color(0xFFEA3799),
-                      size: 40,
-                    ),
-                  );
-                } else if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasData && snapshot.data!) {
-                    return VwLogin();
-                  } else {
-                    Get.snackbar(
-                      "Failed to load data",
-                      "",
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.black.withOpacity(0.5),
-                      colorText: Colors.white,
-                    );
+        case 3:
+          return Stack(
+            children: [
+              const VwDrawerHome(),
 
-                    //the FutureBuilder requires a widget to be returned in all possible cases. Since there's nothing to show in the else block, returning an empty Container is a good way to handle that case. It doesn't affect the UI since it's an empty container.
-                    return Container();
-                  }
-                } else {
-                  return Container();
-                }
-              },
-            ),
-          ],
-        );
+              if ( await l_VmDrawer.Fnc_PendingSaleOrderList())
+                const VwPendingSaleOrder()
+              else
+                Container()
+            ],
+          );
       case 4:
         return Stack(
           children: [
