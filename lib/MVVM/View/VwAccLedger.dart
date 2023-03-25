@@ -8,6 +8,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../Searching/SrAccLedgerList.dart';
+import 'Drawer/VwDrawer.dart';
 
 class VwAccountLedger extends StatefulWidget {
   const VwAccountLedger({Key? key}) : super(key: key);
@@ -47,13 +48,12 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
     Widget _WidgetportraitMode(double PrHeight, PrWidth) {
       return Scaffold(
         appBar: AppBar(
+          leading: DrawerWidget(),
           actions: <Widget>[
             IconButton(icon: const Icon(Icons.picture_as_pdf_sharp), onPressed: () async {}),
           ],
-
           centerTitle: true,
           toolbarHeight: 42,
-
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -66,12 +66,14 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
               ),
             ),
           ),
-          title:
-              Shimmer.fromColors(baseColor: Colors.black38, highlightColor: Colors.cyanAccent, child: const Text("ACCLedger")),
-
-          // backgroundColor: Colors.transparent,
+          title: Shimmer.fromColors(
+              baseColor: Colors.black38,
+              highlightColor: Colors.cyanAccent,
+              child: const Text("Account Ledger")
+          ),
           elevation: 7.0,
         ),
+
         bottomNavigationBar: ResponsiveWrapper(
           maxWidth: 1200,
           minWidth: 480,

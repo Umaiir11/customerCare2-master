@@ -8,6 +8,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../Searching/SrPendingCheques.dart';
+import 'Drawer/VwDrawer.dart';
 
 class VwPendingCheques extends StatefulWidget {
   const VwPendingCheques({Key? key}) : super(key: key);
@@ -46,14 +47,13 @@ class _VwPendingChequesState extends State<VwPendingCheques> {
 
     Widget _WidgetportraitMode(double PrHeight, PrWidth) {
       return Scaffold(
-        appBar: AppBar(
+        appBar:  AppBar(
+          leading: DrawerWidget(),
           actions: <Widget>[
             IconButton(icon: const Icon(Icons.picture_as_pdf_sharp), onPressed: () async {}),
           ],
-
           centerTitle: true,
           toolbarHeight: 42,
-
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -67,9 +67,10 @@ class _VwPendingChequesState extends State<VwPendingCheques> {
             ),
           ),
           title: Shimmer.fromColors(
-              baseColor: Colors.black38, highlightColor: Colors.cyanAccent, child: const Text("Pending Cheques")),
-
-          // backgroundColor: Colors.transparent,
+              baseColor: Colors.black38,
+              highlightColor: Colors.cyanAccent,
+              child: const Text("Pending Cheques")
+          ),
           elevation: 7.0,
         ),
         bottomNavigationBar: ResponsiveWrapper(

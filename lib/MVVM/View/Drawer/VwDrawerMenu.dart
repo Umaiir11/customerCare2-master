@@ -151,27 +151,23 @@ class _VwDrawerMenuState extends State<VwDrawerMenu> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 300),
-                  child: drawerlist(Icons.home, "Home", 0),
+                  child: drawerlist(Icons.home_outlined, "Home", 0),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: drawerlist(Icons.home, "Account Ledger", 1),
+                  child: drawerlist(Icons.account_balance, "Account Ledger", 1),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: drawerlist(Icons.home, "Pending Cheques", 2),
+                  child: drawerlist(Icons.monetization_on_outlined, "Pending Cheques", 2),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: drawerlist(Icons.home, "Pending Sale Order", 3),
+                  child: drawerlist(Icons.add_business_outlined, "Pending Sale Order", 3),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: drawerlist(Icons.home, "Item Query", 4),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: drawerlist(Icons.home, "Logout", 5),
+                  child: drawerlist(Icons.account_balance_wallet_outlined, "Item Query", 4),
                 ),
               ],
             )

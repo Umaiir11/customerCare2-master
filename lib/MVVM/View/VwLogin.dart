@@ -207,7 +207,7 @@ class _VwLoginState extends State<VwLogin> {
                             child: l_vmLogin.Pr_isLoading_wid.value
                                 ? LoadingAnimationWidget.twistingDots(
                                     leftDotColor: const Color(0xFF1A1A3F),
-                                    rightDotColor: const Color(0xFFEA3799),
+                                    rightDotColor: const Color(0xFFFFFFFF),
                                     size: 40,
                                   )
                                 : const Text("Login"),

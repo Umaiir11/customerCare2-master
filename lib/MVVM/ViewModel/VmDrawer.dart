@@ -8,37 +8,44 @@ import 'package:customercare/ServiceLayer/Sl_PendingCheques.dart';
 import 'package:get/get.dart';
 
 import '../../ClassModules/cmGlobalVariables.dart';
+import '../../Searching/SrCompanyList.dart';
 import '../../ServiceLayer/Sl_AccLedger.dart';
 import '../../ServiceLayer/Sl_ItemQuery.dart';
 import '../../ServiceLayer/Sl_PendingSaleOrder.dart';
 import '../../ServiceLayer/Sl_UserAccQuery.dart';
 import 'VmCompany.dart';
+import 'VmLogin.dart';
 
 class VmDrawer extends GetxController {
   final VmCompany G_VmCompany = Get.find();
-
-
+  final SrCompanyList G_SrCompanyList = Get.find();
   RxList<int>? PrDecodeImage = RxList<int>([]);
+
   List<int>? get Pr_DecodeData_Image => PrDecodeImage!.value;
+
   set Pr_DecodeData_Image(List<int>? value) {
     PrDecodeImage!.value = value!;
   }
 
-   RxInt l_PrselectedIndex = 0.obs;
+  RxInt l_PrselectedIndex = 0.obs;
+
   RxInt get Pr_txtselectedIndex_Text {
     return l_PrselectedIndex;
-  }set Pr_txtselectedIndex_Text(RxInt value) {
+  }
+
+  set Pr_txtselectedIndex_Text(RxInt value) {
     l_PrselectedIndex = value;
   }
 
   RxInt l_PrselectedDrawerMenu = 0.obs;
+
   RxInt get Pr_txtselectedDrawerMenu_Text {
     return l_PrselectedIndex;
-  }set Pr_selectedDrawerMenu_Text(RxInt value) {
-    l_PrselectedIndex = value;
   }
 
-
+  set Pr_selectedDrawerMenu_Text(RxInt value) {
+    l_PrselectedIndex = value;
+  }
 
   RxBool Pr_isLoading = false.obs;
 
@@ -50,29 +57,28 @@ class VmDrawer extends GetxController {
     Pr_isLoading = value;
   }
 
-
-
+  //AssignedBranchesList
   RxList<ModAssignedBranches>? l_PrAssignedBranchesList = <ModAssignedBranches>[].obs;
+
   void Fnc_addItem() {
     if (l_PrAssignedBranchesList?.isEmpty ?? true) {
       l_PrAssignedBranchesList?.addAll(G_VmCompany.l_PrAssignedBranchesList!);
     }
   }
 
+  //UserAccountsQueryList
   RxList<ModUserAccountsQuery>? l_PrUserAccountsQueryList = <ModUserAccountsQuery>[].obs;
+
   Future<bool> Fnc_UserAccountQueryList() async {
-    List<ModUserAccountsQuery>? lListUserAccountsQuery =
-        List<ModUserAccountsQuery>.empty(growable: true);
-    lListUserAccountsQuery =
-        await Sl_UserAccountsQuery().Fnc_UserAccountsQuery();
+    List<ModUserAccountsQuery>? lListUserAccountsQuery = List<ModUserAccountsQuery>.empty(growable: true);
+    lListUserAccountsQuery = await Sl_UserAccountsQuery().Fnc_UserAccountsQuery();
     {
       l_PrUserAccountsQueryList?.addAll(lListUserAccountsQuery!);
 
       if (l_PrUserAccountsQueryList == null) {
         return false;
       }
-      cmGlobalVariables.Pb_AccountsDID =
-          l_PrUserAccountsQueryList![0].Pr_AccountsDID;
+      cmGlobalVariables.Pb_AccountsDID = l_PrUserAccountsQueryList![0].Pr_AccountsDID;
       print(cmGlobalVariables.Pb_AccountsDID);
       print(cmGlobalVariables.Pb_AccountsDID);
       //Fnc_AccLedgerList();
@@ -80,14 +86,14 @@ class VmDrawer extends GetxController {
     return true;
   }
 
+  //AccountLedgerList
   RxList<ModAccountLedger>? l_PrAccountLedgerList = <ModAccountLedger>[].obs;
+
   Future<bool> Fnc_AccLedgerList() async {
     Pr_isLoading_wid.value = false;
 
-    List<ModAccountLedger>? lListAccountLedger =
-    List<ModAccountLedger>.empty(growable: true);
-    lListAccountLedger = await Sl_AccountLedger().Fnc_AccountLedger(
-        DateTime.parse("2021-01-01"), DateTime.parse("2021-03-31"));
+    List<ModAccountLedger>? lListAccountLedger = List<ModAccountLedger>.empty(growable: true);
+    lListAccountLedger = await Sl_AccountLedger().Fnc_AccountLedger(DateTime.parse("2021-01-01"), DateTime.parse("2021-03-31"));
     {
       l_PrAccountLedgerList?.addAll(lListAccountLedger!);
 
@@ -101,12 +107,11 @@ class VmDrawer extends GetxController {
     return true;
   }
 
-
-
+  //PendingChequesList
   RxList<ModPendingCheques>? l_PrPendingChequesList = <ModPendingCheques>[].obs;
+
   Future<bool> Fnc_PendingChequesList() async {
-    List<ModPendingCheques>? lListPendingCheques =
-        List<ModPendingCheques>.empty(growable: true);
+    List<ModPendingCheques>? lListPendingCheques = List<ModPendingCheques>.empty(growable: true);
     lListPendingCheques = await Sl_PendingCheques().Fnc_PendingCheques();
     {
       l_PrPendingChequesList?.addAll(lListPendingCheques!);
@@ -118,10 +123,11 @@ class VmDrawer extends GetxController {
     return true;
   }
 
+  //PendingSaleOrderList
   RxList<ModPendingSaleOrder>? l_PrPendingSaleOrderList = <ModPendingSaleOrder>[].obs;
+
   Future<bool> Fnc_PendingSaleOrderList() async {
-    List<ModPendingSaleOrder>? lListPendingSaleOrder =
-        List<ModPendingSaleOrder>.empty(growable: true);
+    List<ModPendingSaleOrder>? lListPendingSaleOrder = List<ModPendingSaleOrder>.empty(growable: true);
     lListPendingSaleOrder = await Sl_PendingSelOrder().Fnc_PendingSO();
     {
       l_PrPendingSaleOrderList?.addAll(lListPendingSaleOrder!);
@@ -133,10 +139,11 @@ class VmDrawer extends GetxController {
     return true;
   }
 
+  //ItemQueryList
   RxList<ModItemQueryDTO>? l_PrItemQueryList = <ModItemQueryDTO>[].obs;
+
   Future<bool> Fnc_ItemQueryList() async {
-    List<ModItemQueryDTO>? lListItemQuery =
-        List<ModItemQueryDTO>.empty(growable: true);
+    List<ModItemQueryDTO>? lListItemQuery = List<ModItemQueryDTO>.empty(growable: true);
     lListItemQuery = await Sl_ItemQuery().Fnc_ItemQuery();
     {
       l_PrItemQueryList?.addAll(lListItemQuery!);
@@ -147,34 +154,6 @@ class VmDrawer extends GetxController {
     }
     return true;
   }
-
-
-
-
-
-  Future<bool> FncCase1() async {
-    Pr_isLoading_wid.value = true;
-    try {
-      // Set a timeout of 5 seconds for the API call
-
-      bool result = await Fnc_AccLedgerList().timeout(const Duration(seconds: 15));
-      Pr_isLoading_wid.value = false;
-      if (result) {
-        return true; // API call was successful
-      } else {
-        // Handle error
-        return false; // API call failed
-      }
-    } catch (e) {
-      // Handle timeout error
-      Pr_isLoading_wid.value = false;
-      print('API call timed out after 15 seconds');
-      cmGlobalVariables.Pb_Exception = e.toString();
-      return false; // API call failed
-    }
-  }
-
-
 
   void FncClearAllDATA() {
     cmGlobalVariables.Pb_Token = "";
@@ -190,8 +169,5 @@ class VmDrawer extends GetxController {
     cmGlobalVariables.Pb_SelectedDID = "";
     cmGlobalVariables.Pb_jsonString = "";
 
-
-
   }
-
 }

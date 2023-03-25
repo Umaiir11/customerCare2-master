@@ -130,8 +130,6 @@ class _VwDrawerState extends State<VwDrawer> {
               Container()
           ],
         );
-      case 5:
-        return VwLogin();
 
       default:
         return const VwDrawerHome();

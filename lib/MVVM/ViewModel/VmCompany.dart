@@ -97,12 +97,6 @@ class VmCompany extends GetxController {
 
     return true;
   }
-
-
-
-
-
-
   Future<bool> Fnc_OnTapLoginBtn() async {
     Pr_isLoading_wid.value = true;
 

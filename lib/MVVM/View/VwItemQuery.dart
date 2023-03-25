@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../Searching/SrAccLedgerList.dart';
 import '../../Searching/SrItemQuery.dart';
+import 'Drawer/VwDrawer.dart';
 
 class VwItemQuery extends StatefulWidget {
   const VwItemQuery({Key? key}) : super(key: key);
@@ -47,14 +48,13 @@ class _VwItemQueryState extends State<VwItemQuery> {
 
     Widget _WidgetportraitMode(double PrHeight, PrWidth) {
       return Scaffold(
-        appBar: AppBar(
+        appBar:  AppBar(
+          leading: DrawerWidget(),
           actions: <Widget>[
             IconButton(icon: const Icon(Icons.picture_as_pdf_sharp), onPressed: () async {}),
           ],
-
           centerTitle: true,
           toolbarHeight: 42,
-
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -67,10 +67,11 @@ class _VwItemQueryState extends State<VwItemQuery> {
               ),
             ),
           ),
-          title:
-          Shimmer.fromColors(baseColor: Colors.black38, highlightColor: Colors.cyanAccent, child: const Text("ACCLedger")),
-
-          // backgroundColor: Colors.transparent,
+          title: Shimmer.fromColors(
+              baseColor: Colors.black38,
+              highlightColor: Colors.cyanAccent,
+              child: const Text("Items Query")
+          ),
           elevation: 7.0,
         ),
         bottomNavigationBar: ResponsiveWrapper(

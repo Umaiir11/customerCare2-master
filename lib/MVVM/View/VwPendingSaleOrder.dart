@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../Searching/SrPendingCheques.dart';
 import '../../Searching/SrPendingSaleOrder.dart';
+import 'Drawer/VwDrawer.dart';
 
 class VwPendingSaleOrder extends StatefulWidget {
   const VwPendingSaleOrder({Key? key}) : super(key: key);
@@ -48,6 +49,7 @@ class _VwPendingSaleOrderState extends State<VwPendingSaleOrder> {
     Widget _WidgetportraitMode(double PrHeight, PrWidth) {
       return Scaffold(
         appBar: AppBar(
+          leading: DrawerWidget(),
           actions: <Widget>[
             IconButton(icon: const Icon(Icons.picture_as_pdf_sharp), onPressed: () async {}),
           ],
@@ -68,7 +70,7 @@ class _VwPendingSaleOrderState extends State<VwPendingSaleOrder> {
             ),
           ),
           title: Shimmer.fromColors(
-              baseColor: Colors.black38, highlightColor: Colors.cyanAccent, child: const Text("Pending Cheques")),
+              baseColor: Colors.black38, highlightColor: Colors.cyanAccent, child: const Text("Pending Sale Order")),
 
           // backgroundColor: Colors.transparent,
           elevation: 7.0,
