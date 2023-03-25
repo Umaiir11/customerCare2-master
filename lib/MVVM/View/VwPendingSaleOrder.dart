@@ -200,9 +200,7 @@ class _VwPendingSaleOrderState extends State<VwPendingSaleOrder> {
                               child: Card(
                                 elevation: 5.0,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
-                                color: (l_SearchController.Pr_filteredList[index  % 2] == 0)
-                                    ? Colors.white
-                                    : Colors.grey.shade300,
+                                color:   index % 2 == 0 ? Colors.white : Colors.grey.shade200,
                                 child: Column(
                                   children: [
                                     //Row1

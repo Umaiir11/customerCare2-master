@@ -8,8 +8,8 @@ class ParModPendingSaleOrder {
 
   Map<String, dynamic> toJson() {
     return {
-      'pr_EmailID': Pr_Branchid,
-      'pr_Password': Pr_AccountDID,
+      'Pr_Branchid': Pr_Branchid,
+      'Pr_AccountDID': Pr_AccountDID,
     };
   }
 }

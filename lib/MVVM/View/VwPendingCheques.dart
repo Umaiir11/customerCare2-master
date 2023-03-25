@@ -201,7 +201,7 @@ class _VwPendingChequesState extends State<VwPendingCheques> {
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
                                 color: (l_SearchController.Pr_filteredList[index].Pr_ChequeStatus == "Pending")
                                     ? Colors.white
-                                    : Colors.grey.shade300,
+                                    : Colors.grey.shade200,
                                 child: Column(
                                   children: [
                                     //Row1

@@ -34,8 +34,10 @@ class SrItemQuery extends GetxController {
             !lListContent.Pr_UOM.toLowerCase().contains(lLetter) &&
             !lListContent.Pr_List1.toLowerCase().contains(lLetter) &&
             !lListContent.Pr_Str1.toLowerCase().contains(lLetter) &&
+            !lListContent.Pr_List2.toLowerCase().contains(lLetter) &&
             !lListContent.Pr_Qty.toString().toLowerCase().contains(lLetter) &&
             !lListContent.Pr_Rate.toString().toLowerCase().contains(lLetter) &&
+            !lListContent.Pr_Desc.toString().toLowerCase().contains(lLetter) &&
             !lListContent.Pr_Str2.toLowerCase().contains(lLetter)) {
           return false;
         }

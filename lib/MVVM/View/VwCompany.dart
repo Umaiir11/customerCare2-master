@@ -139,22 +139,29 @@ class _VwCompanyState extends State<VwCompany> {
                   borderRadius: BorderRadius.circular(32),
                   color: Colors.lightBlueAccent.shade100,
                 ),
-                child: Row(
-                  children: [
-                    Expanded(
+                child: Material(
+                  elevation: 5, // Add elevation effect here
+                  borderRadius: BorderRadius.circular(32),
+                  color: Colors.lightBlueAccent.shade100,
+
+                  child: Row(
+                    children: [
+                      Expanded(
                         child: Container(
-                            padding: const EdgeInsets.only(left: 16),
-                            child: TextField(
-                              onChanged: (value) => l_SearchController.searchText.value = value,
-                              decoration: const InputDecoration(
-                                suffixIcon:
-                                    Icon(MdiIcons.searchWeb, size: 20, color: Colors.indigo),
-                                hintText: "Search",
-                                hintStyle: TextStyle(color: Colors.black),
-                                border: InputBorder.none,
-                              ),
-                            ))),
-                  ],
+                          padding: EdgeInsets.only(left: PrWidth * 0.020),
+                          child: TextField(
+                            onChanged: (value) => l_SearchController.searchText.value = value,
+                            decoration: const InputDecoration(
+                              suffixIcon: Icon(MdiIcons.searchWeb, size: 20, color: Colors.indigo),
+                              hintText: "Search",
+                              hintStyle: TextStyle(color: Colors.black26),
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Expanded(
@@ -357,12 +364,12 @@ class _VwCompanyState extends State<VwCompany> {
                               ),
                               child: BackdropFilter(
                                 filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                                child: Center(
-                                    child: LoadingAnimationWidget.flickr(
-                                  leftDotColor: const Color(0xFF1A1A3F),
-                                  rightDotColor: const Color(0xFFEA3799),
-                                  size: 40,
-                                )),
+                                child:Center(
+                                  child: LoadingAnimationWidget.staggeredDotsWave(
+                                    color: Colors.white,
+                                    size: 40,
+                                  ),
+                                ),
                               ),
                             ),
                           )
