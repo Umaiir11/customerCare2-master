@@ -97,6 +97,8 @@ class VmCompany extends GetxController {
 
     return true;
   }
+
+
   Future<bool> Fnc_OnTapLoginBtn() async {
     Pr_isLoading_wid.value = true;
 
@@ -104,7 +106,7 @@ class VmCompany extends GetxController {
 
       if (await Fnc_OnlineToken() == true) {
         bool result = await Fnc_OnlineAssignedBranches().timeout(
-            const Duration(seconds: 5));
+            const Duration(seconds: 10));
         Pr_isLoading_wid.value = false;
         if (result) {
           return true; // API call was successful
