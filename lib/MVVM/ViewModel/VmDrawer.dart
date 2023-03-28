@@ -86,26 +86,6 @@ class VmDrawer extends GetxController {
     return true;
   }
 
-  //AccountLedgerList
-  RxList<ModAccountLedger>? l_PrAccountLedgerList = <ModAccountLedger>[].obs;
-  Future<bool> Fnc_AccLedgerList() async {
-    Pr_isLoading_wid.value = false;
-
-    List<ModAccountLedger>? lListAccountLedger = List<ModAccountLedger>.empty(growable: true);
-    lListAccountLedger = await Sl_AccountLedger().Fnc_AccountLedger(DateTime.parse("2021-01-01"), DateTime.parse("2021-03-31"));
-    {
-      l_PrAccountLedgerList?.addAll(lListAccountLedger!);
-
-      if (l_PrAccountLedgerList == null) {
-        Pr_isLoading_wid.value = true;
-        return false;
-      }
-    }
-
-    Pr_isLoading_wid.value = true;
-    return true;
-  }
-
   //PendingChequesList
   RxList<ModPendingCheques>? l_PrPendingChequesList = <ModPendingCheques>[].obs;
 

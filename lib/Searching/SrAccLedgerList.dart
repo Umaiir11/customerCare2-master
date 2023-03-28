@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../MVVM/Model/ApiModels/ModAccLedger.dart';
+import '../MVVM/ViewModel/VmAccLedger.dart';
 import '../MVVM/ViewModel/VmDrawer.dart';
 
 class SrAccLedgerList extends GetxController {
-  final VmDrawer G_VmDrawer = Get.find();
+  final VmAccLedger G_AccLedger = Get.find();
+
   final G_currencyFormat = NumberFormat("#,##0", "en_US");
 
   RxList<ModAccountLedger>? l_PrAccLedgerList = <ModAccountLedger>[].obs;
 
   void Fnc_addItem() {
     if (l_PrAccLedgerList?.isEmpty ?? true) {
-      l_PrAccLedgerList?.addAll(G_VmDrawer.l_PrAccountLedgerList!);
+      l_PrAccLedgerList?.addAll(G_AccLedger.l_PrAccountLedgerList!);
     }
   }
 

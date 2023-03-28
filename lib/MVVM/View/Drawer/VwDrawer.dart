@@ -6,6 +6,7 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import '../../ViewModel/VmAccLedger.dart';
 import '../../ViewModel/VmDrawer.dart';
 import '../VwAccLedger.dart';
 import '../VwItemQuery.dart';
@@ -32,6 +33,7 @@ class _VwDrawerState extends State<VwDrawer> {
     currentIndex = 0;
   }
   final l_VmDrawer = Get.put(VmDrawer());
+  final l_VmAccLedger = Get.put(VmAccLedger());
   bool isLoading = false;
 
   @override
@@ -91,7 +93,7 @@ class _VwDrawerState extends State<VwDrawer> {
             children: [
               const VwDrawerHome(),
 
-              if ( await l_VmDrawer.Fnc_AccLedgerList())
+              if ( await l_VmAccLedger.Fnc_AccLedgerList())
                 const VwAccountLedger()
               else
                 Container()
