@@ -3,16 +3,17 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../MVVM/Model/ApiModels/ModPendingSaleOrder.dart';
 import '../MVVM/ViewModel/VmDrawer.dart';
+import '../MVVM/ViewModel/VmPendingSaleOrder.dart';
 
 class SrPendingSaleOrder extends GetxController {
-  final VmDrawer G_VmDrawer = Get.find();
+  final VmPendingSaleOrder G_VmPendingSaleOrder = Get.find();
   final G_currencyFormat = NumberFormat("#,##0", "en_US");
 
   RxList<ModPendingSaleOrder>? l_PrPendingSaleOrderList = <ModPendingSaleOrder>[].obs;
 
   void Fnc_addItem() {
     if (l_PrPendingSaleOrderList?.isEmpty ?? true) {
-      l_PrPendingSaleOrderList?.addAll(G_VmDrawer.l_PrPendingSaleOrderList!);
+      l_PrPendingSaleOrderList?.addAll(G_VmPendingSaleOrder.l_PrPendingSaleOrderList!);
     }
   }
 

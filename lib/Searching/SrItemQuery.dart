@@ -5,16 +5,17 @@ import 'package:intl/intl.dart';
 import '../MVVM/Model/ApiModels/ModAccLedger.dart';
 import '../MVVM/Model/DTO/ModItemQuery.dart';
 import '../MVVM/ViewModel/VmDrawer.dart';
+import '../MVVM/ViewModel/VmItemQuery.dart';
 
 class SrItemQuery extends GetxController {
-  final VmDrawer G_VmDrawer = Get.find();
+  final VmItemQueryList G_VmItemQueryList = Get.find();
   final G_currencyFormat = NumberFormat("#,##0", "en_US");
 
   RxList<ModItemQueryDTO>? l_PrItemQueryList = <ModItemQueryDTO>[].obs;
 
   void Fnc_addItem() {
     if (l_PrItemQueryList?.isEmpty ?? true) {
-      l_PrItemQueryList?.addAll(G_VmDrawer.l_PrItemQueryList!);
+      l_PrItemQueryList?.addAll(G_VmItemQueryList.l_PrItemQueryList!);
     }
   }
 

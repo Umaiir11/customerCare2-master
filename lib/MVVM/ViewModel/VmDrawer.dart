@@ -87,52 +87,11 @@ class VmDrawer extends GetxController {
   }
 
   //PendingChequesList
-  RxList<ModPendingCheques>? l_PrPendingChequesList = <ModPendingCheques>[].obs;
 
-  Future<bool> Fnc_PendingChequesList() async {
-    List<ModPendingCheques>? lListPendingCheques = List<ModPendingCheques>.empty(growable: true);
-    lListPendingCheques = await Sl_PendingCheques().Fnc_PendingCheques();
-    {
-      l_PrPendingChequesList?.addAll(lListPendingCheques!);
 
-      if (l_PrPendingChequesList == null) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  //PendingSaleOrderList
-  RxList<ModPendingSaleOrder>? l_PrPendingSaleOrderList = <ModPendingSaleOrder>[].obs;
-
-  Future<bool> Fnc_PendingSaleOrderList() async {
-    List<ModPendingSaleOrder>? lListPendingSaleOrder = List<ModPendingSaleOrder>.empty(growable: true);
-    lListPendingSaleOrder = await Sl_PendingSelOrder().Fnc_PendingSO();
-    {
-      l_PrPendingSaleOrderList?.addAll(lListPendingSaleOrder!);
-
-      if (l_PrPendingSaleOrderList == null) {
-        return false;
-      }
-    }
-    return true;
-  }
 
   //ItemQueryList
-  RxList<ModItemQueryDTO>? l_PrItemQueryList = <ModItemQueryDTO>[].obs;
 
-  Future<bool> Fnc_ItemQueryList() async {
-    List<ModItemQueryDTO>? lListItemQuery = List<ModItemQueryDTO>.empty(growable: true);
-    lListItemQuery = await Sl_ItemQuery().Fnc_ItemQuery();
-    {
-      l_PrItemQueryList?.addAll(lListItemQuery!);
-
-      if (l_PrItemQueryList == null) {
-        return false;
-      }
-    }
-    return true;
-  }
 
   void FncClearAllDATA() {
     cmGlobalVariables.Pb_Token = "";

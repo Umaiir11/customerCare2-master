@@ -3,16 +3,17 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../MVVM/Model/ApiModels/ModPendingCheques.dart';
 import '../MVVM/ViewModel/VmDrawer.dart';
+import '../MVVM/ViewModel/VmPendingCheques.dart';
 
 class SrPendingCheques extends GetxController {
-  final VmDrawer G_VmDrawer = Get.find();
+  final VmPendingCheques G_VmPendingCheques= Get.find();
   final G_currencyFormat = NumberFormat("#,##0", "en_US");
 
   RxList<ModPendingCheques>? l_PendingChequesList = <ModPendingCheques>[].obs;
 
   void Fnc_addItem() {
     if (l_PendingChequesList?.isEmpty ?? true) {
-      l_PendingChequesList?.addAll(G_VmDrawer.l_PrPendingChequesList!);
+      l_PendingChequesList?.addAll(G_VmPendingCheques.l_PrPendingChequesList!);
     }
   }
 

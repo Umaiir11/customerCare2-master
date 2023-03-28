@@ -8,6 +8,9 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../ViewModel/VmAccLedger.dart';
 import '../../ViewModel/VmDrawer.dart';
+import '../../ViewModel/VmItemQuery.dart';
+import '../../ViewModel/VmPendingCheques.dart';
+import '../../ViewModel/VmPendingSaleOrder.dart';
 import '../VwAccLedger.dart';
 import '../VwItemQuery.dart';
 import '../VwPendingCheques.dart';
@@ -32,8 +35,12 @@ class _VwDrawerState extends State<VwDrawer> {
     super.initState();
     currentIndex = 0;
   }
+
   final l_VmDrawer = Get.put(VmDrawer());
   final l_VmAccLedger = Get.put(VmAccLedger());
+  final l_VmPendingCheques = Get.put(VmPendingCheques());
+  final l_VmPendingSaleOrder = Get.put(VmPendingSaleOrder());
+  final l_VmItemQueryList = Get.put(VmItemQueryList());
   bool isLoading = false;
 
   @override
@@ -88,48 +95,32 @@ class _VwDrawerState extends State<VwDrawer> {
     switch (currentIndex) {
       case 0:
         return const VwDrawerHome();
-        case 1:
-        return Stack(
-            children: [
-              const VwDrawerHome(),
-
-              if ( await l_VmAccLedger.Fnc_AccLedgerList())
-                const VwAccountLedger()
-              else
-                Container()
-            ],
-          );
-        case 2:
+      case 1:
         return Stack(
           children: [
             const VwDrawerHome(),
-
-            if ( await l_VmDrawer.Fnc_PendingChequesList())
-              const VwPendingCheques()
-            else
-              Container()
+            if (await l_VmAccLedger.Fnc_AccLedgerList()) const VwAccountLedger() else Container()
           ],
         );
-        case 3:
-          return Stack(
-            children: [
-              const VwDrawerHome(),
-
-              if ( await l_VmDrawer.Fnc_PendingSaleOrderList())
-                const VwPendingSaleOrder()
-              else
-                Container()
-            ],
-          );
+      case 2:
+        return Stack(
+          children: [
+            const VwDrawerHome(),
+            if (await l_VmPendingCheques.Fnc_PendingChequesList()) const VwPendingCheques() else Container()
+          ],
+        );
+      case 3:
+        return Stack(
+          children: [
+            const VwDrawerHome(),
+            if (await l_VmPendingSaleOrder.Fnc_PendingSaleOrderList()) const VwPendingSaleOrder() else Container()
+          ],
+        );
       case 4:
         return Stack(
           children: [
             const VwDrawerHome(),
-
-            if ( await l_VmDrawer.Fnc_ItemQueryList())
-              const VwItemQuery()
-            else
-              Container()
+            if (await l_VmItemQueryList.Fnc_ItemQueryList()) const VwItemQuery() else Container()
           ],
         );
 
