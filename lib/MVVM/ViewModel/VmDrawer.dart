@@ -1,20 +1,11 @@
-import 'package:customercare/MVVM/Model/ApiModels/ModAccLedger.dart';
 import 'package:customercare/MVVM/Model/ApiModels/ModAssignedBranches.dart';
-import 'package:customercare/MVVM/Model/ApiModels/ModPendingCheques.dart';
-import 'package:customercare/MVVM/Model/ApiModels/ModPendingSaleOrder.dart';
 import 'package:customercare/MVVM/Model/ApiModels/ModUserAccQuery.dart';
-import 'package:customercare/MVVM/Model/DTO/ModItemQuery.dart';
-import 'package:customercare/ServiceLayer/Sl_PendingCheques.dart';
 import 'package:get/get.dart';
 
 import '../../ClassModules/cmGlobalVariables.dart';
 import '../../Searching/SrCompanyList.dart';
-import '../../ServiceLayer/Sl_AccLedger.dart';
-import '../../ServiceLayer/Sl_ItemQuery.dart';
-import '../../ServiceLayer/Sl_PendingSaleOrder.dart';
 import '../../ServiceLayer/Sl_UserAccQuery.dart';
 import 'VmCompany.dart';
-import 'VmLogin.dart';
 
 class VmDrawer extends GetxController {
   final VmCompany G_VmCompany = Get.find();
@@ -68,7 +59,6 @@ class VmDrawer extends GetxController {
 
   //UserAccountsQueryList
   RxList<ModUserAccountsQuery>? l_PrUserAccountsQueryList = <ModUserAccountsQuery>[].obs;
-
   Future<bool> Fnc_UserAccountQueryList() async {
     List<ModUserAccountsQuery>? lListUserAccountsQuery = List<ModUserAccountsQuery>.empty(growable: true);
     lListUserAccountsQuery = await Sl_UserAccountsQuery().Fnc_UserAccountsQuery();
@@ -85,13 +75,6 @@ class VmDrawer extends GetxController {
     }
     return true;
   }
-
-  //PendingChequesList
-
-
-
-  //ItemQueryList
-
 
   void FncClearAllDATA() {
     cmGlobalVariables.Pb_Token = "";

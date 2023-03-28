@@ -48,7 +48,7 @@ class _VwPendingChequesState extends State<VwPendingCheques> {
     Widget _WidgetportraitMode(double PrHeight, PrWidth) {
       return Scaffold(
         appBar:  AppBar(
-          leading: DrawerWidget(),
+          leading: const DrawerWidget(),
           actions: <Widget>[
             IconButton(icon: const Icon(Icons.picture_as_pdf_sharp), onPressed: () async {}),
           ],
@@ -261,7 +261,7 @@ class _VwPendingChequesState extends State<VwPendingCheques> {
                                     ),
                                     //Row2
                                     Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 13.0, vertical: 1),
+                                      padding: const EdgeInsets.symmetric(horizontal: 13.0, vertical: 1),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         crossAxisAlignment: CrossAxisAlignment.start,

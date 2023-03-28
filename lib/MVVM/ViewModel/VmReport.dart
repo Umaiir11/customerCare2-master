@@ -8,18 +8,18 @@ class VmReport extends GetxController {
 
 
   FncReport() async {
-    String? l_result;
+    String? lResult;
 
-    l_result = await SlERptPdf().Fnc_reportpdf();
-    print(l_result);
+    lResult = await SlERptPdf().Fnc_reportpdf();
+    print(lResult);
 
-    if (l_result == null) {
+    if (lResult == null) {
       Get.snackbar("Alert", "Invalid Login Information");
     } else {
 
 
 
-      Uint8List decoded = base64.decode(l_result);
+      Uint8List decoded = base64.decode(lResult);
 
 
       cmGlobalVariables.Pb_Report = decoded;

@@ -51,7 +51,7 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
     Widget _WidgetportraitMode(double PrHeight, PrWidth) {
       return Scaffold(
         appBar: AppBar(
-          leading: DrawerWidget(),
+          leading: const DrawerWidget(),
           actions: <Widget>[
             IconButton(
                 icon: const Icon(Icons.picture_as_pdf_sharp),
@@ -270,7 +270,7 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
                                         ),
                                         //Row2
                                         Container(
-                                          padding: EdgeInsets.symmetric(horizontal: 13.0, vertical: 1),
+                                          padding: const EdgeInsets.symmetric(horizontal: 13.0, vertical: 1),
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             crossAxisAlignment: CrossAxisAlignment.start,

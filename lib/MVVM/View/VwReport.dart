@@ -23,6 +23,7 @@ class _VwReportState extends State<VwReport> {
   String fileName = "Account Ledger";
   int count = 0;
 
+  @override
   void initState() {
     super.initState();
     AwesomeNotifications().initialize(null, [
@@ -41,15 +42,16 @@ class _VwReportState extends State<VwReport> {
   }
 
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           count++;
 
-        },
-        child: Icon(Icons.save_alt), // icon to be displayed on the button
-        backgroundColor: Colors.blue, // background color of the button
+        }, // icon to be displayed on the button
+        backgroundColor: Colors.blue,
+        child: const Icon(Icons.save_alt), // background color of the button
       ),
       appBar: AppBar(
 
@@ -160,11 +162,11 @@ class _VwReportState extends State<VwReport> {
   }
 
   void FncSaveBytesAsPdf(String fileName) async {
-    String l_filePath = '/storage/emulated/0/Download/$fileName($count).pdf';
-    File l_file = File(l_filePath);
-    l_file.writeAsBytes(cmGlobalVariables.Pb_Report);
+    String lFilePath = '/storage/emulated/0/Download/$fileName($count).pdf';
+    File lFile = File(lFilePath);
+    lFile.writeAsBytes(cmGlobalVariables.Pb_Report);
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       content: Text("Report Saved"),
       duration: Duration(milliseconds: 1200),
     ));
@@ -176,7 +178,7 @@ class _VwReportState extends State<VwReport> {
         content: NotificationContent(
           id: 1,
           channelKey: 'Key1',
-          title: '${Emojis.activites_party_popper + " File Saved"}',
+          title: "${Emojis.activites_party_popper} File Saved",
           body: "PDF saved in 'Download' location",
           wakeUpScreen: true,
           notificationLayout: NotificationLayout.BigText,

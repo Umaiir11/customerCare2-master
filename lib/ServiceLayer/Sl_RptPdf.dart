@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../ClassModules/cmHttpCalls.dart';
 import '../ClassModules/cmGlobalVariables.dart';
@@ -24,7 +23,7 @@ class SlERptPdf {
         Pr_FromDate:DateTime.parse(d1),
         Pr_ToDate:DateTime.parse(d2),
         Pr_WhereClause_PC:
-        "and [AccountDID]:'" +"a01cc68a-28fe-411e-9fba-798d375b68fc"+"'and[ChequeStatusDID]in(1,2)and[PostedID]:1",
+        "and [AccountDID]:'a01cc68a-28fe-411e-9fba-798d375b68fc'and[ChequeStatusDID]in(1,2)and[PostedID]:1",
         Pr_GroupByClause_PC: "",
         Pr_OrderByClause_PC: "Order By ChequeType , [ChequeDate] desc",
         Pr_City: "Lahore",
@@ -32,19 +31,19 @@ class SlERptPdf {
         Pr_PrintedBy: "CustCare",
       );
 
-      String l_jsonString = json.encode(body.toJson());
-      cmGlobalVariables.Pb_jsonString = l_jsonString;
+      String lJsonString = json.encode(body.toJson());
+      cmGlobalVariables.Pb_jsonString = lJsonString;
 
       if (await Fnc_OnlineEncryption() == true) {
         String encoded = Uri.encodeComponent(l_Encryption!);
         // print(encoded);
-        List<int> l_UtfContent = utf8.encode(l_jsonString);
-        final l_response = await new cmHttpCalls().Fnc_HttpResponseforReport(
-            '/RptSerAccountLedger/pdf?l_QueryString=', l_UtfContent, encoded);
-        if (l_response.statusCode == 200) {
+        List<int> lUtfContent = utf8.encode(lJsonString);
+        final lResponse = await cmHttpCalls().Fnc_HttpResponseforReport(
+            '/RptSerAccountLedger/pdf?l_QueryString=', lUtfContent, encoded);
+        if (lResponse.statusCode == 200) {
           print("AccLedgerReport");
           //return json.decode(json.encode(l_response.body));
-          return json.decode(l_response.body);
+          return json.decode(lResponse.body);
 
         } else {}
       } else {
@@ -53,6 +52,7 @@ class SlERptPdf {
     } catch (e) {
       print(e.toString());
     }
+    return null;
   }
 }
 

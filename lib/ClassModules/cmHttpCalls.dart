@@ -47,33 +47,33 @@ class cmHttpCalls {
   }
 
   Future<http.Response> Fnc_HttpCallForEncryption(
-      List<int> l_UtfContent) async {
-    Uri l_uri = Uri.parse(
+      List<int> lUtfContent) async {
+    Uri lUri = Uri.parse(
         'https://mango.aisonesystems.com/ApiERP/Cryptography/Fnc_Encryption');
 
-    print(l_uri);
-    Map<String, String> l_stringContect = {
+    print(lUri);
+    Map<String, String> lStringContect = {
       HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
     };
-    final l_response =
-    await http.post(l_uri, headers: l_stringContect, body: l_UtfContent);
-    return l_response;
+    final lResponse =
+    await http.post(lUri, headers: lStringContect, body: lUtfContent);
+    return lResponse;
   }
-  Future<http.Response> Fnc_HttpResponseforReport(String l_controllerUrl,
-      List<int> l_UtfContent, String l_QueryString) async {
+  Future<http.Response> Fnc_HttpResponseforReport(String lControllerUrl,
+      List<int> lUtfContent, String lQueryString) async {
     String BaseURL, DynamicURL, Query, URL;
     BaseURL = cmGlobalVariables.Pb_ERPApiUrl!;
-    DynamicURL = l_controllerUrl;
-    Query = l_QueryString;
+    DynamicURL = lControllerUrl;
+    Query = lQueryString;
     URL = BaseURL + DynamicURL + Query;
 
-    late Uri l_uri;
+    late Uri lUri;
 
-    l_uri = Uri.parse(URL);
-    print(l_uri);
+    lUri = Uri.parse(URL);
+    print(lUri);
 
-    final l_response = await http.get(l_uri);
-    return l_response;
+    final lResponse = await http.get(lUri);
+    return lResponse;
   }
 
 }

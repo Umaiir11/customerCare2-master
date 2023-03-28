@@ -1,7 +1,5 @@
-import 'package:customercare/MVVM/Model/ApiModels/ModAccLedger.dart';
 import 'package:get/get.dart';
 
-import '../../ServiceLayer/Sl_AccLedger.dart';
 import '../../ServiceLayer/Sl_PendingCheques.dart';
 import '../Model/ApiModels/ModPendingCheques.dart';
 

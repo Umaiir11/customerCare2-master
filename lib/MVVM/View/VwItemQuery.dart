@@ -7,7 +7,6 @@ import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../Searching/SrAccLedgerList.dart';
 import '../../Searching/SrItemQuery.dart';
 import 'Drawer/VwDrawer.dart';
 
@@ -49,7 +48,7 @@ class _VwItemQueryState extends State<VwItemQuery> {
     Widget _WidgetportraitMode(double PrHeight, PrWidth) {
       return Scaffold(
         appBar:  AppBar(
-          leading: DrawerWidget(),
+          leading: const DrawerWidget(),
           actions: <Widget>[
             IconButton(icon: const Icon(Icons.picture_as_pdf_sharp), onPressed: () async {}),
           ],
@@ -260,7 +259,7 @@ class _VwItemQueryState extends State<VwItemQuery> {
                                     ),
                                     //Row2
                                     Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 13.0, vertical: 1),
+                                      padding: const EdgeInsets.symmetric(horizontal: 13.0, vertical: 1),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -385,7 +384,7 @@ class _VwItemQueryState extends State<VwItemQuery> {
 
                                     //Row3
                                     Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 13.0, vertical: 1),
+                                      padding: const EdgeInsets.symmetric(horizontal: 13.0, vertical: 1),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -509,7 +508,7 @@ class _VwItemQueryState extends State<VwItemQuery> {
                                     ),
                                     //Row4
                                     Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 13.0, vertical: 1),
+                                      padding: const EdgeInsets.symmetric(horizontal: 13.0, vertical: 1),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         crossAxisAlignment: CrossAxisAlignment.start,

@@ -7,22 +7,23 @@ import '../../ClassModules/cmHttpCalls.dart';
 class SlEncryption {
   Future<String?> Fnc_ItemQuery() async {
     try {
-      String l_jsonString = json.encode((cmGlobalVariables.Pb_jsonString));
-      List<int> l_UtfContent = utf8.encode(l_jsonString);
+      String lJsonString = json.encode((cmGlobalVariables.Pb_jsonString));
+      List<int> lUtfContent = utf8.encode(lJsonString);
 
-      final l_response =
-      await new cmHttpCalls().Fnc_HttpCallForEncryption(l_UtfContent);
+      final lResponse =
+      await cmHttpCalls().Fnc_HttpCallForEncryption(lUtfContent);
 
-      if (l_response.statusCode == 200) {
-        String l_result = json.decode( json.encode(l_response.body));
+      if (lResponse.statusCode == 200) {
+        String lResult = json.decode( json.encode(lResponse.body));
         //return json.decode(l_response.body);
-        print(l_result);
-        return l_response.body;
+        print(lResult);
+        return lResponse.body;
       } else {
         return null;
       }
     } catch (e) {
       print(e.toString());
     }
+    return null;
   }
 }
