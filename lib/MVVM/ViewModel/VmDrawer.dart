@@ -88,7 +88,6 @@ class VmDrawer extends GetxController {
 
   //AccountLedgerList
   RxList<ModAccountLedger>? l_PrAccountLedgerList = <ModAccountLedger>[].obs;
-
   Future<bool> Fnc_AccLedgerList() async {
     Pr_isLoading_wid.value = false;
 

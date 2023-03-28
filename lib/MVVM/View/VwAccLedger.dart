@@ -1,3 +1,5 @@
+import 'package:customercare/MVVM/View/VwReport.dart';
+import 'package:customercare/MVVM/ViewModel/VmReport.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,6 +21,7 @@ class VwAccountLedger extends StatefulWidget {
 
 class _VwAccountLedgerState extends State<VwAccountLedger> {
   final l_SearchController = Get.put(SrAccLedgerList());
+  final VmReport l_VmReport = Get.put(VmReport());
 
   //Controller
   final TextEditingController _textController = TextEditingController();
@@ -50,7 +53,16 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
         appBar: AppBar(
           leading: DrawerWidget(),
           actions: <Widget>[
-            IconButton(icon: const Icon(Icons.picture_as_pdf_sharp), onPressed: () async {}),
+            IconButton(
+                icon: const Icon(Icons.picture_as_pdf_sharp),
+                onPressed: () async {
+                  if (await l_VmReport.FncReport() == true) {
+                    Get.snackbar("Alert", "Api Called");
+                    Get.to(() => const VwReport());
+                  } else {
+                    Get.snackbar("Alert", "No DATA, Please Contact Your Administrator");
+                  }
+                }),
           ],
           centerTitle: true,
           toolbarHeight: 42,
@@ -67,13 +79,9 @@ class _VwAccountLedgerState extends State<VwAccountLedger> {
             ),
           ),
           title: Shimmer.fromColors(
-              baseColor: Colors.black38,
-              highlightColor: Colors.cyanAccent,
-              child: const Text("Account Ledger")
-          ),
+              baseColor: Colors.black38, highlightColor: Colors.cyanAccent, child: const Text("Account Ledger")),
           elevation: 7.0,
         ),
-
         bottomNavigationBar: ResponsiveWrapper(
           maxWidth: 1200,
           minWidth: 480,
