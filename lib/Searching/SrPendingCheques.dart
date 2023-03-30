@@ -5,7 +5,7 @@ import '../MVVM/Model/ApiModels/ModPendingCheques.dart';
 import '../MVVM/ViewModel/VmPendingCheques.dart';
 
 class SrPendingCheques extends GetxController {
-  final VmPendingCheques G_VmPendingCheques= Get.find();
+  final VmPendingCheques G_VmPendingCheques = Get.find();
   final G_currencyFormat = NumberFormat("#,##0", "en_US");
 
   RxList<ModPendingCheques>? l_PendingChequesList = <ModPendingCheques>[].obs;
@@ -32,7 +32,7 @@ class SrPendingCheques extends GetxController {
             !lListContent.Pr_ChequeNo.toString().toLowerCase().contains(lLetter) &&
             !lListContent.Pr_ChequeStatus.toString().toLowerCase().contains(lLetter) &&
             !lListContent.Pr_Amount.toString().toLowerCase().contains(lLetter) &&
-            !lListContent.Pr_VDate.toString().toLowerCase().contains(lLetter) ){
+            !lListContent.Pr_VDate.toString().toLowerCase().contains(lLetter)) {
           return false;
         }
       }
@@ -64,7 +64,4 @@ class SrPendingCheques extends GetxController {
     }
     return TextSpan(children: textSpans);
   }
-
-
-
 }

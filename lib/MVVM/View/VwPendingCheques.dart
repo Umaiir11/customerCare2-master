@@ -8,7 +8,9 @@ import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../Searching/SrPendingCheques.dart';
+import '../ViewModel/VmCart.dart';
 import 'Drawer/VwDrawer.dart';
+import 'VwCart.dart';
 
 class VwPendingCheques extends StatefulWidget {
   const VwPendingCheques({Key? key}) : super(key: key);
@@ -19,6 +21,7 @@ class VwPendingCheques extends StatefulWidget {
 
 class _VwPendingChequesState extends State<VwPendingCheques> {
   final l_SearchController = Get.put(SrPendingCheques());
+  final VmCart l_VmCart = Get.put(VmCart());
 
   //Controller
   final TextEditingController _textController = TextEditingController();
@@ -47,7 +50,7 @@ class _VwPendingChequesState extends State<VwPendingCheques> {
 
     Widget _WidgetportraitMode(double PrHeight, PrWidth) {
       return Scaffold(
-        appBar:  AppBar(
+        appBar: AppBar(
           leading: const DrawerWidget(),
           actions: <Widget>[
             IconButton(icon: const Icon(Icons.picture_as_pdf_sharp), onPressed: () async {}),
@@ -67,10 +70,7 @@ class _VwPendingChequesState extends State<VwPendingCheques> {
             ),
           ),
           title: Shimmer.fromColors(
-              baseColor: Colors.black38,
-              highlightColor: Colors.cyanAccent,
-              child: const Text("Pending Cheques")
-          ),
+              baseColor: Colors.black38, highlightColor: Colors.cyanAccent, child: const Text("Pending Cheques")),
           elevation: 7.0,
         ),
         bottomNavigationBar: ResponsiveWrapper(
@@ -187,187 +187,191 @@ class _VwPendingChequesState extends State<VwPendingCheques> {
                 ),
                 Expanded(
                   child: Obx(() => ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: l_SearchController.Pr_filteredList.length,
-                    itemBuilder: ((context, index) {
-                      return Column(
-                        children: [
-                          InkWell(
-                            onTap: () async {},
-                            child: SizedBox(
-                              width: PrWidth * 0.900,
-                              height: PrHeight * 0.120,
-                              child: Card(
-                                elevation: 5.0,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
-                                color: (l_SearchController.Pr_filteredList[index].Pr_ChequeStatus == "Pending")
-                                    ? Colors.white
-                                    : Colors.grey.shade200,
-                                child: Column(
-                                  children: [
-                                    //Row1
-                                    Padding(
-                                      padding: EdgeInsets.all(PrHeight * 0.01),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                        shrinkWrap: true,
+                        itemCount: l_SearchController.Pr_filteredList.length,
+                        itemBuilder: ((context, index) {
+                          return  Column(
+                              children: [
+                                InkWell(
+                                  onTap: ()  {
+
+
+
+                                  },
+                                  child: SizedBox(
+                                    width: PrWidth * 0.900,
+                                    height: PrHeight * 0.120,
+                                    child: Card(
+                                      elevation: 5.0,
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
+                                      color: (l_SearchController.Pr_filteredList[index].Pr_ChequeStatus == "Pending")
+                                          ? Colors.white
+                                          : Colors.grey.shade200,
+                                      child: Column(
                                         children: [
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              RichText(
-                                                text: TextSpan(
-                                                  text: '',
-                                                  style: const TextStyle(
-                                                    fontSize: 22,
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w600,
-                                                    letterSpacing: 0.5,
-                                                  ),
+                                          //Row1
+                                          Padding(
+                                            padding: EdgeInsets.all(PrHeight * 0.01),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
-                                                    l_SearchController.getMatchedTextSpan(
-                                                      l_SearchController.Pr_filteredList[index].Pr_VoucherNo,
-                                                      l_SearchController.searchText.value,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              RichText(
-                                                text: TextSpan(
-                                                  text: '',
-                                                  style: const TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight: FontWeight.w600,
-                                                      color: Colors.black,
-                                                      letterSpacing: .5),
-                                                  children: [
-                                                    l_SearchController.getMatchedTextSpan(
-                                                      G_DateTimeFormat.format(
-                                                          l_SearchController.Pr_filteredList[index].Pr_VDate),
-                                                      l_SearchController.searchText.value,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    //Row2
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 13.0, vertical: 1),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          //Debit
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Cheque No',
-                                                style: GoogleFonts.ubuntu(
-                                                    textStyle: const TextStyle(
-                                                        fontSize: 18, color: Colors.black26, letterSpacing: .5)),
-                                              ),
-                                              RichText(
-                                                text: TextSpan(
-                                                  text: '',
-                                                  style: GoogleFonts.ubuntu(
-                                                      textStyle: const TextStyle(
-                                                          fontSize: 13,
-                                                          color: Colors.blue,
-                                                          fontWeight: FontWeight.w600,
-                                                          letterSpacing: .5)),
-                                                  children: [
-                                                    l_SearchController.getMatchedTextSpan(
-                                                      l_SearchController.Pr_filteredList[index].Pr_ChequeNo,
-                                                      l_SearchController.searchText.value,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          //Credit
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Cheque Status',
-                                                style: GoogleFonts.ubuntu(
-                                                    textStyle: const TextStyle(
-                                                        fontSize: 18, color: Colors.black26, letterSpacing: .5)),
-                                              ),
-                                              RichText(
-                                                text: TextSpan(
-                                                  text: '',
-                                                  style: GoogleFonts.ubuntu(
-                                                      textStyle: const TextStyle(
-                                                          fontSize: 13,
-                                                          color: Colors.green,
-                                                          fontWeight: FontWeight.w600,
-                                                          letterSpacing: .5)),
-                                                  children: [
-                                                    l_SearchController.getMatchedTextSpan(
-                                                      l_SearchController.Pr_filteredList[index].Pr_ChequeStatus,
-                                                      l_SearchController.searchText.value,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          //Balance
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Amount',
-                                                style: GoogleFonts.ubuntu(
-                                                    textStyle: const TextStyle(
-                                                        fontSize: 18,
-                                                        color: Colors.black26,
-                                                        //fontWeight: FontWeight.w600,
-                                                        letterSpacing: .5)),
-                                              ),
-                                              RichText(
-                                                text: TextSpan(
-                                                  text: '',
-                                                  style: GoogleFonts.ubuntu(
-                                                      textStyle: const TextStyle(
-                                                          fontSize: 13,
+                                                    RichText(
+                                                      text: TextSpan(
+                                                        text: '',
+                                                        style: const TextStyle(
+                                                          fontSize: 22,
                                                           color: Colors.black,
                                                           fontWeight: FontWeight.w600,
-                                                          letterSpacing: .5)),
-                                                  children: [
-                                                    l_SearchController.getMatchedTextSpan(
-                                                        G_currencyFormat.format(
-                                                            l_SearchController.Pr_filteredList[index].Pr_Amount),
-                                                        l_SearchController.searchText.value),
+                                                          letterSpacing: 0.5,
+                                                        ),
+                                                        children: [
+                                                          l_SearchController.getMatchedTextSpan(
+                                                            l_SearchController.Pr_filteredList[index].Pr_VoucherNo,
+                                                            l_SearchController.searchText.value,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ],
                                                 ),
-                                              ),
-                                            ],
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    RichText(
+                                                      text: TextSpan(
+                                                        text: '',
+                                                        style: const TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight: FontWeight.w600,
+                                                            color: Colors.black,
+                                                            letterSpacing: .5),
+                                                        children: [
+                                                          l_SearchController.getMatchedTextSpan(
+                                                            G_DateTimeFormat.format(
+                                                                l_SearchController.Pr_filteredList[index].Pr_VDate),
+                                                            l_SearchController.searchText.value,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          //Row2
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(horizontal: 13.0, vertical: 1),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                //Debit
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Cheque No',
+                                                      style: GoogleFonts.ubuntu(
+                                                          textStyle: const TextStyle(
+                                                              fontSize: 18, color: Colors.black26, letterSpacing: .5)),
+                                                    ),
+                                                    RichText(
+                                                      text: TextSpan(
+                                                        text: '',
+                                                        style: GoogleFonts.ubuntu(
+                                                            textStyle: const TextStyle(
+                                                                fontSize: 13,
+                                                                color: Colors.blue,
+                                                                fontWeight: FontWeight.w600,
+                                                                letterSpacing: .5)),
+                                                        children: [
+                                                          l_SearchController.getMatchedTextSpan(
+                                                            l_SearchController.Pr_filteredList[index].Pr_ChequeNo,
+                                                            l_SearchController.searchText.value,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                //Credit
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Cheque Status',
+                                                      style: GoogleFonts.ubuntu(
+                                                          textStyle: const TextStyle(
+                                                              fontSize: 18, color: Colors.black26, letterSpacing: .5)),
+                                                    ),
+                                                    RichText(
+                                                      text: TextSpan(
+                                                        text: '',
+                                                        style: GoogleFonts.ubuntu(
+                                                            textStyle: const TextStyle(
+                                                                fontSize: 13,
+                                                                color: Colors.green,
+                                                                fontWeight: FontWeight.w600,
+                                                                letterSpacing: .5)),
+                                                        children: [
+                                                          l_SearchController.getMatchedTextSpan(
+                                                            l_SearchController.Pr_filteredList[index].Pr_ChequeStatus,
+                                                            l_SearchController.searchText.value,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                //Balance
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Amount',
+                                                      style: GoogleFonts.ubuntu(
+                                                          textStyle: const TextStyle(
+                                                              fontSize: 18,
+                                                              color: Colors.black26,
+                                                              //fontWeight: FontWeight.w600,
+                                                              letterSpacing: .5)),
+                                                    ),
+                                                    RichText(
+                                                      text: TextSpan(
+                                                        text: '',
+                                                        style: GoogleFonts.ubuntu(
+                                                            textStyle: const TextStyle(
+                                                                fontSize: 13,
+                                                                color: Colors.black,
+                                                                fontWeight: FontWeight.w600,
+                                                                letterSpacing: .5)),
+                                                        children: [
+                                                          l_SearchController.getMatchedTextSpan(
+                                                              G_currencyFormat.format(
+                                                                  l_SearchController.Pr_filteredList[index].Pr_Amount),
+                                                              l_SearchController.searchText.value),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    }),
-                  )),
+                              ],
+                            );
+                        }),
+                      )),
                 )
               ],
             )),
@@ -378,6 +382,7 @@ class _VwPendingChequesState extends State<VwPendingCheques> {
       onTap: () {
         //when tap anywhere on screen keyboard dismiss
         FocusManager.instance.primaryFocus?.unfocus();
+
       },
       child: OrientationBuilder(
         builder: (BuildContext context, Orientation orientation) {
